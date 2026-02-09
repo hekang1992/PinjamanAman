@@ -11,21 +11,6 @@ import TYAlertController
 
 class SettingViewController: BaseViewController {
     
-    lazy var bgView: UIView = {
-        let bgView = UIView()
-        bgView.backgroundColor = UIColor.init(hexString: "#33954F")
-        return bgView
-    }()
-    
-    lazy var footView: UIView = {
-        let footView = UIView()
-        footView.layer.cornerRadius = 20
-        footView.layer.masksToBounds = true
-        footView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        footView.backgroundColor = UIColor.init(hexString: "#F6F6F4")
-        return footView
-    }()
-    
     lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: "cen_logo_image")

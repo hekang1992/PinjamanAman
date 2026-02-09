@@ -36,7 +36,7 @@ class CenterViewController: BaseViewController {
             if pageUrl.contains(scheme_url) {
                 DeepLinkNavigator.navigate(to: pageUrl, from: self)
             }else if pageUrl.contains("http") {
-                
+                self.goH5WebVc(pageUrl: pageUrl)
             }
         }
     }

@@ -39,6 +39,7 @@
 		736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */; };
 		736F5BAE2F3A0EC000F5BC15 /* AppLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAD2F3A0EC000F5BC15 /* AppLogoutView.swift */; };
 		736F5BB02F3A119F00F5BC15 /* AppCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAF2F3A119F00F5BC15 /* AppCancelView.swift */; };
+		736F5BB22F3A146B00F5BC15 /* H5WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB12F3A146B00F5BC15 /* H5WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeadView.swift; sourceTree = "<group>"; };
 		736F5BAD2F3A0EC000F5BC15 /* AppLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoutView.swift; sourceTree = "<group>"; };
 		736F5BAF2F3A119F00F5BC15 /* AppCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCancelView.swift; sourceTree = "<group>"; };
+		736F5BB12F3A146B00F5BC15 /* H5WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5WebViewController.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,6 +193,7 @@
 				736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */,
 				736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */,
 				736F5BAD2F3A0EC000F5BC15 /* AppLogoutView.swift */,
+				736F5BB12F3A146B00F5BC15 /* H5WebViewController.swift */,
 			);
 			path = Center;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */,
 				7319D6472F39AEE800F24B7D /* OrderViewController.swift in Sources */,
 				7319D64B2F39AF0000F24B7D /* ProductStepListViewController.swift in Sources */,
+				736F5BB22F3A146B00F5BC15 /* H5WebViewController.swift in Sources */,
 				7319D6552F39BB3300F24B7D /* LoadingView.swift in Sources */,
 				7319D6432F39AE2E00F24B7D /* UserSessionManager.swift in Sources */,
 				736F5BB02F3A119F00F5BC15 /* AppCancelView.swift in Sources */,
