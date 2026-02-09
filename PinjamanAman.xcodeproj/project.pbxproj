@@ -23,6 +23,7 @@
 		7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6482F39AEF000F24B7D /* CenterViewController.swift */; };
 		7319D64B2F39AF0000F24B7D /* ProductStepListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */; };
 		7319D64D2F39B14D00F24B7D /* AppIdentifierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */; };
+		7319D64F2F39B29A00F24B7D /* DeviceInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64E2F39B29A00F24B7D /* DeviceInfoManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		7319D6482F39AEF000F24B7D /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStepListViewController.swift; sourceTree = "<group>"; };
 		7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIdentifierManager.swift; sourceTree = "<group>"; };
+		7319D64E2F39B29A00F24B7D /* DeviceInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoManager.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +164,7 @@
 		7319D6352F39A6E200F24B7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7319D64E2F39B29A00F24B7D /* DeviceInfoManager.swift */,
 				7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */,
 			);
 			path = Common;
@@ -316,6 +319,7 @@
 				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
 				7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */,
+				7319D64F2F39B29A00F24B7D /* DeviceInfoManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
