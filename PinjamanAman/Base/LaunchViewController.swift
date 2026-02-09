@@ -52,7 +52,8 @@ extension LaunchViewController {
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
                     let languageCode = success.logic?.realm ?? ""
-                    AppLanguageCodeManager.saveLanguageCode(code: languageCode)
+//                    AppLanguageCodeManager.saveLanguageCode(code: languageCode)
+                    AppLanguageCodeManager.saveLanguageCode(code: "1105")
                     Task {
                         try? await Task.sleep(nanoseconds: 250_000_000)
                         NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)

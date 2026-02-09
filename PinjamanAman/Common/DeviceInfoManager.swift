@@ -27,7 +27,7 @@ class DeviceInfoManager {
         
         deviceInfo["complements"] = UserSessionManager.shared.token ?? ""
         
-        deviceInfo["realm"] = Locale.current.identifier
+        deviceInfo["realm"] = AppLanguageCodeManager.getLanguageCode()
         
         return deviceInfo
     }

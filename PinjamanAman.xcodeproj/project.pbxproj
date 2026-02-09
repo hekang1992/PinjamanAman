@@ -41,6 +41,8 @@
 		736F5BB02F3A119F00F5BC15 /* AppCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAF2F3A119F00F5BC15 /* AppCancelView.swift */; };
 		736F5BB22F3A146B00F5BC15 /* H5WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB12F3A146B00F5BC15 /* H5WebViewController.swift */; };
 		736F5BB42F3A167900F5BC15 /* OneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB32F3A167500F5BC15 /* OneView.swift */; };
+		736F5BB62F3A24E200F5BC15 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB52F3A24E200F5BC15 /* CardListView.swift */; };
+		736F5BBC2F3A2E7000F5BC15 /* ProductStepViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BBB2F3A2E7000F5BC15 /* ProductStepViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		736F5BAF2F3A119F00F5BC15 /* AppCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCancelView.swift; sourceTree = "<group>"; };
 		736F5BB12F3A146B00F5BC15 /* H5WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5WebViewController.swift; sourceTree = "<group>"; };
 		736F5BB32F3A167500F5BC15 /* OneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneView.swift; sourceTree = "<group>"; };
+		736F5BB52F3A24E200F5BC15 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
+		736F5BBB2F3A2E7000F5BC15 /* ProductStepViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStepViewCell.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +178,7 @@
 			children = (
 				736F5BB32F3A167500F5BC15 /* OneView.swift */,
 				7319D6442F39AEE100F24B7D /* HomeViewController.swift */,
+				736F5BB52F3A24E200F5BC15 /* CardListView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 		7319D6342F39A6DD00F24B7D /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				736F5BBB2F3A2E7000F5BC15 /* ProductStepViewCell.swift */,
 				7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */,
 			);
 			path = Product;
@@ -361,6 +367,7 @@
 				7319D64D2F39B14D00F24B7D /* AppIdentifierManager.swift in Sources */,
 				7319D63B2F39A8A700F24B7D /* BaseTabBarController.swift in Sources */,
 				736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */,
+				736F5BBC2F3A2E7000F5BC15 /* ProductStepViewCell.swift in Sources */,
 				7319D6472F39AEE800F24B7D /* OrderViewController.swift in Sources */,
 				7319D64B2F39AF0000F24B7D /* ProductStepListViewController.swift in Sources */,
 				736F5BB22F3A146B00F5BC15 /* H5WebViewController.swift in Sources */,
@@ -387,6 +394,7 @@
 				7319D6592F39BFAF00F24B7D /* LoginView.swift in Sources */,
 				7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */,
 				736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */,
+				736F5BB62F3A24E200F5BC15 /* CardListView.swift in Sources */,
 				7319D64F2F39B29A00F24B7D /* DeviceInfoManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
