@@ -18,6 +18,11 @@
 		7319D63F2F39AB7A00F24B7D /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D63E2F39AB7A00F24B7D /* LaunchViewController.swift */; };
 		7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6402F39ABFD00F24B7D /* NetworkMonitor.swift */; };
 		7319D6432F39AE2E00F24B7D /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6422F39AE2E00F24B7D /* UserSessionManager.swift */; };
+		7319D6452F39AEE100F24B7D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6442F39AEE100F24B7D /* HomeViewController.swift */; };
+		7319D6472F39AEE800F24B7D /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6462F39AEE800F24B7D /* OrderViewController.swift */; };
+		7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6482F39AEF000F24B7D /* CenterViewController.swift */; };
+		7319D64B2F39AF0000F24B7D /* ProductStepListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */; };
+		7319D64D2F39B14D00F24B7D /* AppIdentifierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +41,11 @@
 		7319D63E2F39AB7A00F24B7D /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		7319D6402F39ABFD00F24B7D /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		7319D6422F39AE2E00F24B7D /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
+		7319D6442F39AEE100F24B7D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7319D6462F39AEE800F24B7D /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		7319D6482F39AEF000F24B7D /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
+		7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStepListViewController.swift; sourceTree = "<group>"; };
+		7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIdentifierManager.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +130,7 @@
 		7319D6312F39A6C600F24B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7319D6442F39AEE100F24B7D /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -127,6 +138,7 @@
 		7319D6322F39A6C800F24B7D /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				7319D6462F39AEE800F24B7D /* OrderViewController.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -134,6 +146,7 @@
 		7319D6332F39A6D700F24B7D /* Center */ = {
 			isa = PBXGroup;
 			children = (
+				7319D6482F39AEF000F24B7D /* CenterViewController.swift */,
 			);
 			path = Center;
 			sourceTree = "<group>";
@@ -141,6 +154,7 @@
 		7319D6342F39A6DD00F24B7D /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -148,6 +162,7 @@
 		7319D6352F39A6E200F24B7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -288,12 +303,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7319D64D2F39B14D00F24B7D /* AppIdentifierManager.swift in Sources */,
 				7319D63B2F39A8A700F24B7D /* BaseTabBarController.swift in Sources */,
+				7319D6472F39AEE800F24B7D /* OrderViewController.swift in Sources */,
+				7319D64B2F39AF0000F24B7D /* ProductStepListViewController.swift in Sources */,
 				7319D6432F39AE2E00F24B7D /* UserSessionManager.swift in Sources */,
 				7319D63F2F39AB7A00F24B7D /* LaunchViewController.swift in Sources */,
 				7319D6392F39A89300F24B7D /* BaseView.swift in Sources */,
 				7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */,
+				7319D6452F39AEE100F24B7D /* HomeViewController.swift in Sources */,
 				7319D63D2F39A8BD00F24B7D /* BaseNavigationController.swift in Sources */,
+				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
 				7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */,
 			);
