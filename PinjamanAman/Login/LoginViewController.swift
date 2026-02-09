@@ -51,7 +51,7 @@ extension LoginViewController {
     @objc func codeBtnClick() {
         let phone = self.loginView.phoneListView.phoneFiled.text ?? ""
         if phone.isEmpty {
-            ToastManager.showLocal(languageCode == "1100" ? "Silakan masukkan nomor telepon" : "Please enter your phone number")
+            ToastManager.showMessage(languageCode == "1100" ? "Silakan masukkan nomor telepon" : "Please enter your phone number")
             return
         }
         
@@ -98,18 +98,18 @@ extension LoginViewController {
     @objc func loginBtnClick() {
         let phone = self.loginView.phoneListView.phoneFiled.text ?? ""
         if phone.isEmpty {
-            ToastManager.showLocal(languageCode == "1100" ? "Silakan masukkan nomor telepon" : "Please enter your phone number")
+            ToastManager.showMessage(languageCode == "1100" ? "Silakan masukkan nomor telepon" : "Please enter your phone number")
             return
         }
         
         let code = self.loginView.codeListView.codeFiled.text ?? ""
         if code.isEmpty {
-            ToastManager.showLocal(languageCode == "1100" ? "Silakan masukkan kode verifikasi" : "Please enter the verification code")
+            ToastManager.showMessage(languageCode == "1100" ? "Silakan masukkan kode verifikasi" : "Please enter the verification code")
             return
         }
         
         if loginView.sureAgreementBtn.isSelected == false {
-            ToastManager.showLocal(languageCode == "1100" ? "Silakan baca dan konfirmasi Kebijakan Privasi" : "Please read and confirm the Privacy Policy")
+            ToastManager.showMessage(languageCode == "1100" ? "Silakan baca dan konfirmasi Kebijakan Privasi" : "Please read and confirm the Privacy Policy")
             return
         }
         
@@ -130,7 +130,7 @@ extension LoginViewController {
                     self?.startCountDown()
                     self?.loginView.codeListView.codeFiled.becomeFirstResponder()
                 }
-                ToastManager.showLocal(success.reason ?? "")
+                ToastManager.showMessage(success.reason ?? "")
                 
             case .failure(_):
                 LoadingView.shared.hide()
@@ -149,7 +149,7 @@ extension LoginViewController {
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()
-                ToastManager.showLocal(success.reason ?? "")
+                ToastManager.showMessage(success.reason ?? "")
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
                     let phone = success.logic?.explained ?? ""

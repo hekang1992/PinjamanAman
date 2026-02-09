@@ -28,6 +28,17 @@ class CenterViewController: BaseViewController {
             self.centerInfo()
         })
         
+        centerView.settingBtn.addTarget(self, action: #selector(settingClick), for: .touchUpInside)
+        
+        centerView.cellBlock = { [weak self] model in
+            guard let self = self else { return }
+            let pageUrl = model.eyes ?? ""
+            if pageUrl.contains(scheme_url) {
+                DeepLinkNavigator.navigate(to: pageUrl, from: self)
+            }else if pageUrl.contains("http") {
+                
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,4 +68,12 @@ extension CenterViewController {
         }
     }
     
+}
+
+extension CenterViewController {
+    
+    @objc func settingClick() {
+        let settingVc = SettingViewController()
+        self.navigationController?.pushViewController(settingVc, animated: true)
+    }
 }

@@ -12,6 +12,8 @@ class CenterView: BaseView {
     
     var modelArray: [confideModel] = []
     
+    var cellBlock: ((confideModel) -> Void)?
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "center_bg_image")
@@ -182,6 +184,11 @@ extension CenterView: UITableViewDelegate, UITableViewDataSource {
         let model = modelArray[indexPath.row]
         cell.model = model
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = modelArray[indexPath.row]
+        self.cellBlock?(model)
     }
     
 }

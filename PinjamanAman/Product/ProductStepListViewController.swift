@@ -8,6 +8,8 @@
 import UIKit
 
 class ProductStepListViewController: BaseViewController {
+    
+    var productID: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
