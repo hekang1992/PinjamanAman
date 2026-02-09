@@ -32,6 +32,8 @@
 		7319D65B2F39C0D400F24B7D /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D65A2F39C0D400F24B7D /* ToastManager.swift */; };
 		7319D65D2F39C42100F24B7D /* LoginListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D65C2F39C42100F24B7D /* LoginListView.swift */; };
 		7319D65F2F39C7A000F24B7D /* CodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D65E2F39C7A000F24B7D /* CodeListView.swift */; };
+		7319D6612F39D33D00F24B7D /* CenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6602F39D33D00F24B7D /* CenterView.swift */; };
+		7319D6632F39DA7D00F24B7D /* CenterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6622F39DA7D00F24B7D /* CenterViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		7319D65A2F39C0D400F24B7D /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		7319D65C2F39C42100F24B7D /* LoginListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginListView.swift; sourceTree = "<group>"; };
 		7319D65E2F39C7A000F24B7D /* CodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListView.swift; sourceTree = "<group>"; };
+		7319D6602F39D33D00F24B7D /* CenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterView.swift; sourceTree = "<group>"; };
+		7319D6622F39DA7D00F24B7D /* CenterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewCell.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,7 +174,9 @@
 		7319D6332F39A6D700F24B7D /* Center */ = {
 			isa = PBXGroup;
 			children = (
+				7319D6602F39D33D00F24B7D /* CenterView.swift */,
 				7319D6482F39AEF000F24B7D /* CenterViewController.swift */,
+				7319D6622F39DA7D00F24B7D /* CenterViewCell.swift */,
 			);
 			path = Center;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				7319D6392F39A89300F24B7D /* BaseView.swift in Sources */,
 				7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */,
 				7319D65F2F39C7A000F24B7D /* CodeListView.swift in Sources */,
+				7319D6632F39DA7D00F24B7D /* CenterViewCell.swift in Sources */,
 				7319D6452F39AEE100F24B7D /* HomeViewController.swift in Sources */,
 				7319D6512F39B47800F24B7D /* BaseModel.swift in Sources */,
 				7319D65D2F39C42100F24B7D /* LoginListView.swift in Sources */,
@@ -348,6 +355,7 @@
 				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
 				7319D65B2F39C0D400F24B7D /* ToastManager.swift in Sources */,
+				7319D6612F39D33D00F24B7D /* CenterView.swift in Sources */,
 				7319D6532F39B4D500F24B7D /* NetworkManager.swift in Sources */,
 				7319D6592F39BFAF00F24B7D /* LoginView.swift in Sources */,
 				7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */,

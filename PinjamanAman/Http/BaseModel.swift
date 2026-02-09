@@ -32,6 +32,11 @@ class logicModel: Codable {
     var realm: String?
     var explained: String?
     var complements: String?
+    var confide: [confideModel]?
 }
 
-
+class confideModel: Codable {
+    var strain: String?
+    var gaining: String?
+    var eyes: String?
+}
