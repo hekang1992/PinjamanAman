@@ -24,6 +24,8 @@
 		7319D64B2F39AF0000F24B7D /* ProductStepListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */; };
 		7319D64D2F39B14D00F24B7D /* AppIdentifierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */; };
 		7319D64F2F39B29A00F24B7D /* DeviceInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D64E2F39B29A00F24B7D /* DeviceInfoManager.swift */; };
+		7319D6512F39B47800F24B7D /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6502F39B47500F24B7D /* BaseModel.swift */; };
+		7319D6532F39B4D500F24B7D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6522F39B4D500F24B7D /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStepListViewController.swift; sourceTree = "<group>"; };
 		7319D64C2F39B14D00F24B7D /* AppIdentifierManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIdentifierManager.swift; sourceTree = "<group>"; };
 		7319D64E2F39B29A00F24B7D /* DeviceInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoManager.swift; sourceTree = "<group>"; };
+		7319D6502F39B47500F24B7D /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		7319D6522F39B4D500F24B7D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +120,9 @@
 		7319D62F2F39A6B400F24B7D /* Http */ = {
 			isa = PBXGroup;
 			children = (
+				7319D6502F39B47500F24B7D /* BaseModel.swift */,
 				7319D6402F39ABFD00F24B7D /* NetworkMonitor.swift */,
+				7319D6522F39B4D500F24B7D /* NetworkManager.swift */,
 			);
 			path = Http;
 			sourceTree = "<group>";
@@ -315,9 +321,11 @@
 				7319D6392F39A89300F24B7D /* BaseView.swift in Sources */,
 				7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */,
 				7319D6452F39AEE100F24B7D /* HomeViewController.swift in Sources */,
+				7319D6512F39B47800F24B7D /* BaseModel.swift in Sources */,
 				7319D63D2F39A8BD00F24B7D /* BaseNavigationController.swift in Sources */,
 				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
+				7319D6532F39B4D500F24B7D /* NetworkManager.swift in Sources */,
 				7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */,
 				7319D64F2F39B29A00F24B7D /* DeviceInfoManager.swift in Sources */,
 			);
