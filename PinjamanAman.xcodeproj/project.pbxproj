@@ -30,6 +30,8 @@
 		7319D6572F39BE1000F24B7D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6562F39BE1000F24B7D /* LoginViewController.swift */; };
 		7319D6592F39BFAF00F24B7D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6582F39BFAF00F24B7D /* LoginView.swift */; };
 		7319D65B2F39C0D400F24B7D /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D65A2F39C0D400F24B7D /* ToastManager.swift */; };
+		7319D65D2F39C42100F24B7D /* LoginListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D65C2F39C42100F24B7D /* LoginListView.swift */; };
+		7319D65F2F39C7A000F24B7D /* CodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D65E2F39C7A000F24B7D /* CodeListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		7319D6562F39BE1000F24B7D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7319D6582F39BFAF00F24B7D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7319D65A2F39C0D400F24B7D /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		7319D65C2F39C42100F24B7D /* LoginListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginListView.swift; sourceTree = "<group>"; };
+		7319D65E2F39C7A000F24B7D /* CodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListView.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,9 +142,11 @@
 		7319D6302F39A6C400F24B7D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				7319D6422F39AE2E00F24B7D /* UserSessionManager.swift */,
-				7319D6562F39BE1000F24B7D /* LoginViewController.swift */,
 				7319D6582F39BFAF00F24B7D /* LoginView.swift */,
+				7319D65C2F39C42100F24B7D /* LoginListView.swift */,
+				7319D65E2F39C7A000F24B7D /* CodeListView.swift */,
+				7319D6562F39BE1000F24B7D /* LoginViewController.swift */,
+				7319D6422F39AE2E00F24B7D /* UserSessionManager.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -334,8 +340,10 @@
 				7319D63F2F39AB7A00F24B7D /* LaunchViewController.swift in Sources */,
 				7319D6392F39A89300F24B7D /* BaseView.swift in Sources */,
 				7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */,
+				7319D65F2F39C7A000F24B7D /* CodeListView.swift in Sources */,
 				7319D6452F39AEE100F24B7D /* HomeViewController.swift in Sources */,
 				7319D6512F39B47800F24B7D /* BaseModel.swift in Sources */,
+				7319D65D2F39C42100F24B7D /* LoginListView.swift in Sources */,
 				7319D63D2F39A8BD00F24B7D /* BaseNavigationController.swift in Sources */,
 				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
