@@ -40,6 +40,7 @@
 		736F5BAE2F3A0EC000F5BC15 /* AppLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAD2F3A0EC000F5BC15 /* AppLogoutView.swift */; };
 		736F5BB02F3A119F00F5BC15 /* AppCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAF2F3A119F00F5BC15 /* AppCancelView.swift */; };
 		736F5BB22F3A146B00F5BC15 /* H5WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB12F3A146B00F5BC15 /* H5WebViewController.swift */; };
+		736F5BB42F3A167900F5BC15 /* OneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB32F3A167500F5BC15 /* OneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		736F5BAD2F3A0EC000F5BC15 /* AppLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoutView.swift; sourceTree = "<group>"; };
 		736F5BAF2F3A119F00F5BC15 /* AppCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCancelView.swift; sourceTree = "<group>"; };
 		736F5BB12F3A146B00F5BC15 /* H5WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5WebViewController.swift; sourceTree = "<group>"; };
+		736F5BB32F3A167500F5BC15 /* OneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneView.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 		7319D6312F39A6C600F24B7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				736F5BB32F3A167500F5BC15 /* OneView.swift */,
 				7319D6442F39AEE100F24B7D /* HomeViewController.swift */,
 			);
 			path = Home;
@@ -367,6 +370,7 @@
 				7319D63F2F39AB7A00F24B7D /* LaunchViewController.swift in Sources */,
 				7319D6392F39A89300F24B7D /* BaseView.swift in Sources */,
 				7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */,
+				736F5BB42F3A167900F5BC15 /* OneView.swift in Sources */,
 				7319D65F2F39C7A000F24B7D /* CodeListView.swift in Sources */,
 				7319D6632F39DA7D00F24B7D /* CenterViewCell.swift in Sources */,
 				7319D6452F39AEE100F24B7D /* HomeViewController.swift in Sources */,
