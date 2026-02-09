@@ -22,11 +22,13 @@ class LaunchViewController: BaseViewController {
             make.edges.equalToSuperview()
         }
         
-        NetworkMonitor.shared.startMonitoring { isReachable, connectionType in
+        NetworkMonitor.shared.startMonitoring { [weak self] isReachable, connectionType in
             if isReachable {
                 if connectionType == .ethernetOrWiFi {
+                    self?.appInfo()
                     NetworkMonitor.shared.stopMonitoring()
                 } else if connectionType == .cellular {
+                    self?.appInfo()
                     NetworkMonitor.shared.stopMonitoring()
                 }
             } else {
@@ -40,4 +42,28 @@ class LaunchViewController: BaseViewController {
 
 extension LaunchViewController {
     
+    private func appInfo() {
+        LoadingView.shared.show()
+        NetworkManager.post(url: "/patkan/center/experience/emotions",
+                            responseType: BaseModel.self) { result in
+            switch result {
+            case .success(let success):
+                LoadingView.shared.hide()
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    let languageCode = success.logic?.realm ?? ""
+                    AppLanguageCodeManager.saveLanguageCode(code: languageCode)
+                    Task {
+                        try? await Task.sleep(nanoseconds: 250_000_000)
+                        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
+                    }
+                }
+                
+            case .failure(_):
+                LoadingView.shared.hide()
+            }
+        }
+    }
+    
 }
+

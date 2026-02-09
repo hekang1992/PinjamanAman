@@ -6,13 +6,13 @@
 //
 
 class BaseModel: Codable {
-    var suc: String?
-    var mes: String?
-    var data: [dataModel]?
+    var partner: String?
+    var reason: String?
+    var logic: logicModel?
 }
 
-class dataModel: Codable {
-    var list: [String]?
+class logicModel: Codable {
+    var realm: String?
 }
 
 

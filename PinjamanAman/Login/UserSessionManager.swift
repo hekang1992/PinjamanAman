@@ -58,3 +58,17 @@ class UserSessionManager {
     }
     
 }
+
+class AppLanguageCodeManager {
+    
+    static func saveLanguageCode(code: String) {
+        UserDefaults.standard.set(code, forKey: "languageCode")
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func getLanguageCode() -> String {
+        let languageCode = UserDefaults.standard.object(forKey: "languageCode") as? String ?? ""
+        return languageCode
+    }
+    
+}

@@ -34,10 +34,11 @@ extension NetworkManager {
     
     static func get<T: Codable>(
         url: String,
-        params: [String: Any]?,
+        params: [String: Any]? = nil,
         responseType: T.Type,
         completion: @escaping (Result<T, AFError>) -> Void
     ) {
+        let apiUrl = (base_url + url).appendingQueryParams(DeviceInfoManager.getDeviceInfoDictionary())
         
         getSession.upload(
             multipartFormData: { formData in
@@ -46,7 +47,7 @@ extension NetworkManager {
                     formData.append(data, withName: key)
                 }
             },
-            to: url,
+            to: apiUrl,
             method: .get
         )
         .validate()
@@ -60,19 +61,20 @@ extension NetworkManager {
     
     static func post<T: Codable>(
         url: String,
-        params: [String: Any],
+        params: [String: Any]? = nil,
         responseType: T.Type,
         completion: @escaping (Result<T, AFError>) -> Void
     ) {
+        let apiUrl = (base_url + url).appendingQueryParams(DeviceInfoManager.getDeviceInfoDictionary())
         
         postSession.upload(
             multipartFormData: { formData in
-                params.forEach { key, value in
+                params?.forEach { key, value in
                     let data = "\(value)".data(using: .utf8) ?? Data()
                     formData.append(data, withName: key)
                 }
             },
-            to: url,
+            to: apiUrl,
             method: .post
         )
         .validate()
@@ -86,17 +88,19 @@ extension NetworkManager {
     
     static func post<T: Codable>(
         url: String,
-        params: [String: Any],
+        params: [String: Any]? = nil,
         imageData: Data,
         imageKey: String = "image",
         responseType: T.Type,
         completion: @escaping (Result<T, AFError>) -> Void
     ) {
         
+        let apiUrl = (base_url + url).appendingQueryParams(DeviceInfoManager.getDeviceInfoDictionary())
+        
         postSession.upload(
             multipartFormData: { formData in
                 
-                params.forEach { key, value in
+                params?.forEach { key, value in
                     let data = "\(value)".data(using: .utf8) ?? Data()
                     formData.append(data, withName: key)
                 }
@@ -108,12 +112,26 @@ extension NetworkManager {
                     mimeType: "image/jpeg"
                 )
             },
-            to: url,
+            to: apiUrl,
             method: .post
         )
         .validate()
         .responseDecodable(of: T.self) { response in
             completion(response.result)
         }
+    }
+}
+
+extension String {
+    func appendingQueryParams(_ parameters: [String: String]) -> String {
+        guard var components = URLComponents(string: self) else { return self }
+        var queryItems = components.queryItems ?? []
+        
+        for (key, value) in parameters {
+            queryItems.append(URLQueryItem(name: key, value: value))
+        }
+        
+        components.queryItems = queryItems
+        return components.url?.absoluteString ?? self
     }
 }
