@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import TYAlertController
 import MJRefresh
+import Kingfisher
 
 class ProductStepListViewController: BaseViewController {
     
@@ -56,6 +57,7 @@ class ProductStepListViewController: BaseViewController {
         nextBtn.setTitleColor(.white, for: .normal)
         nextBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(700))
         nextBtn.setBackgroundImage(UIImage(named: "login_btn_bg_image"), for: .normal)
+        nextBtn.addTarget(self, action: #selector(nextBtnClick), for: .touchUpInside)
         return nextBtn
     }()
     
@@ -66,6 +68,44 @@ class ProductStepListViewController: BaseViewController {
         whiteView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         whiteView.backgroundColor = UIColor.init(hexString: "#FFFFFF")
         return whiteView
+    }()
+    
+    lazy var productImageView: UIImageView = {
+        let productImageView = UIImageView()
+        productImageView.layer.cornerRadius = 8
+        productImageView.layer.masksToBounds = true
+        productImageView.backgroundColor = .systemGreen
+        return productImageView
+    }()
+    
+    lazy var nameLabel: UILabel = {
+        let nameLabel = UILabel()
+        nameLabel.textAlignment = .left
+        nameLabel.textColor = UIColor.init(hexString: "#203D31")
+        nameLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(500))
+        return nameLabel
+    }()
+    
+    lazy var descImageView: UIImageView = {
+        let descImageView = UIImageView()
+        descImageView.image = languageCode == "1100" ? UIImage(named: "id_ho_a_yn") : UIImage(named: "home_cdesc_image")
+        return descImageView
+    }()
+    
+    lazy var moneyLabel: UILabel = {
+        let moneyLabel = UILabel()
+        moneyLabel.textAlignment = .center
+        moneyLabel.textColor = UIColor.init(hexString: "#203D31")
+        moneyLabel.font = UIFont.systemFont(ofSize: 46, weight: UIFont.Weight(600))
+        return moneyLabel
+    }()
+    
+    lazy var uptoLabel: UILabel = {
+        let uptoLabel = UILabel()
+        uptoLabel.textAlignment = .center
+        uptoLabel.textColor = UIColor.init(hexString: "#B0B4B3")
+        uptoLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight(500))
+        return uptoLabel
     }()
     
     override func viewDidLoad() {
@@ -156,6 +196,44 @@ extension ProductStepListViewController: UITableViewDelegate, UITableViewDataSou
         let modelArray = self.model?.logic?.strike ?? []
         stepImageView.image = modelArray.count == 4 ? UIImage(named: "id_t_for_image") : UIImage(named: "en_t_st_image")
         
+        headView.addSubview(productImageView)
+        headView.addSubview(nameLabel)
+        headView.addSubview(descImageView)
+        headView.addSubview(moneyLabel)
+        headView.addSubview(uptoLabel)
+        
+        productImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(26)
+            make.left.equalToSuperview().offset(40.pix())
+            make.top.equalToSuperview().offset(60.pix())
+        }
+        nameLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(productImageView)
+            make.left.equalTo(productImageView.snp.right).offset(5)
+            make.height.equalTo(30)
+        }
+        descImageView.snp.makeConstraints { make in
+            make.top.equalTo(productImageView.snp.bottom).offset(5)
+            make.left.equalTo(productImageView)
+            make.size.equalTo(CGSize(width: 220.pix(), height: 20.pix()))
+        }
+        moneyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(descImageView.snp.bottom).offset(15)
+            make.height.equalTo(50)
+        }
+        uptoLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(moneyLabel.snp.bottom).offset(2)
+            make.height.equalTo(15)
+        }
+        
+        let cardModel = self.model?.logic?.smaller ?? smallerModel()
+        productImageView.kf.setImage(with: URL(string: cardModel.conflicts ?? ""))
+        nameLabel.text = cardModel.soften ?? ""
+        moneyLabel.text = cardModel.positivity ?? ""
+        uptoLabel.text = cardModel.mindset ?? ""
+        
         return headView
     }
     
@@ -175,6 +253,18 @@ extension ProductStepListViewController: UITableViewDelegate, UITableViewDataSou
         cell.typeImageView.isHidden = isLastCell
         cell.model = model
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let modelArray = self.model?.logic?.strike ?? []
+        let model = modelArray[indexPath.row]
+        let cardModel = self.model?.logic?.smaller ?? smallerModel()
+        let typeIndex = model.laugh ?? 0
+        if typeIndex == 1 {
+            self.judgeKeysToPageVc(cardModel: cardModel, stepModel: model)
+        }else {
+            self.nextBtnClick()
+        }
     }
     
 }
@@ -203,4 +293,14 @@ extension ProductStepListViewController {
             }
         }
     }
+}
+
+extension ProductStepListViewController {
+    
+    @objc func nextBtnClick() {
+        let stepModel = self.model?.logic?.achievements ?? strikeModel()
+        let cardModel = self.model?.logic?.smaller ?? smallerModel()
+        self.judgeKeysToPageVc(cardModel: cardModel, stepModel: stepModel)
+    }
+    
 }

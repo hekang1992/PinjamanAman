@@ -116,7 +116,7 @@ class OneView: BaseView {
     
     lazy var descImageView: UIImageView = {
         let descImageView = UIImageView()
-        descImageView.image = languageCode == "1100" ? UIImage(named: "home_cdesc_image") : UIImage(named: "home_cdesc_image")
+        descImageView.image = languageCode == "1100" ? UIImage(named: "id_ho_a_yn") : UIImage(named: "home_cdesc_image")
         return descImageView
     }()
     

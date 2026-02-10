@@ -30,13 +30,13 @@ class BaseViewController: UIViewController {
         footView.backgroundColor = UIColor.init(hexString: "#F6F6F4")
         return footView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.init(hexString: "#F6F6F4")
     }
-
+    
 }
 
 extension BaseViewController {
@@ -48,3 +48,34 @@ extension BaseViewController {
     }
     
 }
+
+extension BaseViewController {
+    
+    func judgeKeysToPageVc(cardModel: smallerModel, stepModel: strikeModel) {
+        let type = stepModel.word ?? ""
+        switch type {
+        case "contentment1":
+            let basicVc = BasicViewController()
+            basicVc.cardModel = cardModel
+            basicVc.stepModel = stepModel
+            self.navigationController?.pushViewController(basicVc, animated: true)
+            
+        case "contentment3":
+            let basicVc = PersonalViewController()
+            basicVc.cardModel = cardModel
+            basicVc.stepModel = stepModel
+            self.navigationController?.pushViewController(basicVc, animated: true)
+            
+        case "contentment4":
+            break
+            
+        case "contentment5":
+            break
+            
+        default:
+            break
+        }
+    }
+    
+}
+

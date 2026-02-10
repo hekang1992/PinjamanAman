@@ -17,12 +17,6 @@ final class NetworkManager {
 
 extension NetworkManager {
     
-    static let getSession: Session = {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 10
-        return Session(configuration: config)
-    }()
-    
     static let postSession: Session = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30
@@ -35,20 +29,18 @@ extension NetworkManager {
     static func get<T: Codable>(
         url: String,
         params: [String: Any]? = nil,
+        timeout: TimeInterval = 30,
         responseType: T.Type,
         completion: @escaping (Result<T, AFError>) -> Void
     ) {
         let apiUrl = (base_url + url).appendingQueryParams(DeviceInfoManager.getDeviceInfoDictionary())
         
-        getSession.upload(
-            multipartFormData: { formData in
-                params?.forEach { key, value in
-                    let data = "\(value)".data(using: .utf8) ?? Data()
-                    formData.append(data, withName: key)
-                }
-            },
-            to: apiUrl,
-            method: .get
+        AF.request(
+            apiUrl,
+            method: .get,
+            parameters: params,
+            encoding: URLEncoding.default,
+            requestModifier: { $0.timeoutInterval = timeout }
         )
         .validate()
         .responseDecodable(of: T.self) { response in
