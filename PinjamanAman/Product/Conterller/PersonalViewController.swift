@@ -5,9 +5,9 @@
 //  Created by hekang on 2026/2/10.
 //
 
-
 import UIKit
 import SnapKit
+import TYAlertController
 
 class PersonalViewController: BaseViewController {
     
@@ -144,11 +144,39 @@ extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
         if type == "ability2" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EnterTextCell", for: indexPath) as! EnterTextCell
             cell.model = model
+            cell.enterFiledBlock = { text in
+                model.worlds = text
+                model.acceptance = text
+            }
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TapCell", for: indexPath) as! TapCell
             cell.model = model
+            cell.tapBlock = { [weak self] in
+                guard let self = self else { return }
+                self.tapCell(cell: cell, listModel: model)
+            }
             return cell
         }
     }
+}
+
+extension PersonalViewController {
+    
+    private func tapCell(cell: TapCell, listModel: evolveModel) {
+        let popView = PopEnmuView(frame: self.view.bounds)
+        popView.nameLabel.text = listModel.strain ?? ""
+        popView.modelArray = listModel.lay ?? []
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        popView.sureBlock = { [weak self] in
+            guard let self = self else { return }
+        }
+    }
+    
 }

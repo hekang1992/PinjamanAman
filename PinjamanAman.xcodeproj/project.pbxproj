@@ -42,6 +42,7 @@
 		7363AB012F3AFD0100E8002F /* PopSaveInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */; };
 		7363AB032F3B105700E8002F /* TapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB022F3B105700E8002F /* TapCell.swift */; };
 		7363AB052F3B106400E8002F /* EnterTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB042F3B106400E8002F /* EnterTextCell.swift */; };
+		7363AB072F3B1A9700E8002F /* PopEnmuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB062F3B1A9700E8002F /* PopEnmuView.swift */; };
 		736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */; };
 		736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */; };
 		736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */; };
@@ -93,6 +94,7 @@
 		7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopSaveInfoView.swift; sourceTree = "<group>"; };
 		7363AB022F3B105700E8002F /* TapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCell.swift; sourceTree = "<group>"; };
 		7363AB042F3B106400E8002F /* EnterTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTextCell.swift; sourceTree = "<group>"; };
+		7363AB062F3B1A9700E8002F /* PopEnmuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopEnmuView.swift; sourceTree = "<group>"; };
 		736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTarget.swift; sourceTree = "<group>"; };
 		736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeadView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */,
 				7363AB022F3B105700E8002F /* TapCell.swift */,
 				7363AB042F3B106400E8002F /* EnterTextCell.swift */,
+				7363AB062F3B1A9700E8002F /* PopEnmuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				736F5BAE2F3A0EC000F5BC15 /* AppLogoutView.swift in Sources */,
 				7319D63D2F39A8BD00F24B7D /* BaseNavigationController.swift in Sources */,
 				7363AB012F3AFD0100E8002F /* PopSaveInfoView.swift in Sources */,
+				7363AB072F3B1A9700E8002F /* PopEnmuView.swift in Sources */,
 				7363AAFB2F3ADD7A00E8002F /* BasicListView.swift in Sources */,
 				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
