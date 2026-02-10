@@ -1,5 +1,5 @@
 //
-//  PersonalViewController 2.swift
+//  ConnectViewController 2.swift
 //  PinjamanAman
 //
 //  Created by hekang on 2026/2/10.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import TYAlertController
 
-class PersonalViewController: BaseViewController {
+class ConnectViewController: BaseViewController {
     
     var cardModel: smallerModel?
     var stepModel: strikeModel?
@@ -28,12 +28,12 @@ class PersonalViewController: BaseViewController {
     
     lazy var descImageView: UIImageView = {
         let descImageView = UIImageView()
-        descImageView.image = languageCode == "1100" ? UIImage(named: "edc2_image_y") : UIImage(named: "enc2_image_y")
+        descImageView.image = languageCode == "1100" ? UIImage(named: "con_arzx_9image") : UIImage(named: "con_arzx_9image")
         return descImageView
     }()
     
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.estimatedRowHeight = 80
@@ -42,8 +42,7 @@ class PersonalViewController: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(TapCell.self, forCellReuseIdentifier: "TapCell")
-        tableView.register(EnterTextCell.self, forCellReuseIdentifier: "EnterTextCell")
+        tableView.register(ConnectViewCell.self, forCellReuseIdentifier: "ConnectViewCell")
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
@@ -107,7 +106,7 @@ class PersonalViewController: BaseViewController {
     
 }
 
-extension PersonalViewController {
+extension ConnectViewController {
     
     @objc func nextBtnClick() {
         var params = ["transform": self.cardModel?.opening ?? ""]
@@ -137,13 +136,13 @@ extension PersonalViewController {
     private func personalInfo() {
         LoadingView.shared.show()
         let params = ["transform": self.cardModel?.opening ?? ""]
-        NetworkManager.post(url: "/patkan/riderall/profound/system", params: params, responseType: BaseModel.self) { result in
+        NetworkManager.post(url: "/patkan/window/within/enjoying", params: params, responseType: BaseModel.self) { result in
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
-                    self.modelArray = success.logic?.evolve ?? []
+                    self.modelArray = success.logic?.found?.see ?? []
                     self.tableView.reloadData()
                 }
                 
@@ -154,72 +153,23 @@ extension PersonalViewController {
     }
 }
 
-extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
+extension ConnectViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.modelArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = self.modelArray[indexPath.row]
-        let type = model.social ?? ""
-        if type == "ability2" {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EnterTextCell", for: indexPath) as! EnterTextCell
-            cell.model = model
-            cell.enterFiledBlock = { text in
-                model.worlds = text
-                model.acceptance = text
-            }
-            return cell
-        }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TapCell", for: indexPath) as! TapCell
-            cell.model = model
-            cell.tapBlock = { [weak self] in
-                guard let self = self else { return }
-                self.view.endEditing(true)
-                self.tapCell(cell: cell, listModel: model)
-            }
-            return cell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectViewCell", for: indexPath) as! ConnectViewCell
+        cell.model = model
+        return cell
+        
     }
 }
 
-extension PersonalViewController {
-    
-    private func tapCell(cell: TapCell, listModel: evolveModel) {
-        let popView = PopEnmuView(frame: self.view.bounds)
-        popView.nameLabel.text = listModel.strain ?? ""
-        
-        let modelArray = listModel.lay ?? []
-        
-        let targetText = cell.enterFiled.text ?? ""
-        
-        if let index = modelArray.firstIndex(where: { $0.blend == targetText }) {
-            popView.selectedIndex = index
-        }
-        
-        popView.modelArray = modelArray
-        
-        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
-        self.present(alertVc!, animated: true)
-        
-        popView.cancelBlock = { [weak self] in
-            self?.dismiss(animated: true)
-        }
-        
-        popView.sureBlock = { [weak self] model in
-            guard let self = self else { return }
-            self.dismiss(animated: true)
-            let text = model.blend ?? ""
-            let value = model.acceptance ?? ""
-            cell.enterFiled.text = text
-            listModel.worlds = text
-            listModel.acceptance = value
-        }
-    }
-    
-}
 
-extension PersonalViewController {
+
+extension ConnectViewController {
     
     private func clickDescInfo() {
         LoadingView.shared.show()

@@ -49,7 +49,7 @@ extension BaseViewController {
     
     func toTargetVc() {
         guard let nav = navigationController else { return }
-
+        
         if let vc = nav.viewControllers.compactMap({ $0 as? ProductStepListViewController }).first {
             nav.popToViewController(vc, animated: true)
         } else {
@@ -77,9 +77,18 @@ extension BaseViewController {
             self.navigationController?.pushViewController(basicVc, animated: true)
             
         case "contentment4":
-            break
+            let basicVc = ConnectViewController()
+            basicVc.cardModel = cardModel
+            basicVc.stepModel = stepModel
+            self.navigationController?.pushViewController(basicVc, animated: true)
             
         case "contentment5":
+            let basicVc = ToYouViewController()
+            basicVc.cardModel = cardModel
+            basicVc.stepModel = stepModel
+            self.navigationController?.pushViewController(basicVc, animated: true)
+            
+        case "":
             break
             
         default:

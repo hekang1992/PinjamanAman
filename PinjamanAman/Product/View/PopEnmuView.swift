@@ -20,7 +20,7 @@ class PopEnmuView: BaseView {
     }
 
     var selectedIndex: Int? {
-//        didSet {
+        didSet {
 //            guard let index = selectedIndex else { return }
 //            DispatchQueue.main.async {
 //                let indexPath = IndexPath(row: index, section: 0)
@@ -28,7 +28,7 @@ class PopEnmuView: BaseView {
 //                    self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
 //                }
 //            }
-//        }
+        }
     }
 
     lazy var bgImageView: UIImageView = {

@@ -1,5 +1,5 @@
 //
-//  PersonalViewController 2.swift
+//  ToYouViewController 2.swift
 //  PinjamanAman
 //
 //  Created by hekang on 2026/2/10.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import TYAlertController
 
-class PersonalViewController: BaseViewController {
+class ToYouViewController: BaseViewController {
     
     var cardModel: smallerModel?
     var stepModel: strikeModel?
@@ -28,7 +28,7 @@ class PersonalViewController: BaseViewController {
     
     lazy var descImageView: UIImageView = {
         let descImageView = UIImageView()
-        descImageView.image = languageCode == "1100" ? UIImage(named: "edc2_image_y") : UIImage(named: "enc2_image_y")
+        descImageView.image = languageCode == "1100" ? UIImage(named: "lisst_rzx_0image") : UIImage(named: "ad_rzx_13d_y")
         return descImageView
     }()
     
@@ -107,7 +107,7 @@ class PersonalViewController: BaseViewController {
     
 }
 
-extension PersonalViewController {
+extension ToYouViewController {
     
     @objc func nextBtnClick() {
         var params = ["transform": self.cardModel?.opening ?? ""]
@@ -154,7 +154,7 @@ extension PersonalViewController {
     }
 }
 
-extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
+extension ToYouViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.modelArray.count
     }
@@ -183,7 +183,7 @@ extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension PersonalViewController {
+extension ToYouViewController {
     
     private func tapCell(cell: TapCell, listModel: evolveModel) {
         let popView = PopEnmuView(frame: self.view.bounds)
@@ -219,7 +219,7 @@ extension PersonalViewController {
     
 }
 
-extension PersonalViewController {
+extension ToYouViewController {
     
     private func clickDescInfo() {
         LoadingView.shared.show()

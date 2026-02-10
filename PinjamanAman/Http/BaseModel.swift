@@ -44,6 +44,11 @@ class logicModel: Codable {
     var thinking: String?
     var blend: String?
     var evolve: [evolveModel]?
+    var found: foundModel?
+}
+
+class foundModel: Codable {
+    var see: [evolveModel]?
 }
 
 class involvesModel: Codable {
@@ -84,6 +89,31 @@ class confideModel: Codable {
 class seeModel: Codable {
     var acceptance: String?
     var forgiveness: [forgivenessModel]?
+    var gives: [layModel]?
+    var ahead: String?
+    var beliefs: String?
+    var blend: String?
+    var forValue: String?
+    var remain: String?
+    var ahistories: String?
+    var dhistories: String?
+    var chistories: String?
+    var fhistories: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case acceptance
+        case forgiveness
+        case gives
+        case ahead
+        case beliefs
+        case blend
+        case forValue = "for"
+        case remain
+        case ahistories
+        case dhistories
+        case chistories
+        case fhistories
+    }
 }
 
 class forgivenessModel: Codable {
@@ -97,17 +127,6 @@ class forgivenessModel: Codable {
     var misunderstandings: String?
     var demands: String?
     var few: String?
-}
-
-class evolveModel: Codable {
-    var strain: String?
-    var cultivated: String?
-    var partner: String?
-    var social: String?
-    var worlds: String?
-    var acceptance: String?
-    var bonds: String?
-    var lay: [layModel]?
 }
 
 /// enum
@@ -129,5 +148,50 @@ class layModel: Codable {
         }
         
         blend = try? container.decode(String.self, forKey: .blend)
+    }
+}
+
+class evolveModel: Codable {
+    var strain: String?
+    var cultivated: String?
+    var partner: String?
+    var social: String?
+    var worlds: String?
+    var acceptance: String?
+    var bonds: String?
+    var lay: [layModel]?
+    
+    var forgiveness: [forgivenessModel]?
+    var gives: [layModel]?
+    var ahead: String?
+    var beliefs: String?
+    var blend: String?
+    var forValue: String?
+    var remain: String?
+    var ahistories: String?
+    var dhistories: String?
+    var chistories: String?
+    var fhistories: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case strain
+        case cultivated
+        case partner
+        case social
+        case worlds
+        case acceptance
+        case bonds
+        case lay
+        case forgiveness
+        case gives
+        case ahead
+        case beliefs
+        case blend
+        case forValue = "for"
+        case remain
+        case ahistories
+        case dhistories
+        case chistories
+        case fhistories
     }
 }

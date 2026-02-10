@@ -43,6 +43,9 @@
 		7363AB032F3B105700E8002F /* TapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB022F3B105700E8002F /* TapCell.swift */; };
 		7363AB052F3B106400E8002F /* EnterTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB042F3B106400E8002F /* EnterTextCell.swift */; };
 		7363AB072F3B1A9700E8002F /* PopEnmuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB062F3B1A9700E8002F /* PopEnmuView.swift */; };
+		7363AB092F3B25CC00E8002F /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB082F3B25CC00E8002F /* ConnectViewController.swift */; };
+		7363AB0B2F3B25ED00E8002F /* ToYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB0A2F3B25ED00E8002F /* ToYouViewController.swift */; };
+		7363AB0D2F3B272900E8002F /* ConnectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB0C2F3B272900E8002F /* ConnectViewCell.swift */; };
 		736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */; };
 		736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */; };
 		736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */; };
@@ -95,6 +98,9 @@
 		7363AB022F3B105700E8002F /* TapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCell.swift; sourceTree = "<group>"; };
 		7363AB042F3B106400E8002F /* EnterTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTextCell.swift; sourceTree = "<group>"; };
 		7363AB062F3B1A9700E8002F /* PopEnmuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopEnmuView.swift; sourceTree = "<group>"; };
+		7363AB082F3B25CC00E8002F /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		7363AB0A2F3B25ED00E8002F /* ToYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToYouViewController.swift; sourceTree = "<group>"; };
+		7363AB0C2F3B272900E8002F /* ConnectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewCell.swift; sourceTree = "<group>"; };
 		736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTarget.swift; sourceTree = "<group>"; };
 		736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeadView.swift; sourceTree = "<group>"; };
@@ -251,6 +257,8 @@
 				7319D64A2F39AF0000F24B7D /* ProductStepListViewController.swift */,
 				7363AAEE2F3ADA1D00E8002F /* BasicViewController.swift */,
 				7363AAF62F3ADCFC00E8002F /* PersonalViewController.swift */,
+				7363AB082F3B25CC00E8002F /* ConnectViewController.swift */,
+				7363AB0A2F3B25ED00E8002F /* ToYouViewController.swift */,
 			);
 			path = Conterller;
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 				7363AB022F3B105700E8002F /* TapCell.swift */,
 				7363AB042F3B106400E8002F /* EnterTextCell.swift */,
 				7363AB062F3B1A9700E8002F /* PopEnmuView.swift */,
+				7363AB0C2F3B272900E8002F /* ConnectViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -441,11 +450,14 @@
 				7319D65B2F39C0D400F24B7D /* ToastManager.swift in Sources */,
 				7319D6612F39D33D00F24B7D /* CenterView.swift in Sources */,
 				7319D6532F39B4D500F24B7D /* NetworkManager.swift in Sources */,
+				7363AB0B2F3B25ED00E8002F /* ToYouViewController.swift in Sources */,
 				736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */,
 				7319D6592F39BFAF00F24B7D /* LoginView.swift in Sources */,
 				7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */,
 				7363AAF72F3ADCFC00E8002F /* PersonalViewController.swift in Sources */,
 				736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */,
+				7363AB0D2F3B272900E8002F /* ConnectViewCell.swift in Sources */,
+				7363AB092F3B25CC00E8002F /* ConnectViewController.swift in Sources */,
 				736F5BB62F3A24E200F5BC15 /* CardListView.swift in Sources */,
 				7319D64F2F39B29A00F24B7D /* DeviceInfoManager.swift in Sources */,
 			);
