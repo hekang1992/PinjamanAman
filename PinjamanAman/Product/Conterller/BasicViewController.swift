@@ -179,7 +179,6 @@ extension BasicViewController {
             return
         }
         
-        
     }
 }
 
@@ -237,13 +236,24 @@ extension BasicViewController {
     private func getBasicInfo() {
         LoadingView.shared.show()
         let params = ["transform": self.cardModel?.opening ?? ""]
-        NetworkManager.get(url: "/patkan/brings/there/often", params: params, responseType: BaseModel.self) { result in
+        NetworkManager.get(url: "/patkan/brings/there/often", params: params, responseType: BaseModel.self) { [weak self] result in
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
-                    self.model = success
+                    self?.model = success
+                    
+                    let card = success.logic?.go?.laugh ?? 0
+                    if card == 1 {
+                        self?.oneListView.cameraImageView.image = UIImage(named: "cpxq_dh_ic")
+                    }
+                    
+                    let face = success.logic?.involves?.laugh ?? 0
+                    if face == 1 {
+                        self?.twoListView.cameraImageView.image = UIImage(named: "cpxq_dh_ic")
+                    }
+                    
                 }
             case .failure(_):
                 LoadingView.shared.hide()
@@ -269,7 +279,7 @@ extension BasicViewController {
                     if type == "11" {
                         self?.saveNameInfo(model: success)
                     }else {
-                        
+                        self?.clickDescInfo()
                     }
                 }else {
                     ToastManager.showMessage(success.reason ?? "")
@@ -282,6 +292,7 @@ extension BasicViewController {
     
     private func saveNameInfo(model: BaseModel) {
         let popView = PopSaveInfoView(frame: self.view.bounds)
+        popView.model = model
         let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
         self.present(alertVc!, animated: true)
         
@@ -290,15 +301,42 @@ extension BasicViewController {
         }
         
         popView.saveBlock = { [weak self] in
-            self?.dismiss(animated: true) {
-                
-            }
+            let name = popView.oneFiled.text ?? ""
+            let idNum = popView.twoFiled.text ?? ""
+            let time = popView.threeFiled.text ?? ""
+            let orderID = self?.cardModel?.good ?? ""
+            let paras = ["blend": name,
+                         "thinking": idNum,
+                         "old": time,
+                         "reevaluate": orderID,
+                         "beliefs": UserSessionManager.shared.phone ?? "",
+                         "transform": self?.cardModel?.opening ?? ""]
+            self?.saveName(paras: paras)
         }
     }
     
 }
 
 extension BasicViewController {
+    
+    private func saveName(paras: [String: String]) {
+        LoadingView.shared.show()
+        NetworkManager.post(url: "/patkan/doing/deeply/force", params: paras, responseType: BaseModel.self) { [weak self] result in
+            switch result {
+            case .success(let success):
+                LoadingView.shared.hide()
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    self?.dismiss(animated: true)
+                    self?.getBasicInfo()
+                }else {
+                    ToastManager.showMessage(success.reason ?? "")
+                }
+            case .failure(_):
+                LoadingView.shared.hide()
+            }
+        }
+    }
     
     private func clickDescInfo() {
         LoadingView.shared.show()

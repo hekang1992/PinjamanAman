@@ -40,6 +40,9 @@ class logicModel: Codable {
     var achievements: strikeModel?
     var involves: involvesModel?
     var go: involvesModel?
+    var old: String?
+    var thinking: String?
+    var blend: String?
 }
 
 class involvesModel: Codable {
@@ -68,6 +71,7 @@ class smallerModel: Codable {
     var mindset: String?
     var positivity: String?
     var opening: String?
+    var good: String?
 }
 
 class confideModel: Codable {

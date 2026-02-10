@@ -10,6 +10,15 @@ import SnapKit
 
 class PopSaveInfoView: BaseView {
     
+    var model: BaseModel? {
+        didSet {
+            guard let model = model else { return }
+            oneFiled.text = model.logic?.blend ?? ""
+            twoFiled.text = model.logic?.thinking ?? ""
+            threeFiled.text = model.logic?.old ?? ""
+        }
+    }
+    
     var cancelBlock: (() -> Void)?
     
     var saveBlock: (() -> Void)?
@@ -148,6 +157,19 @@ class PopSaveInfoView: BaseView {
         return tclineView
     }()
     
+    lazy var arrowImageView: UIImageView = {
+        let arrowImageView = UIImageView()
+        arrowImageView.image = UIImage(named: "right_ac_liamge")
+        return arrowImageView
+    }()
+    
+    lazy var tapTimeBtn: UIButton = {
+        let tapTimeBtn = UIButton(type: .custom)
+        tapTimeBtn.backgroundColor = .red
+        tapTimeBtn.addTarget(self, action: #selector(tapTimeBtnClick), for: .touchUpInside)
+        return tapTimeBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -168,6 +190,9 @@ class PopSaveInfoView: BaseView {
         bgView.addSubview(threeBtn)
         bgView.addSubview(threeFiled)
         bgView.addSubview(tclineView)
+        
+        bgView.addSubview(arrowImageView)
+        bgView.addSubview(tapTimeBtn)
         
         addSubview(cancelBtn)
         
@@ -262,6 +287,19 @@ class PopSaveInfoView: BaseView {
             make.left.bottom.right.equalTo(threeFiled)
             make.height.equalTo(1)
         }
+        
+        arrowImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(threeFiled)
+            make.right.equalToSuperview().offset(-32)
+            make.size.equalTo(CGSize(width: 14, height: 12))
+        }
+        
+        tapTimeBtn.snp.makeConstraints { make in
+            make.top.equalTo(threeBtn.snp.bottom)
+            make.left.equalTo(oneBtn)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+        }
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -278,5 +316,9 @@ extension PopSaveInfoView {
     
     @objc func applyBtnClick() {
         self.saveBlock?()
+    }
+    
+    @objc func tapTimeBtnClick() {
+        
     }
 }

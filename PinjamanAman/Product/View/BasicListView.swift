@@ -66,7 +66,7 @@ class BasicListView: BaseView {
         bgView.addSubview(nameLabel)
         bgView.addSubview(descLabel)
         bgView.addSubview(bgImageView)
-        bgView.addSubview(cameraImageView)
+        bgImageView.addSubview(cameraImageView)
         bgView.addSubview(tapBtn)
         
         bgView.snp.makeConstraints { make in
@@ -93,6 +93,10 @@ class BasicListView: BaseView {
             make.centerX.equalToSuperview()
             make.top.equalTo(descLabel.snp.bottom).offset(25)
             make.size.equalTo(CGSize(width: 204.pix(), height: 140.pix()))
+        }
+        cameraImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(28)
+            make.top.left.equalToSuperview().inset(18)
         }
         tapBtn.snp.makeConstraints { make in
             make.edges.equalToSuperview()

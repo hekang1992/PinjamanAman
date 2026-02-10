@@ -19,7 +19,17 @@ class ProductStepViewCell: UITableViewCell {
             descLabel.text = model.cultivated ?? ""
             let laugh = model.laugh ?? 0
             
+            stepLabel.textColor = laugh == 1 ? UIColor.init(hexString: "#267B3F") : UIColor.init(hexString: "#B0B4B3")
             
+            bgImageView.image = laugh == 1 ? UIImage(named: "comp_step_image") : UIImage(named: "nor_step_image")
+            
+            compImageView.image = laugh == 1 ? UIImage(named: "cpxq_dh_ic") : UIImage(named: "cpxq_jt_ic")
+            
+            nameLabel.textColor = laugh == 1 ? UIColor.init(hexString: "#267B3F") : UIColor.init(hexString: "#B0B4B3")
+            
+            cycleImageView.image = laugh == 1 ? UIImage(named: "cpxq_ic") : UIImage(named: "nor_cpxq_icimage")
+            
+            typeImageView.image = laugh == 1 ? UIImage(named: "sel_li_i_image") : UIImage(named: "nor_li_i_image")
             
         }
     }
@@ -86,7 +96,7 @@ class ProductStepViewCell: UITableViewCell {
         compImageView.image = UIImage(named: "cpxq_jt_ic")
         return compImageView
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(bgView)
