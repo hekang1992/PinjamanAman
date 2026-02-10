@@ -20,6 +20,8 @@ class EnterTextCell: UITableViewCell {
             
             let bonds = model.bonds ?? ""
             enterFiled.keyboardType = bonds == "1" ? .numberPad : .default
+            
+            enterFiled.text = model.worlds ?? ""
         }
     }
     

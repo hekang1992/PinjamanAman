@@ -166,7 +166,19 @@ extension PersonalViewController {
     private func tapCell(cell: TapCell, listModel: evolveModel) {
         let popView = PopEnmuView(frame: self.view.bounds)
         popView.nameLabel.text = listModel.strain ?? ""
-        popView.modelArray = listModel.lay ?? []
+        
+        let modelArray = listModel.lay ?? []
+        
+        let targetText = cell.enterFiled.text ?? ""
+        
+        for (index, model) in modelArray.enumerated() {
+            if model.blend == targetText {
+                popView.selectedIndex = index
+            }
+        }
+        
+        popView.modelArray = modelArray
+        
         let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
         self.present(alertVc!, animated: true)
         
@@ -174,8 +186,14 @@ extension PersonalViewController {
             self?.dismiss(animated: true)
         }
         
-        popView.sureBlock = { [weak self] in
+        popView.sureBlock = { [weak self] model in
             guard let self = self else { return }
+            self.dismiss(animated: true)
+            let text = model.blend ?? ""
+            let value = model.acceptance ?? ""
+            cell.enterFiled.text = text
+            listModel.worlds = text
+            listModel.acceptance = value
         }
     }
     

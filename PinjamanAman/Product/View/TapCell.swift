@@ -17,6 +17,7 @@ class TapCell: UITableViewCell {
             guard let model = model else { return }
             nameLabel.text = model.strain ?? ""
             enterFiled.placeholder = model.cultivated ?? ""
+            enterFiled.text = model.worlds ?? ""
         }
     }
     
