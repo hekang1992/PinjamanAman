@@ -80,7 +80,7 @@ class BasicViewController: BaseViewController {
         
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.navigationController?.popViewController(animated: true)
+            self.toTargetVc()
         }
         
         view.addSubview(nextBtn)
@@ -179,6 +179,7 @@ extension BasicViewController {
             return
         }
         
+        self.clickDescInfo()
     }
 }
 

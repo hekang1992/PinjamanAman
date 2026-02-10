@@ -26,7 +26,7 @@ class PersonalViewController: BaseViewController {
     
     lazy var descImageView: UIImageView = {
         let descImageView = UIImageView()
-        descImageView.image = languageCode == "1100" ? UIImage(named: "home_pri_image") : UIImage(named: "home_pri_image")
+        descImageView.image = languageCode == "1100" ? UIImage(named: "edc2_image_y") : UIImage(named: "enc2_image_y")
         return descImageView
     }()
 
@@ -40,7 +40,6 @@ class PersonalViewController: BaseViewController {
             make.height.equalTo(450.pix())
         }
         
-        
         view.addSubview(headView)
         headView.nameLabel.text = stepModel?.strain ?? ""
         headView.snp.makeConstraints { make in
@@ -51,7 +50,7 @@ class PersonalViewController: BaseViewController {
         
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.navigationController?.popViewController(animated: true)
+            self.toTargetVc()
         }
         
         view.addSubview(nextBtn)

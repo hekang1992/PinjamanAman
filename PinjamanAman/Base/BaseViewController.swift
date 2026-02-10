@@ -47,6 +47,16 @@ extension BaseViewController {
         self.navigationController?.pushViewController(h5WebVc, animated: true)
     }
     
+    func toTargetVc() {
+        guard let nav = navigationController else { return }
+
+        if let vc = nav.viewControllers.compactMap({ $0 as? ProductStepListViewController }).first {
+            nav.popToViewController(vc, animated: true)
+        } else {
+            nav.popToRootViewController(animated: true)
+        }
+    }
+    
 }
 
 extension BaseViewController {
