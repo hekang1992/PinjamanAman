@@ -117,7 +117,7 @@ extension ToYouViewController {
             params[key] = value
         }
         LoadingView.shared.show()
-        NetworkManager.post(url: "/patkan/behaviors/during/emotional", params: params, responseType: BaseModel.self) { result in
+        NetworkManager.post(url: "/patkan/whispering/stories/swimming", params: params, responseType: BaseModel.self) { result in
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()
@@ -137,7 +137,7 @@ extension ToYouViewController {
     private func personalInfo() {
         LoadingView.shared.show()
         let params = ["transform": self.cardModel?.opening ?? ""]
-        NetworkManager.post(url: "/patkan/riderall/profound/system", params: params, responseType: BaseModel.self) { result in
+        NetworkManager.post(url: "/patkan/silience/furthermore", params: params, responseType: BaseModel.self) { result in
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()

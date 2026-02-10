@@ -18,10 +18,26 @@ class ConnectViewCell: UITableViewCell {
         didSet {
             guard let model = model else { return }
             descLabel.text = model.remain ?? ""
+            
             relationLabel.text = model.ahistories ?? ""
             enterFiled.placeholder = model.dhistories ?? ""
+            
             nameLabel.text = model.chistories ?? ""
             nameFiled.placeholder = model.fhistories ?? ""
+            
+            let name =  model.blend ?? ""
+            let phone = model.beliefs ?? ""
+            nameFiled.text = (name.isEmpty || phone.isEmpty) ? "" : String(format: "%@-%@", name, phone)
+            
+            let value = model.forValue ?? ""
+            let modelArray = model.gives ?? []
+            for (_, model) in modelArray.enumerated() {
+                let target = model.acceptance ?? ""
+                if target == value {
+                    enterFiled.text = model.blend ?? ""
+                }
+            }
+            
         }
     }
     

