@@ -94,7 +94,7 @@ class OneView: BaseView {
     
     lazy var idFootImageView: UIImageView = {
         let idFootImageView = UIImageView()
-        idFootImageView.image = UIImage(named: "home_one_image")
+        idFootImageView.image = UIImage(named: "foa_idimage_ync")
         return idFootImageView
     }()
     

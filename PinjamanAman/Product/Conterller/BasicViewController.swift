@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import TYAlertController
 
 class BasicViewController: BaseViewController {
     
@@ -14,6 +15,7 @@ class BasicViewController: BaseViewController {
     var stepModel: strikeModel?
     
     var model: BaseModel?
+    private var cameraPicker: SystemCameraPicker?
     
     lazy var nextBtn: UIButton = {
         let nextBtn = UIButton(type: .custom)
@@ -27,7 +29,7 @@ class BasicViewController: BaseViewController {
     
     lazy var descImageView: UIImageView = {
         let descImageView = UIImageView()
-        descImageView.image = languageCode == "1100" ? UIImage(named: "home_pri_image") : UIImage(named: "home_pri_image")
+        descImageView.image = languageCode == "1100" ? UIImage(named: "stip_id_one_image") : UIImage(named: "stip_en_one_image")
         return descImageView
     }()
     
@@ -126,19 +128,35 @@ class BasicViewController: BaseViewController {
         oneListView.tapBlock = { [weak self] in
             guard let self = self else { return }
             let card = self.model?.logic?.go?.laugh ?? 0
-            let face = self.model?.logic?.involves?.laugh ?? 0
-            
+            if card == 1 {
+                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
+            }else {
+                self.popCardView()
+            }
+            //            let face = self.model?.logic?.involves?.laugh ?? 0
         }
         
         twoListView.tapBlock = { [weak self] in
             guard let self = self else { return }
             let card = self.model?.logic?.go?.laugh ?? 0
+            
+            if card == 1 {
+                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
+            }else {
+                self.popCardView()
+                return
+            }
+            
             let face = self.model?.logic?.involves?.laugh ?? 0
+            if face == 1 {
+                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
+            }else {
+                self.popFaceView()
+                return
+            }
+            
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         getBasicInfo()
     }
     
@@ -148,8 +166,70 @@ extension BasicViewController {
     
     @objc func nextBtnClick() {
         let card = self.model?.logic?.go?.laugh ?? 0
+        if card == 1 {
+        }else {
+            self.popCardView()
+            return
+        }
+        
         let face = self.model?.logic?.involves?.laugh ?? 0
+        if face == 1 {
+        }else {
+            self.popFaceView()
+            return
+        }
+        
+        
     }
+}
+
+extension BasicViewController {
+    
+    private func popCardView() {
+        let popView = PopAlertFaceView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        popView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        popView.sureBlock = { [weak self] in
+            self?.dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                self.cameraPicker = SystemCameraPicker(
+                    position: .back,
+                    presentVC: self
+                ) { [weak self] imageData in
+                    self?.uploadImage(type: "11", imageData: imageData)
+                }
+                cameraPicker?.presentCamera()
+            }
+        }
+    }
+    
+    private func popFaceView() {
+        let popView = PopAlertFaceView(frame: self.view.bounds)
+        popView.bgImageView.image = languageCode == "1100" ? UIImage(named: "fac_id_a_c_image") : UIImage(named: "fac_en_a_c_image")
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        popView.sureBlock = { [weak self] in
+            self?.dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                self.cameraPicker = SystemCameraPicker(
+                    position: .front,
+                    presentVC: self
+                ) { [weak self] imageData in
+                    self?.uploadImage(type: "10", imageData: imageData)
+                }
+                cameraPicker?.presentCamera()
+            }
+        }
+    }
+    
 }
 
 extension BasicViewController {
@@ -164,6 +244,35 @@ extension BasicViewController {
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
                     self.model = success
+                }
+            case .failure(_):
+                LoadingView.shared.hide()
+            }
+        }
+    }
+    
+    private func uploadImage(type: String, imageData: Data) {
+        let paras = ["acceptance": type,
+                     "unsettling": "2",
+                     "exciting": "",
+                     "adapting": "1"]
+        LoadingView.shared.show()
+        NetworkManager.post(url: "/patkan/greatest/chaos/confide",
+                            params: paras,
+                            imageData: imageData,
+                            responseType: BaseModel.self) { [weak self] result in
+            switch result {
+            case .success(let success):
+                LoadingView.shared.hide()
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    if type == "11" {
+                        
+                    }else {
+                        
+                    }
+                }else {
+                    ToastManager.showMessage(success.reason ?? "")
                 }
             case .failure(_):
                 LoadingView.shared.hide()

@@ -82,7 +82,7 @@ extension NetworkManager {
         url: String,
         params: [String: Any]? = nil,
         imageData: Data,
-        imageKey: String = "image",
+        imageKey: String = "causes_img",
         responseType: T.Type,
         completion: @escaping (Result<T, AFError>) -> Void
     ) {
