@@ -43,6 +43,7 @@ class logicModel: Codable {
     var old: String?
     var thinking: String?
     var blend: String?
+    var evolve: [evolveModel]?
 }
 
 class involvesModel: Codable {
@@ -96,4 +97,37 @@ class forgivenessModel: Codable {
     var misunderstandings: String?
     var demands: String?
     var few: String?
+}
+
+class evolveModel: Codable {
+    var strain: String?
+    var cultivated: String?
+    var partner: String?
+    var social: String?
+    var worlds: String?
+    var acceptance: String?
+    var bonds: String?
+    var lay: [layModel]?
+}
+
+/// enum
+class layModel: Codable {
+    var blend: String?
+    var acceptance: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case blend, acceptance
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let intValue = try? container.decode(Int.self, forKey: .acceptance) {
+            acceptance = String(intValue)
+        } else {
+            acceptance = try? container.decode(String.self, forKey: .acceptance)
+        }
+        
+        blend = try? container.decode(String.self, forKey: .blend)
+    }
 }

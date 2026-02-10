@@ -40,6 +40,8 @@
 		7363AAFD2F3AF47600E8002F /* PopAlertFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAFC2F3AF47600E8002F /* PopAlertFaceView.swift */; };
 		7363AAFF2F3AF7AD00E8002F /* SystemCameraPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAFE2F3AF7AD00E8002F /* SystemCameraPicker.swift */; };
 		7363AB012F3AFD0100E8002F /* PopSaveInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */; };
+		7363AB032F3B105700E8002F /* TapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB022F3B105700E8002F /* TapCell.swift */; };
+		7363AB052F3B106400E8002F /* EnterTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB042F3B106400E8002F /* EnterTextCell.swift */; };
 		736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */; };
 		736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */; };
 		736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */; };
@@ -89,6 +91,8 @@
 		7363AAFC2F3AF47600E8002F /* PopAlertFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAlertFaceView.swift; sourceTree = "<group>"; };
 		7363AAFE2F3AF7AD00E8002F /* SystemCameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemCameraPicker.swift; sourceTree = "<group>"; };
 		7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopSaveInfoView.swift; sourceTree = "<group>"; };
+		7363AB022F3B105700E8002F /* TapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCell.swift; sourceTree = "<group>"; };
+		7363AB042F3B106400E8002F /* EnterTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTextCell.swift; sourceTree = "<group>"; };
 		736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTarget.swift; sourceTree = "<group>"; };
 		736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeadView.swift; sourceTree = "<group>"; };
@@ -257,6 +261,8 @@
 				736F5BBB2F3A2E7000F5BC15 /* ProductStepViewCell.swift */,
 				7363AAFC2F3AF47600E8002F /* PopAlertFaceView.swift */,
 				7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */,
+				7363AB022F3B105700E8002F /* TapCell.swift */,
+				7363AB042F3B106400E8002F /* EnterTextCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7319D6572F39BE1000F24B7D /* LoginViewController.swift in Sources */,
+				7363AB052F3B106400E8002F /* EnterTextCell.swift in Sources */,
 				7319D64D2F39B14D00F24B7D /* AppIdentifierManager.swift in Sources */,
 				7319D63B2F39A8A700F24B7D /* BaseTabBarController.swift in Sources */,
 				736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */,
@@ -426,6 +433,7 @@
 				7363AAFB2F3ADD7A00E8002F /* BasicListView.swift in Sources */,
 				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
+				7363AB032F3B105700E8002F /* TapCell.swift in Sources */,
 				7319D65B2F39C0D400F24B7D /* ToastManager.swift in Sources */,
 				7319D6612F39D33D00F24B7D /* CenterView.swift in Sources */,
 				7319D6532F39B4D500F24B7D /* NetworkManager.swift in Sources */,
