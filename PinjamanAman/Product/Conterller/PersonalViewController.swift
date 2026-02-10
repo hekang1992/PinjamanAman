@@ -143,9 +143,11 @@ extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
         let type = model.social ?? ""
         if type == "ability2" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EnterTextCell", for: indexPath) as! EnterTextCell
+            cell.model = model
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TapCell", for: indexPath) as! TapCell
+            cell.model = model
             return cell
         }
     }
