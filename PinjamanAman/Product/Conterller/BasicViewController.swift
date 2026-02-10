@@ -267,13 +267,44 @@ extension BasicViewController {
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
                     if type == "11" {
-                        
+                        self?.saveNameInfo(model: success)
                     }else {
                         
                     }
                 }else {
                     ToastManager.showMessage(success.reason ?? "")
                 }
+            case .failure(_):
+                LoadingView.shared.hide()
+            }
+        }
+    }
+    
+    private func saveNameInfo(model: BaseModel) {
+        let popView = PopSaveInfoView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
+        self.present(alertVc!, animated: true)
+    }
+    
+}
+
+extension BasicViewController {
+    
+    private func clickDescInfo() {
+        LoadingView.shared.show()
+        let productID = cardModel?.opening ?? ""
+        let params = ["transform": productID, "revel": "1"]
+        NetworkManager.post(url: "/patkan/growth/achieve", params: params, responseType: BaseModel.self) { [weak self] result in
+            switch result {
+            case .success(let success):
+                LoadingView.shared.hide()
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    let stepModel = success.logic?.achievements ?? strikeModel()
+                    let cardModel = success.logic?.smaller ?? smallerModel()
+                    self?.judgeKeysToPageVc(cardModel: cardModel, stepModel: stepModel)
+                }
+                
             case .failure(_):
                 LoadingView.shared.hide()
             }

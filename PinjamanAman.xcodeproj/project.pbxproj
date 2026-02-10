@@ -39,6 +39,7 @@
 		7363AAFB2F3ADD7A00E8002F /* BasicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAFA2F3ADD7A00E8002F /* BasicListView.swift */; };
 		7363AAFD2F3AF47600E8002F /* PopAlertFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAFC2F3AF47600E8002F /* PopAlertFaceView.swift */; };
 		7363AAFF2F3AF7AD00E8002F /* SystemCameraPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAFE2F3AF7AD00E8002F /* SystemCameraPicker.swift */; };
+		7363AB012F3AFD0100E8002F /* PopSaveInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */; };
 		736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */; };
 		736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */; };
 		736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */; };
@@ -87,6 +88,7 @@
 		7363AAFA2F3ADD7A00E8002F /* BasicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicListView.swift; sourceTree = "<group>"; };
 		7363AAFC2F3AF47600E8002F /* PopAlertFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAlertFaceView.swift; sourceTree = "<group>"; };
 		7363AAFE2F3AF7AD00E8002F /* SystemCameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemCameraPicker.swift; sourceTree = "<group>"; };
+		7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopSaveInfoView.swift; sourceTree = "<group>"; };
 		736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTarget.swift; sourceTree = "<group>"; };
 		736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeadView.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				7363AAFA2F3ADD7A00E8002F /* BasicListView.swift */,
 				736F5BBB2F3A2E7000F5BC15 /* ProductStepViewCell.swift */,
 				7363AAFC2F3AF47600E8002F /* PopAlertFaceView.swift */,
+				7363AB002F3AFD0100E8002F /* PopSaveInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				7319D65D2F39C42100F24B7D /* LoginListView.swift in Sources */,
 				736F5BAE2F3A0EC000F5BC15 /* AppLogoutView.swift in Sources */,
 				7319D63D2F39A8BD00F24B7D /* BaseNavigationController.swift in Sources */,
+				7363AB012F3AFD0100E8002F /* PopSaveInfoView.swift in Sources */,
 				7363AAFB2F3ADD7A00E8002F /* BasicListView.swift in Sources */,
 				7319D6492F39AEF000F24B7D /* CenterViewController.swift in Sources */,
 				7319D6372F39A88800F24B7D /* BaseViewController.swift in Sources */,
