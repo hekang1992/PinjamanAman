@@ -284,6 +284,16 @@ extension BasicViewController {
         let popView = PopSaveInfoView(frame: self.view.bounds)
         let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
         self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        popView.saveBlock = { [weak self] in
+            self?.dismiss(animated: true) {
+                
+            }
+        }
     }
     
 }

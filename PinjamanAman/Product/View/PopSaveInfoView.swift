@@ -10,10 +10,15 @@ import SnapKit
 
 class PopSaveInfoView: BaseView {
     
+    var cancelBlock: (() -> Void)?
+    
+    var saveBlock: (() -> Void)?
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "comsa_ve_image")
         bgImageView.contentMode = .scaleAspectFit
+        bgImageView.isUserInteractionEnabled = true
         return bgImageView
     }()
     
@@ -61,6 +66,88 @@ class PopSaveInfoView: BaseView {
         return descLabel
     }()
     
+    lazy var oneBtn: UIButton = {
+        let oneBtn = UIButton(type: .custom)
+        oneBtn.setTitle(languageCode == "1100" ? "Nama sesuai KTP" : "Real name", for: .normal)
+        oneBtn.setTitleColor(UIColor.init(hexString: "#B0B4B3"), for: .normal)
+        oneBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        oneBtn.setImage(UIImage(named: "cc_one_image"), for: .normal)
+        oneBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
+        oneBtn.titleLabel?.textAlignment = .left
+        return oneBtn
+    }()
+    
+    lazy var oneFiled: UITextField = {
+        let oneFiled = UITextField()
+        oneFiled.placeholder = languageCode == "1100" ? "Nama sesuai KTP" : "Real name"
+        oneFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
+        oneFiled.textColor = UIColor.init(hexString: "#203D31")
+        return oneFiled
+    }()
+    
+    lazy var lineView: UIView = {
+        let lineView = UIView()
+        lineView.layer.cornerRadius = 2
+        lineView.layer.masksToBounds = true
+        lineView.backgroundColor = UIColor.init(hexString: "#B0B4B3")
+        return lineView
+    }()
+    
+    lazy var twoBtn: UIButton = {
+        let twoBtn = UIButton(type: .custom)
+        twoBtn.setTitle(languageCode == "1100" ? "Nomor KTP" : "ID number", for: .normal)
+        twoBtn.setTitleColor(UIColor.init(hexString: "#B0B4B3"), for: .normal)
+        twoBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        twoBtn.setImage(UIImage(named: "cc_two_image"), for: .normal)
+        twoBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
+        twoBtn.titleLabel?.textAlignment = .left
+        return twoBtn
+    }()
+    
+    lazy var twoFiled: UITextField = {
+        let twoFiled = UITextField()
+        twoFiled.placeholder = languageCode == "1100" ? "Nomor KTP" : "ID number"
+        twoFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
+        twoFiled.textColor = UIColor.init(hexString: "#203D31")
+        return twoFiled
+    }()
+    
+    lazy var tlineView: UIView = {
+        let tlineView = UIView()
+        tlineView.layer.cornerRadius = 2
+        tlineView.layer.masksToBounds = true
+        tlineView.backgroundColor = UIColor.init(hexString: "#B0B4B3")
+        return tlineView
+    }()
+    
+    lazy var threeBtn: UIButton = {
+        let threeBtn = UIButton(type: .custom)
+        threeBtn.setTitle(languageCode == "1100" ? "Ulang tahun" : "Birthday", for: .normal)
+        threeBtn.setTitleColor(UIColor.init(hexString: "#B0B4B3"), for: .normal)
+        threeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        threeBtn.setImage(UIImage(named: "cc_three_image"), for: .normal)
+        threeBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
+        threeBtn.titleLabel?.textAlignment = .left
+        return threeBtn
+    }()
+    
+    lazy var threeFiled: UITextField = {
+        let threeFiled = UITextField()
+        threeFiled.isEnabled = false
+        threeFiled.placeholder = languageCode == "1100" ? "Ulang tahun" : "Birthday"
+        threeFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
+        threeFiled.textColor = UIColor.init(hexString: "#203D31")
+        return threeFiled
+    }()
+    
+    lazy var tclineView: UIView = {
+        let tclineView = UIView()
+        tclineView.layer.cornerRadius = 2
+        tclineView.layer.masksToBounds = true
+        tclineView.backgroundColor = UIColor.init(hexString: "#B0B4B3")
+        return tclineView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -69,6 +156,19 @@ class PopSaveInfoView: BaseView {
         bgImageView.addSubview(bgView)
         bgView.addSubview(descLabel)
         bgView.addSubview(applyBtn)
+        
+        bgView.addSubview(oneBtn)
+        bgView.addSubview(oneFiled)
+        bgView.addSubview(lineView)
+        
+        bgView.addSubview(twoBtn)
+        bgView.addSubview(twoFiled)
+        bgView.addSubview(tlineView)
+        
+        bgView.addSubview(threeBtn)
+        bgView.addSubview(threeFiled)
+        bgView.addSubview(tclineView)
+        
         addSubview(cancelBtn)
         
         bgImageView.snp.makeConstraints { make in
@@ -105,6 +205,63 @@ class PopSaveInfoView: BaseView {
             make.bottom.equalTo(descLabel.snp.top).offset(-12)
             make.size.equalTo(CGSize(width: 280.pix(), height: 46.pix()))
         }
+        
+        oneBtn.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(23)
+            make.left.equalToSuperview().offset(20)
+            make.height.equalTo(14)
+            make.width.equalTo(130)
+        }
+        
+        oneFiled.snp.makeConstraints { make in
+            make.top.equalTo(oneBtn.snp.bottom)
+            make.left.equalTo(oneBtn)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        lineView.snp.makeConstraints { make in
+            make.left.bottom.right.equalTo(oneFiled)
+            make.height.equalTo(1)
+        }
+        
+        twoBtn.snp.makeConstraints { make in
+            make.top.equalTo(lineView.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.height.equalTo(14)
+            make.width.equalTo(100)
+        }
+        
+        twoFiled.snp.makeConstraints { make in
+            make.top.equalTo(twoBtn.snp.bottom)
+            make.left.equalTo(oneBtn)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        tlineView.snp.makeConstraints { make in
+            make.left.bottom.right.equalTo(twoFiled)
+            make.height.equalTo(1)
+        }
+        
+        threeBtn.snp.makeConstraints { make in
+            make.top.equalTo(tlineView.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.height.equalTo(14)
+            make.width.equalTo(100)
+        }
+        
+        threeFiled.snp.makeConstraints { make in
+            make.top.equalTo(threeBtn.snp.bottom)
+            make.left.equalTo(oneBtn)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        tclineView.snp.makeConstraints { make in
+            make.left.bottom.right.equalTo(threeFiled)
+            make.height.equalTo(1)
+        }
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -116,10 +273,10 @@ class PopSaveInfoView: BaseView {
 extension PopSaveInfoView {
     
     @objc func cancelBtnClick() {
-        
+        self.cancelBlock?()
     }
     
     @objc func applyBtnClick() {
-        
+        self.saveBlock?()
     }
 }
