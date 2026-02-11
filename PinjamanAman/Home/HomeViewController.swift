@@ -42,6 +42,11 @@ class HomeViewController: BaseViewController {
             self.homeDataInfo()
         })
         
+        self.twoView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            self.homeDataInfo()
+        })
+        
         self.oneView.tapBlock = { [weak self] model in
             guard let self = self else { return }
             let productID = String(model.opening ?? 0)
@@ -100,12 +105,15 @@ extension HomeViewController {
             case .success(let success):
                 LoadingView.shared.hide()
                 self.oneView.scrollView.mj_header?.endRefreshing()
+                self.twoView.tableView.mj_header?.endRefreshing()
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
                     let modelArray = success.logic?.see ?? []
-                    if let cardModel = modelArray.first(where: { $0.acceptance == "appreciate3" }) {
+                    if let _ = modelArray.first(where: { $0.acceptance == "appreciate3" }) {
                         self.oneView.isHidden = true
                         self.twoView.isHidden = false
+                        self.twoView.modelArray = modelArray
+                        self.twoView.tableView.reloadData()
                         return
                     }
                     
@@ -120,6 +128,7 @@ extension HomeViewController {
             case .failure(_):
                 LoadingView.shared.hide()
                 self.oneView.scrollView.mj_header?.endRefreshing()
+                self.twoView.tableView.mj_header?.endRefreshing()
             }
         }
     }

@@ -157,6 +157,8 @@ class forgivenessModel: Codable {
     var misunderstandings: String?
     var demands: String?
     var few: String?
+    var divide: String?
+    var tested: String?
 }
 
 /// enum
