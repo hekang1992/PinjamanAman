@@ -99,6 +99,12 @@ class seeModel: Codable {
     var dhistories: String?
     var chistories: String?
     var fhistories: String?
+    var views: viewsModel?
+    var conflicts: String?
+    var soften: String?
+    var resolve: String?
+    var materials: String?
+    var economy: String?
     
     enum CodingKeys: String, CodingKey {
         case acceptance
@@ -113,7 +119,21 @@ class seeModel: Codable {
         case dhistories
         case chistories
         case fhistories
+        case views
+        case conflicts
+        case soften
+        case resolve
+        case economy
+        case materials
     }
+}
+
+class viewsModel: Codable {
+    var boyose: String?
+    var showWord: String?
+    var provimories: String?
+    var rejuvenation: String?
+    var tip: String?
 }
 
 class forgivenessModel: Codable {

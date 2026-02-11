@@ -10,12 +10,11 @@ import SnapKit
 
 class OrderViewController: BaseViewController {
     
-    // MARK: - 数据
     private let buttonenTitles = ["All", "In progress", "Repayment", "Finished"]
     private let buttonidTitles = ["Semua", "Dalam proses", "Belum lunas", "Lunas"]
     private var currentSelectedIndex = 0
+    private var type: String = "4"
     
-    // MARK: - UI Components
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "center_bg_image")
@@ -59,6 +58,25 @@ class OrderViewController: BaseViewController {
     }()
     
     private var buttons: [UIButton] = []
+    
+    private var modelArray: [seeModel] = []
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        tableView.estimatedRowHeight = 100
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(OrderViewCell.self, forCellReuseIdentifier: "OrderViewCell")
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +141,11 @@ class OrderViewController: BaseViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(coverView.snp.bottom).offset(1)
         }
+        
+        footView.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     private func createButton(title: String, tag: Int) -> UIButton {
@@ -167,10 +190,28 @@ class OrderViewController: BaseViewController {
     @objc private func buttonTapped(_ sender: UIButton) {
         guard sender.tag != currentSelectedIndex else { return }
         selectButton(sender)
+        switch sender.tag {
+        case 0:
+            self.type = "4"
+            
+        case 1:
+            self.type = "7"
+            
+        case 2:
+            self.type = "6"
+            
+        case 3:
+            self.type = "5"
+            
+        default:
+            break
+        }
+        orderListInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        orderListInfo()
     }
     
     override func viewDidLayoutSubviews() {
@@ -182,3 +223,52 @@ class OrderViewController: BaseViewController {
     }
 }
 
+extension OrderViewController {
+    
+    private func orderListInfo() {
+        LoadingView.shared.show()
+        let params = ["overshadowed": type,
+                      "around": "1",
+                      "millions": "55"]
+        NetworkManager.post(url: "/patkan/greenery/while/lives",
+                            params: params,
+                            responseType: BaseModel.self) { result in
+            switch result {
+            case .success(let success):
+                LoadingView.shared.hide()
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    self.modelArray = success.logic?.see ?? []
+                    self.tableView.reloadData()
+                }
+            case .failure(_):
+                LoadingView.shared.hide()
+            }
+        }
+    }
+    
+}
+
+extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.modelArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderViewCell", for: indexPath) as! OrderViewCell
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        let model = self.modelArray[indexPath.row]
+        cell.model = model
+        return cell
+    }
+}
