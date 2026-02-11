@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import SnapKit
+import StoreKit
 
 class H5WebViewController: BaseViewController {
     
@@ -15,6 +16,7 @@ class H5WebViewController: BaseViewController {
     
     private var webView: WKWebView!
     private let progressView = UIProgressView(progressViewStyle: .default)
+    private let singleLocationManager = SingleLocationService()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -152,22 +154,25 @@ extension H5WebViewController: WKScriptMessageHandler {
         _ userContentController: WKUserContentController,
         didReceive message: WKScriptMessage
     ) {
-        print("JS 方法：\(message.name)")
-        print("参数：\(message.body)")
-        
         switch message.name {
         case "emotion":
             handleEmotion(message.body)
+            
         case "confide":
             handleConfide(message.body)
+            
         case "symbol":
             handleSymbol(message.body)
+            
         case "autumn":
             handleAutumn(message.body)
+            
         case "possible":
             handlePossible(message.body)
+            
         case "Leaves":
             handleLeaves(message.body)
+            
         default:
             break
         }
@@ -178,27 +183,67 @@ extension H5WebViewController: WKScriptMessageHandler {
 extension H5WebViewController {
     
     private func handleEmotion(_ body: Any) {
-        print("emotion:", body)
+        singleLocationManager.requestCurrentLocation { result in }
+        let body = body as? [String] ?? []
+        let productID = body.first ?? ""
+        let orderID = body.last ?? ""
+        
+        Task {
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            await self.lycOtherCocelleInfo(type: "9",
+                                           orderID: orderID,
+                                           productID: productID,
+                                           onetime: String(Int(Date().timeIntervalSince1970)),
+                                           twotime: String(Int(Date().timeIntervalSince1970)))
+        }
+        
     }
     
     private func handleConfide(_ body: Any) {
-        print("confide:", body)
+        guard let pageUrl = body as? String, !pageUrl.isEmpty else {
+            return
+        }
+        
+        if pageUrl.hasPrefix(scheme_url) {
+            DeepLinkNavigator.navigate(to: pageUrl, from: self)
+        } else if pageUrl.hasPrefix("http") {
+            self.pageUrl = pageUrl
+            self.loadPage()
+        }
     }
     
     private func handleSymbol(_ body: Any) {
-        print("symbol:", body)
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func handleAutumn(_ body: Any) {
-        print("autumn:", body)
+        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
     }
     
     private func handlePossible(_ body: Any) {
-        print("possible:", body)
+        
+        guard let email = body as? String, !email.isEmpty else {
+            return
+        }
+        
+        let phone = UserSessionManager.shared.phone ?? ""
+        let body = "Pinjaman Aman: \(phone)"
+        
+        guard let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let emailURL = URL(string: "mailto:\(email)?body=\(encodedBody)"),
+              UIApplication.shared.canOpenURL(emailURL) else {
+            return
+        }
+        
+        UIApplication.shared.open(emailURL)
     }
     
     private func handleLeaves(_ body: Any) {
-        print("Leaves:", body)
+        guard #available(iOS 14.0, *),
+              let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        SKStoreReviewController.requestReview(in: windowScene)
     }
 }
 

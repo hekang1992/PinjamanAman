@@ -15,7 +15,7 @@
 		730D42892F3C4A56001E5D2F /* TwoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D42882F3C4A56001E5D2F /* TwoViewCell.swift */; };
 		730D428B2F3C4A61001E5D2F /* ThreeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D428A2F3C4A61001E5D2F /* ThreeViewCell.swift */; };
 		730D428E2F3C6491001E5D2F /* ProvicesModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D428D2F3C6491001E5D2F /* ProvicesModelManager.swift */; };
-		730D42902F3C69D1001E5D2F /* OnceLocationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D428F2F3C69D1001E5D2F /* OnceLocationTool.swift */; };
+		730D42902F3C69D1001E5D2F /* SingleLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D428F2F3C69D1001E5D2F /* SingleLocationService.swift */; };
 		7319D6262F39A64600F24B7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7319D61D2F39A64600F24B7D /* Assets.xcassets */; };
 		7319D6282F39A64600F24B7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7319D6202F39A64600F24B7D /* LaunchScreen.storyboard */; };
 		7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D61C2F39A64600F24B7D /* AppDelegate.swift */; };
@@ -76,7 +76,7 @@
 		730D42882F3C4A56001E5D2F /* TwoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewCell.swift; sourceTree = "<group>"; };
 		730D428A2F3C4A61001E5D2F /* ThreeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewCell.swift; sourceTree = "<group>"; };
 		730D428D2F3C6491001E5D2F /* ProvicesModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvicesModelManager.swift; sourceTree = "<group>"; };
-		730D428F2F3C69D1001E5D2F /* OnceLocationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnceLocationTool.swift; sourceTree = "<group>"; };
+		730D428F2F3C69D1001E5D2F /* SingleLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLocationService.swift; sourceTree = "<group>"; };
 		7319D6042F39A64000F24B7D /* PinjamanAman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinjamanAman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7319D61C2F39A64600F24B7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7319D61D2F39A64600F24B7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 		7319D6352F39A6E200F24B7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				730D428F2F3C69D1001E5D2F /* OnceLocationTool.swift */,
+				730D428F2F3C69D1001E5D2F /* SingleLocationService.swift */,
 				73B8F6E82F3B7CD400409D13 /* ContactManager.swift */,
 				736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */,
 				7319D65A2F39C0D400F24B7D /* ToastManager.swift */,
@@ -461,7 +461,7 @@
 				7363AAFF2F3AF7AD00E8002F /* SystemCameraPicker.swift in Sources */,
 				7319D6472F39AEE800F24B7D /* OrderViewController.swift in Sources */,
 				7319D64B2F39AF0000F24B7D /* ProductStepListViewController.swift in Sources */,
-				730D42902F3C69D1001E5D2F /* OnceLocationTool.swift in Sources */,
+				730D42902F3C69D1001E5D2F /* SingleLocationService.swift in Sources */,
 				736F5BB22F3A146B00F5BC15 /* H5WebViewController.swift in Sources */,
 				7319D6552F39BB3300F24B7D /* LoadingView.swift in Sources */,
 				7319D6432F39AE2E00F24B7D /* UserSessionManager.swift in Sources */,

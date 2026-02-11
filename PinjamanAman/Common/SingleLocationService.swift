@@ -1,5 +1,5 @@
 //
-//  OnceLocationTool.swift
+//  SingleLocationService.swift
 //  PinjamanAman
 //
 //  Created by hekang on 2026/2/11.
@@ -8,30 +8,11 @@
 import UIKit
 import CoreLocation
 
-class LocationStorage {
-    
-    private enum Keys {
-        static let longitude = "longitude"
-        static let latitude = "latitude"
-    }
-    
-    static func save(latitude: String, longitude: String) {
-        UserDefaults.standard.set(latitude, forKey: Keys.latitude)
-        UserDefaults.standard.set(longitude, forKey: Keys.longitude)
-    }
-    
-    static var storedLongitude: String {
-        return UserDefaults.standard.string(forKey: Keys.longitude) ?? ""
-    }
-    
-    static var storedLatitude: String {
-        return UserDefaults.standard.string(forKey: Keys.latitude) ?? ""
-    }
-}
-
-class OnceLocationTool: NSObject {
+final class SingleLocationService: NSObject {
     
     typealias LocationDataCompletion = ([String: String]?) -> Void
+    
+    // MARK: - Properties
     
     private lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -40,24 +21,31 @@ class OnceLocationTool: NSObject {
         return manager
     }()
     
-    private lazy var geocoder = CLGeocoder()
-    
+    private let geocoder = CLGeocoder()
     private var completionHandler: LocationDataCompletion?
     
+    // MARK: - Public
+    
     func requestCurrentLocation(completion: @escaping LocationDataCompletion) {
-        self.completionHandler = completion
-        
-        checkAuthorizationAndStart()
+        completionHandler = completion
+        checkAuthorizationStatus()
     }
     
-    private func checkAuthorizationAndStart() {
+    // MARK: - Authorization
+    
+    private func checkAuthorizationStatus() {
         let status: CLAuthorizationStatus
+        
         if #available(iOS 14.0, *) {
             status = locationManager.authorizationStatus
         } else {
             status = CLLocationManager.authorizationStatus()
         }
         
+        handleAuthorization(status)
+    }
+    
+    private func handleAuthorization(_ status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -73,14 +61,7 @@ class OnceLocationTool: NSObject {
         }
     }
     
-    private func stopTracking() {
-        locationManager.stopUpdatingLocation()
-    }
-    
-    private func handleError() {
-        completionHandler?(nil)
-        stopTracking()
-    }
+    // MARK: - Location Handling
     
     private func processLocation(_ location: CLLocation) {
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
@@ -98,18 +79,26 @@ class OnceLocationTool: NSObject {
             }
             
             let latString = String(location.coordinate.latitude)
-            let longString = String(location.coordinate.longitude)
-            LocationStorage.save(latitude: latString, longitude: longString)
             
-            let infoDict = self.mapPlacemarkToDictionary(placemark, location: location)
+            let longString = String(location.coordinate.longitude)
+            
+            LocationInfoStorage.save(latitude: latString, longitude: longString)
+            
+            let infoDict = self.buildLocationDictionary(
+                placemark: placemark,
+                location: location
+            )
             
             self.completionHandler?(infoDict)
-            
-            self.stopTracking()
+            self.stopUpdating()
         }
     }
     
-    private func mapPlacemarkToDictionary(_ placemark: CLPlacemark, location: CLLocation) -> [String: String] {
+    private func buildLocationDictionary(
+        placemark: CLPlacemark,
+        location: CLLocation
+    ) -> [String: String] {
+        
         return [
             "cultural": placemark.administrativeArea ?? "",
             "centuries": placemark.isoCountryCode ?? "",
@@ -122,12 +111,25 @@ class OnceLocationTool: NSObject {
         ]
     }
     
+    // MARK: - Error & Stop
+    
+    private func handleError() {
+        completionHandler?(nil)
+        stopUpdating()
+    }
+    
+    private func stopUpdating() {
+        locationManager.stopUpdatingLocation()
+    }
+    
     deinit {
-        stopTracking()
+        stopUpdating()
     }
 }
 
-extension OnceLocationTool: CLLocationManagerDelegate {
+// MARK: - CLLocationManagerDelegate
+
+extension SingleLocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
@@ -135,13 +137,17 @@ extension OnceLocationTool: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if let clError = error as? CLError, clError.code == .locationUnknown {
+        if let clError = error as? CLError,
+           clError.code == .locationUnknown {
             return
         }
+        
         handleError()
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager,
+                         didChangeAuthorization status: CLAuthorizationStatus) {
+        
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
@@ -152,5 +158,31 @@ extension OnceLocationTool: CLLocationManagerDelegate {
         default:
             break
         }
+    }
+}
+
+class LocationInfoStorage {
+    
+    private enum Keys {
+        static let longitude = "longitude"
+        static let latitude = "latitude"
+    }
+    
+    static func save(latitude: String, longitude: String) {
+        UserDefaults.standard.set(latitude, forKey: Keys.latitude)
+        UserDefaults.standard.set(longitude, forKey: Keys.longitude)
+    }
+    
+    static var storedLongitude: String {
+        UserDefaults.standard.string(forKey: Keys.longitude) ?? ""
+    }
+    
+    static var storedLatitude: String {
+        UserDefaults.standard.string(forKey: Keys.latitude) ?? ""
+    }
+    
+    static func clear() {
+        UserDefaults.standard.removeObject(forKey: Keys.latitude)
+        UserDefaults.standard.removeObject(forKey: Keys.longitude)
     }
 }

@@ -9,10 +9,11 @@ import UIKit
 import SnapKit
 import MJRefresh
 import FBSDKCoreKit
+import CoreLocation
 
 class HomeViewController: BaseViewController {
     
-    let locationTool = OnceLocationTool()
+    private let singleLocationManager = SingleLocationService()
     
     lazy var oneView: OneView = {
         let oneView = OneView(frame: .zero)
@@ -77,8 +78,19 @@ class HomeViewController: BaseViewController {
             await getAdcInfo()
         }
         
-        locationTool.requestCurrentLocation { params in
-            print("params=======\(params ?? [:])")
+        singleLocationManager.requestCurrentLocation { params in
+            if let params = params {
+                NetworkManager.post(url: "/patkan/survival/relationships/companionship",
+                                    params: params,
+                                    responseType: BaseModel.self) { result in
+                    switch result {
+                    case .success(_):
+                        break
+                    case .failure(_):
+                        break
+                    }
+                }
+            }
         }
         
     }
@@ -158,6 +170,27 @@ extension HomeViewController {
     }
     
     private func clickProductInfo(productID: String) {
+        
+        let status = CLLocationManager().authorizationStatus
+        
+        if languageCode == "1100" {
+            if status == .denied || status == .restricted {
+                ToastManager.showMessage("请开启定位!!!!!!! 记录一下..等文案")
+                return
+            }
+        }
+        
+        let onetime = UserDefaults.standard.object(forKey: "start_time") as? String ?? ""
+        let twotime = UserDefaults.standard.object(forKey: "end_time") as? String ?? ""
+        
+        if !onetime.isEmpty && !twotime.isEmpty {
+            self.lycCocelleInfo(type: "1",
+                                orderID: "",
+                                productID: "",
+                                onetime: onetime,
+                                twotime: twotime)
+        }
+        
         LoadingView.shared.show()
         let params = ["transform": productID,
                       "imagined": "1000",
@@ -193,6 +226,39 @@ extension HomeViewController {
                 if ["0", "00"].contains(partner) {
                     AdcManager.shared.modelArray = success.logic?.see ?? []
                 }
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    private func lycCocelleInfo(type: String,
+                                orderID: String,
+                                productID: String,
+                                onetime: String,
+                                twotime: String) {
+        let reminder = LocationInfoStorage.storedLongitude
+        let order = LocationInfoStorage.storedLatitude
+        let params = ["food": type,
+                      "good": orderID,
+                      "possessions": productID,
+                      "entire": AppIdentifierManager.getIDFV(),
+                      "foundation": AppIdentifierManager.getIDFA() ?? "",
+                      "plant": onetime,
+                      "sustains": twotime,
+                      "reminder": reminder,
+                      "order": order]
+        NetworkManager.post(url: "/patkan/overwhelming/nostalgia/signs",
+                            params: params,
+                            responseType: BaseModel.self) { result in
+            switch result {
+            case .success(let success):
+                let partner = success.partner ?? ""
+                if ["0","00"].contains(partner) {
+                    UserDefaults.standard.removeObject(forKey: "start_time")
+                    UserDefaults.standard.removeObject(forKey: "end_time")
+                }
+                
             case .failure(_):
                 break
             }

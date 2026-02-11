@@ -16,6 +16,13 @@ class BasicViewController: BaseViewController {
     
     var model: BaseModel?
     private var cameraPicker: SystemCameraPicker?
+    private let singleLocationManager = SingleLocationService()
+    
+    var card_start_time: String = ""
+    var card_end_time: String = ""
+    
+    var face_start_time: String = ""
+    var face_end_time: String = ""
     
     lazy var nextBtn: UIButton = {
         let nextBtn = UIButton(type: .custom)
@@ -157,6 +164,12 @@ class BasicViewController: BaseViewController {
             
         }
         
+        singleLocationManager.requestCurrentLocation { result in
+            
+        }
+        
+        card_start_time = String(Int(Date().timeIntervalSince1970))
+        
         getBasicInfo()
     }
     
@@ -207,6 +220,7 @@ extension BasicViewController {
     }
     
     private func popFaceView() {
+        face_start_time = String(Int(Date().timeIntervalSince1970))
         let popView = PopAlertFaceView(frame: self.view.bounds)
         popView.bgImageView.image = languageCode == "1100" ? UIImage(named: "fac_id_a_c_image") : UIImage(named: "fac_en_a_c_image")
         let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
@@ -219,6 +233,7 @@ extension BasicViewController {
         popView.sureBlock = { [weak self] in
             self?.dismiss(animated: true) { [weak self] in
                 guard let self = self else { return }
+                face_end_time = String(Int(Date().timeIntervalSince1970))
                 self.cameraPicker = SystemCameraPicker(
                     position: .front,
                     presentVC: self
@@ -281,6 +296,14 @@ extension BasicViewController {
                         self?.saveNameInfo(model: success)
                     }else {
                         self?.clickDescInfo()
+                        Task {
+                            try? await Task.sleep(nanoseconds: 3_000_000_000)
+                            await self?.lycOtherCocelleInfo(type: "3",
+                                                            orderID: self?.cardModel?.good ?? "",
+                                                            productID: self?.cardModel?.opening ?? "",
+                                                            onetime: self?.face_start_time ?? "",
+                                                            twotime: self?.face_end_time ?? "")
+                        }
                     }
                 }else {
                     ToastManager.showMessage(success.reason ?? "")
@@ -292,6 +315,7 @@ extension BasicViewController {
     }
     
     private func saveNameInfo(model: BaseModel) {
+        card_end_time = String(Int(Date().timeIntervalSince1970))
         let popView = PopSaveInfoView(frame: self.view.bounds)
         popView.model = model
         let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
@@ -330,6 +354,17 @@ extension BasicViewController {
                 if ["0", "00"].contains(partner) {
                     self?.dismiss(animated: true)
                     self?.getBasicInfo()
+                    
+                    Task {
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        await self?.lycOtherCocelleInfo(type: "2",
+                                                        orderID: self?.cardModel?.good ?? "",
+                                                        productID: self?.cardModel?.opening ?? "",
+                                                        onetime: self?.card_start_time ?? "",
+                                                        twotime: self?.card_end_time ?? "")
+                    }
+                    
+                    
                 }else {
                     ToastManager.showMessage(success.reason ?? "")
                 }
@@ -362,3 +397,4 @@ extension BasicViewController {
     }
     
 }
+

@@ -15,7 +15,11 @@ class PersonalViewController: BaseViewController {
     var cardModel: smallerModel?
     var stepModel: strikeModel?
     
+    var start_time: String = ""
+    var end_time: String = ""
+    
     var modelArray: [evolveModel] = []
+    private let singleLocationManager = SingleLocationService()
     
     lazy var nextBtn: UIButton = {
         let nextBtn = UIButton(type: .custom)
@@ -99,6 +103,12 @@ class PersonalViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        singleLocationManager.requestCurrentLocation { result in
+            
+        }
+        
+        start_time = String(Date().timeIntervalSince1970)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +121,7 @@ class PersonalViewController: BaseViewController {
 extension PersonalViewController {
     
     @objc func nextBtnClick() {
+        end_time = String(Date().timeIntervalSince1970)
         var params = ["transform": self.cardModel?.opening ?? ""]
         for model in modelArray {
             let key = model.partner ?? ""
@@ -118,13 +129,24 @@ extension PersonalViewController {
             params[key] = value
         }
         LoadingView.shared.show()
-        NetworkManager.post(url: "/patkan/behaviors/during/emotional", params: params, responseType: BaseModel.self) { result in
+        NetworkManager.post(url: "/patkan/behaviors/during/emotional", params: params, responseType: BaseModel.self) { [weak self] result in
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
-                    self.clickDescInfo()
+                    self?.clickDescInfo()
+                    
+                    Task {
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        await self?.lycOtherCocelleInfo(type: "4",
+                                                        orderID: self?.cardModel?.good ?? "",
+                                                        productID: self?.cardModel?.opening ?? "",
+                                                        onetime: self?.start_time ?? "",
+                                                        twotime: self?.end_time ?? "")
+                    }
+                    
+                    
                 }else {
                     ToastManager.showMessage(success.reason ?? "")
                 }

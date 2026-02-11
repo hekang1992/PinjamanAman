@@ -33,6 +33,10 @@ class LoginViewController: BaseViewController {
         loginView.sureAgreementBtn.addTarget(self, action: #selector(sureBtnClick), for: .touchUpInside)
         
         loginView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
+        
+        UserDefaults.standard.set(String(Int(Date().timeIntervalSince1970)), forKey: "start_time")
+        UserDefaults.standard.synchronize()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -183,6 +187,10 @@ extension LoginViewController {
     }
     
     private func loginInfo(phone: String, code: String) {
+        
+        UserDefaults.standard.set(String(Int(Date().timeIntervalSince1970)), forKey: "end_time")
+        UserDefaults.standard.synchronize()
+        
         self.loginView.phoneListView.phoneFiled.resignFirstResponder()
         self.loginView.codeListView.codeFiled.resignFirstResponder()
         LoadingView.shared.show()

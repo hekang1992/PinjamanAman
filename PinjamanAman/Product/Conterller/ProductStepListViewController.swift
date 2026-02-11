@@ -17,6 +17,8 @@ class ProductStepListViewController: BaseViewController {
     
     var model: BaseModel?
     
+    private let singleLocationManager = SingleLocationService()
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "center_bg_image")
@@ -162,6 +164,9 @@ class ProductStepListViewController: BaseViewController {
             clickDescInfo()
         })
         
+        singleLocationManager.requestCurrentLocation { result in
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

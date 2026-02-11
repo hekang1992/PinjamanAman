@@ -136,6 +136,17 @@ extension BaseViewController {
                     }else if pageUrl.contains("http") {
                         self.goH5WebVc(pageUrl: pageUrl)
                     }
+                    
+                    Task {
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        await self.lycOtherCocelleInfo(type: "8",
+                                                       orderID: cardModel.good ?? "",
+                                                       productID: cardModel.opening ?? "",
+                                                       onetime: String(Int(Date().timeIntervalSince1970)),
+                                                       twotime: String(Int(Date().timeIntervalSince1970)))
+                    }
+                    
+                    
                 }
             case .failure(_):
                 LoadingView.shared.hide()
@@ -143,4 +154,39 @@ extension BaseViewController {
         }
         
     }
+}
+
+extension BaseViewController {
+    
+    func lycOtherCocelleInfo(type: String,
+                             orderID: String,
+                             productID: String,
+                             onetime: String,
+                             twotime: String) async {
+        let params = ["food": type,
+                      "good": orderID,
+                      "possessions": productID,
+                      "entire": AppIdentifierManager.getIDFV(),
+                      "foundation": AppIdentifierManager.getIDFA() ?? "",
+                      "plant": onetime,
+                      "sustains": twotime,
+                      "reminder": LocationInfoStorage.storedLongitude,
+                      "order": LocationInfoStorage.storedLatitude]
+        NetworkManager.post(url: "/patkan/overwhelming/nostalgia/signs",
+                            params: params,
+                            responseType: BaseModel.self) { result in
+            switch result {
+            case .success(let success):
+                let partner = success.partner ?? ""
+                if ["0","00"].contains(partner) {
+                    UserDefaults.standard.removeObject(forKey: "start_time")
+                    UserDefaults.standard.removeObject(forKey: "end_time")
+                }
+                
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
 }
