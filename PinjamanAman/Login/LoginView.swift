@@ -62,6 +62,12 @@ class LoginView: BaseView {
         return sureAgreementBtn
     }()
     
+    lazy var entBtn: UIButton = {
+        let entBtn = UIButton(type: .custom)
+        entBtn.setImage(languageCode == "1100" ? UIImage(named: "prc_id_a_imagre") : UIImage(named: "prc_en_a_imagre"), for: .normal)
+        return entBtn
+    }()
+    
     lazy var loginBtn: UIButton = {
         let loginBtn = UIButton(type: .custom)
         loginBtn.setTitle(languageCode == "1100" ? "Masuk" : "Login", for: .normal)
@@ -82,6 +88,7 @@ class LoginView: BaseView {
         threeImageView.addSubview(phoneListView)
         threeImageView.addSubview(codeListView)
         threeImageView.addSubview(sureAgreementBtn)
+        threeImageView.addSubview(entBtn)
         threeImageView.addSubview(loginBtn)
         
         bgImageView.snp.makeConstraints { make in
@@ -121,6 +128,15 @@ class LoginView: BaseView {
             make.width.height.equalTo(14)
             make.top.equalTo(codeListView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
+        }
+        entBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(sureAgreementBtn)
+            make.left.equalTo(sureAgreementBtn.snp.right).offset(5)
+            if languageCode == "1100" {
+                make.size.equalTo(CGSize(width: 214.pix(), height: 13.pix()))
+            }else {
+                make.size.equalTo(CGSize(width: 264.pix(), height: 13.pix()))
+            }
         }
         loginBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
