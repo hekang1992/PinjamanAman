@@ -79,29 +79,29 @@ class HomeViewController: BaseViewController {
         }
         
         singleLocationManager.requestCurrentLocation { params in
-            if let params = params {
-                NetworkManager.post(url: "/patkan/survival/relationships/companionship",
-                                    params: params,
-                                    responseType: BaseModel.self) { result in
-                    switch result {
-                    case .success(_):
-                        break
-                    case .failure(_):
-                        break
-                    }
-                }
-            }
+            //            if let params = params {
+            //                NetworkManager.post(url: "/patkan/survival/relationships/companionship",
+            //                                    params: params,
+            //                                    responseType: BaseModel.self) { result in
+            //                    switch result {
+            //                    case .success(_):
+            //                        break
+            //                    case .failure(_):
+            //                        break
+            //                    }
+            //                }
+            //            }
         }
         
-        DeviceInfoBuilder.shared.build { result in
-            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
-                return
-            }
-            let base64String = jsonData.base64EncodedString()
-            print("Base64：")
-            print(base64String)
-        }
-
+        //        DeviceInfoBuilder.shared.build { result in
+        //            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
+        //                return
+        //            }
+        //            let base64String = jsonData.base64EncodedString()
+        //            print("Base64：")
+        //            print(base64String)
+        //        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -198,6 +198,40 @@ extension HomeViewController {
                                 productID: "",
                                 onetime: onetime,
                                 twotime: twotime)
+        }
+        
+        if languageCode == "1100" {
+            singleLocationManager.requestCurrentLocation { params in
+                if let params = params {
+                    NetworkManager.post(url: "/patkan/survival/relationships/companionship",
+                                        params: params,
+                                        responseType: BaseModel.self) { result in
+                        switch result {
+                        case .success(_):
+                            break
+                        case .failure(_):
+                            break
+                        }
+                    }
+                }
+            }
+            
+            DeviceInfoBuilder.shared.build { result in
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
+                    return
+                }
+                let base64String = jsonData.base64EncodedString()
+                NetworkManager.post(url: "/patkan/journey/granite/conclusion",
+                                    params: ["logic": base64String],
+                                    responseType: BaseModel.self) { result in
+                    switch result {
+                    case .success(_):
+                        break
+                    case .failure(_):
+                        break
+                    }
+                }
+            }
         }
         
         LoadingView.shared.show()
