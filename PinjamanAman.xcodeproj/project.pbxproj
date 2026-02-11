@@ -43,6 +43,7 @@
 		7319D65F2F39C7A000F24B7D /* CodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D65E2F39C7A000F24B7D /* CodeListView.swift */; };
 		7319D6612F39D33D00F24B7D /* CenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6602F39D33D00F24B7D /* CenterView.swift */; };
 		7319D6632F39DA7D00F24B7D /* CenterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D6622F39DA7D00F24B7D /* CenterViewCell.swift */; };
+		7346D9D52F3CC25E00588186 /* DeviceInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346D9D42F3CC25E00588186 /* DeviceInfoBuilder.swift */; };
 		7363AAEF2F3ADA1D00E8002F /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAEE2F3ADA1D00E8002F /* BasicViewController.swift */; };
 		7363AAF72F3ADCFC00E8002F /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAF62F3ADCFC00E8002F /* PersonalViewController.swift */; };
 		7363AAFB2F3ADD7A00E8002F /* BasicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AAFA2F3ADD7A00E8002F /* BasicListView.swift */; };
@@ -108,6 +109,7 @@
 		7319D65E2F39C7A000F24B7D /* CodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListView.swift; sourceTree = "<group>"; };
 		7319D6602F39D33D00F24B7D /* CenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterView.swift; sourceTree = "<group>"; };
 		7319D6622F39DA7D00F24B7D /* CenterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewCell.swift; sourceTree = "<group>"; };
+		7346D9D42F3CC25E00588186 /* DeviceInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoBuilder.swift; sourceTree = "<group>"; };
 		7363AAEE2F3ADA1D00E8002F /* BasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
 		7363AAF62F3ADCFC00E8002F /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		7363AAFA2F3ADD7A00E8002F /* BasicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicListView.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		7319D6352F39A6E200F24B7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7346D9D42F3CC25E00588186 /* DeviceInfoBuilder.swift */,
 				730D428F2F3C69D1001E5D2F /* SingleLocationService.swift */,
 				73B8F6E82F3B7CD400409D13 /* ContactManager.swift */,
 				736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */,
@@ -474,6 +477,7 @@
 				730D428B2F3C4A61001E5D2F /* ThreeViewCell.swift in Sources */,
 				7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */,
 				736F5BB42F3A167900F5BC15 /* OneView.swift in Sources */,
+				7346D9D52F3CC25E00588186 /* DeviceInfoBuilder.swift in Sources */,
 				7319D65F2F39C7A000F24B7D /* CodeListView.swift in Sources */,
 				7319D6632F39DA7D00F24B7D /* CenterViewCell.swift in Sources */,
 				7363AAEF2F3ADA1D00E8002F /* BasicViewController.swift in Sources */,

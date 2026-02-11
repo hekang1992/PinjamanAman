@@ -93,6 +93,15 @@ class HomeViewController: BaseViewController {
             }
         }
         
+        DeviceInfoBuilder.shared.build { result in
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
+                return
+            }
+            let base64String = jsonData.base64EncodedString()
+            print("Base64：")
+            print(base64String)
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
