@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import FBSDKCoreKit
+import AppTrackingTransparency
 
 class LoginViewController: BaseViewController {
     
@@ -31,12 +33,17 @@ class LoginViewController: BaseViewController {
         loginView.sureAgreementBtn.addTarget(self, action: #selector(sureBtnClick), for: .touchUpInside)
         
         loginView.loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.loginView.phoneListView.phoneFiled.becomeFirstResponder()
+        
+        Task{
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            await self.requestIDFAPermission()
+        }
+        
     }
     
     @MainActor
@@ -47,6 +54,43 @@ class LoginViewController: BaseViewController {
 }
 
 extension LoginViewController {
+    
+    private func requestIDFAPermission() async {
+        
+        guard #available(iOS 14, *) else { return }
+        
+        let status = await ATTrackingManager.requestTrackingAuthorization()
+        
+        switch status {
+        case .authorized, .denied, .notDetermined:
+            await uploadIDFAInfo()
+            
+        case .restricted:
+            break
+            
+        @unknown default:
+            break
+        }
+        
+    }
+    
+    private func uploadIDFAInfo() async {
+        let params = ["shade": AppIdentifierManager.getIDFV(),
+                      "respiration": AppIdentifierManager.getIDFA() ?? ""]
+        NetworkManager.post(url: "/patkan/sophistication/especially/dream",
+                            params: params,
+                            responseType: BaseModel.self) { [weak self] result in
+            switch result {
+            case .success(let success):
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    self?.configureFacebookSDK(with: success.logic?.analysisability ?? analysisabilityModel())
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
     
     @objc func codeBtnClick() {
         let phone = self.loginView.phoneListView.phoneFiled.text ?? ""
@@ -167,4 +211,20 @@ extension LoginViewController {
             }
         }
     }
+}
+
+extension LoginViewController {
+    
+    func configureFacebookSDK(with model: analysisabilityModel) {
+        Settings.shared.displayName = model.cur ?? ""
+        Settings.shared.appURLSchemeSuffix = model.walkety ?? ""
+        Settings.shared.appID = model.shortster ?? ""
+        Settings.shared.clientToken = model.middleee ?? ""
+        
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            didFinishLaunchingWithOptions: nil
+        )
+    }
+    
 }

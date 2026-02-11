@@ -45,6 +45,14 @@ class logicModel: Codable {
     var blend: String?
     var evolve: [evolveModel]?
     var found: foundModel?
+    var analysisability: analysisabilityModel?
+}
+
+class analysisabilityModel: Codable {
+    var walkety: String?
+    var shortster: String?
+    var cur: String?
+    var middleee: String?
 }
 
 class foundModel: Codable {
