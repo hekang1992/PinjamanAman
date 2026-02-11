@@ -78,16 +78,6 @@ class strikeModel: Codable {
     var word: String?
 }
 
-class smallerModel: Codable {
-    var resolve: String?
-    var soften: String?
-    var conflicts: String?
-    var mindset: String?
-    var positivity: String?
-    var opening: String?
-    var good: String?
-}
-
 class confideModel: Codable {
     var strain: String?
     var gaining: String?
@@ -331,5 +321,35 @@ class evolveModel: Codable {
         lay = try container.decodeIfPresent([layModel].self, forKey: .lay)
         forgiveness = try container.decodeIfPresent([forgivenessModel].self, forKey: .forgiveness)
         gives = try container.decodeIfPresent([layModel].self, forKey: .gives)
+    }
+}
+
+class smallerModel: Codable {
+    var resolve: String?
+    var soften: String?
+    var conflicts: String?
+    var mindset: String?
+    var positivity: String?
+    var opening: String?
+    var good: String?
+    var midst: String?
+    var practice: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case resolve, soften, conflicts, mindset, positivity, opening, good, midst, practice
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        resolve = (try? container.decode(Int.self, forKey: .resolve)).map { String($0) } ?? (try? container.decode(String.self, forKey: .resolve))
+        soften = (try? container.decode(Int.self, forKey: .soften)).map { String($0) } ?? (try? container.decode(String.self, forKey: .soften))
+        conflicts = (try? container.decode(Int.self, forKey: .conflicts)).map { String($0) } ?? (try? container.decode(String.self, forKey: .conflicts))
+        mindset = (try? container.decode(Int.self, forKey: .mindset)).map { String($0) } ?? (try? container.decode(String.self, forKey: .mindset))
+        positivity = (try? container.decode(Int.self, forKey: .positivity)).map { String($0) } ?? (try? container.decode(String.self, forKey: .positivity))
+        opening = (try? container.decode(Int.self, forKey: .opening)).map { String($0) } ?? (try? container.decode(String.self, forKey: .opening))
+        good = (try? container.decode(Int.self, forKey: .good)).map { String($0) } ?? (try? container.decode(String.self, forKey: .good))
+        midst = (try? container.decode(Int.self, forKey: .midst)).map { String($0) } ?? (try? container.decode(String.self, forKey: .midst))
+        practice = (try? container.decode(Int.self, forKey: .practice)).map { String($0) } ?? (try? container.decode(String.self, forKey: .practice))
     }
 }

@@ -99,7 +99,7 @@ extension BaseViewController {
             self.navigationController?.pushViewController(basicVc, animated: true)
             
         case "":
-            break
+            self.applyOrderInfo(cardModel: cardModel, stepModel: stepModel)
             
         default:
             break
@@ -108,3 +108,39 @@ extension BaseViewController {
     
 }
 
+extension BaseViewController {
+    
+    private func applyOrderInfo(cardModel: smallerModel, stepModel: strikeModel) {
+        LoadingView.shared.show()
+        let reevaluate = cardModel.good ?? ""
+        let positivity = cardModel.positivity ?? ""
+        let midst = cardModel.midst ?? ""
+        let practice = cardModel.practice ?? ""
+        
+        let params = ["reevaluate": reevaluate,
+                      "positivity": positivity,
+                      "midst": midst,
+                      "practice": practice]
+        NetworkManager.post(url: "/patkan/gentle/unwind/depth",
+                            params: params,
+                            responseType: BaseModel.self) { [weak self] result in
+            switch result {
+            case .success(let success):
+                guard let self = self else { return }
+                LoadingView.shared.hide()
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    let pageUrl = success.logic?.vigor ?? ""
+                    if pageUrl.contains(scheme_url) {
+                        DeepLinkNavigator.navigate(to: pageUrl, from: self)
+                    }else if pageUrl.contains("http") {
+                        self.goH5WebVc(pageUrl: pageUrl)
+                    }
+                }
+            case .failure(_):
+                LoadingView.shared.hide()
+            }
+        }
+        
+    }
+}
