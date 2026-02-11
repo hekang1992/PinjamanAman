@@ -55,7 +55,7 @@ extension H5WebViewController {
             if self.webView.canGoBack {
                 self.webView.goBack()
             }else {
-                self.navigationController?.popToRootViewController(animated: true)
+                self.toOrderLisrTargetVc()
             }
         }
         
