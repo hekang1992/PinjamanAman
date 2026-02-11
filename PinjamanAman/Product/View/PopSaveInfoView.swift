@@ -170,6 +170,16 @@ class PopSaveInfoView: BaseView {
         return tapTimeBtn
     }()
     
+    private lazy var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter
+    }()
+    
+    private var datePickerTitle: String {
+        languageCode == "1100" ? "Pemilihan tanggal" : "Date selection"
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -322,59 +332,61 @@ extension PopSaveInfoView {
         tapTimeClick(dateTx: threeFiled)
     }
     
+    // MARK: - Public Action
     private func tapTimeClick(dateTx: UITextField) {
-        let selectedDate = parseDate(from: dateTx.text)
-        showDatePicker(for: dateTx, with: selectedDate)
+        let currentDate = date(from: dateTx.text) ?? defaultDate
+        presentDatePicker(for: dateTx, selectedDate: currentDate)
     }
     
-    private func showDatePicker(for dateTx: UITextField, with selectedDate: Date) {
-        let datePickerView = BRDatePickerView()
-        datePickerView.pickerMode = .YMD
-        datePickerView.title = languageCode == "1100" ? "Pemilihan tanggal" : "Date selection"
-        datePickerView.selectDate = selectedDate
-        datePickerView.pickerStyle = createPickerStyle()
+    private func presentDatePicker(for textField: UITextField, selectedDate: Date) {
+        let picker = BRDatePickerView()
+        picker.pickerMode = .YMD
+        picker.title = datePickerTitle
+        picker.selectDate = selectedDate
+        picker.pickerStyle = createPickerStyle()
         
-        datePickerView.resultBlock = { [weak self] selectedDate, _ in
-            self?.updateTime(dateTx: dateTx, with: selectedDate)
+        picker.resultBlock = { [weak self, weak textField] date, _ in
+            guard let self = self,
+                  let date = date,
+                  let textField = textField else { return }
+            
+            textField.text = self.formatter.string(from: date)
         }
         
-        datePickerView.show()
+        picker.show()
     }
     
-    private func parseDate(from timeString: String?) -> Date {
-        guard let timeString = timeString, !timeString.isEmpty else {
-            return defaultDate()
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.date(from: timeString) ?? defaultDate()
+    private func date(from string: String?) -> Date? {
+        guard let string = string, !string.isEmpty else { return nil }
+        return formatter.date(from: string)
     }
     
-    private func defaultDate() -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.date(from: "01/01/1990") ?? Date()
+    private var defaultDate: Date {
+        var components = DateComponents()
+        components.year = 1990
+        components.month = 1
+        components.day = 1
+        return Calendar.current.date(from: components) ?? Date()
     }
     
     private func createPickerStyle() -> BRPickerStyle {
         let style = BRPickerStyle()
         style.rowHeight = 46
         style.language = "en"
-        style.doneBtnTitle = languageCode == "1100" ? "OKE" : "OK"
-        style.cancelBtnTitle = languageCode == "1100" ? "Batal" : "Cancel"
-        style.doneTextColor = UIColor(hexString: "#203D31")
-        style.selectRowTextColor = UIColor(hexString: "#203D31")
-        style.pickerTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
-        style.selectRowTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        
+        let isIndonesian = languageCode == "1100"
+        style.doneBtnTitle = isIndonesian ? "OKE" : "OK"
+        style.cancelBtnTitle = isIndonesian ? "Batal" : "Cancel"
+        
+        let color = UIColor(hexString: "#203D31")
+        style.doneTextColor = color
+        style.selectRowTextColor = color
+        
+        let font = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        style.pickerTextFont = font
+        style.selectRowTextFont = font
+        
         return style
-    }
-    
-    private func updateTime(dateTx: UITextField, with date: Date?) {
-        guard let date = date else { return }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        dateTx.text = dateFormatter.string(from: date)
     }
     
     
