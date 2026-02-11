@@ -372,9 +372,11 @@ extension PopSaveInfoView {
     private func createPickerStyle() -> BRPickerStyle {
         let style = BRPickerStyle()
         style.rowHeight = 46
-        style.language = "en"
         
         let isIndonesian = languageCode == "1100"
+        
+        style.language = isIndonesian ? nil : "en"
+        
         style.doneBtnTitle = isIndonesian ? "OKE" : "OK"
         style.cancelBtnTitle = isIndonesian ? "Batal" : "Cancel"
         

@@ -12,6 +12,8 @@ import FBSDKCoreKit
 
 class HomeViewController: BaseViewController {
     
+    let locationTool = OnceLocationTool()
+    
     lazy var oneView: OneView = {
         let oneView = OneView(frame: .zero)
         oneView.isHidden = true
@@ -75,6 +77,9 @@ class HomeViewController: BaseViewController {
             await getAdcInfo()
         }
         
+        locationTool.requestCurrentLocation { params in
+            print("params=======\(params ?? [:])")
+        }
         
     }
     
