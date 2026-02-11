@@ -105,6 +105,7 @@ class seeModel: Codable {
     var resolve: String?
     var materials: String?
     var economy: String?
+    var chaos: String?
     
     enum CodingKeys: String, CodingKey {
         case acceptance
@@ -125,6 +126,7 @@ class seeModel: Codable {
         case resolve
         case economy
         case materials
+        case chaos
     }
 }
 

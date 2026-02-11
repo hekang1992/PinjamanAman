@@ -271,4 +271,14 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
         cell.model = model
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = self.modelArray[indexPath.row]
+        let pageUrl = model.chaos ?? ""
+        if pageUrl.contains(scheme_url) {
+            DeepLinkNavigator.navigate(to: pageUrl, from: self)
+        }else if pageUrl.contains("http") {
+            self.goH5WebVc(pageUrl: pageUrl)
+        }
+    }
 }
