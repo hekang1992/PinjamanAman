@@ -14,6 +14,7 @@
 		730D42872F3C4A4C001E5D2F /* OneViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D42862F3C4A4C001E5D2F /* OneViewCell.swift */; };
 		730D42892F3C4A56001E5D2F /* TwoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D42882F3C4A56001E5D2F /* TwoViewCell.swift */; };
 		730D428B2F3C4A61001E5D2F /* ThreeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D428A2F3C4A61001E5D2F /* ThreeViewCell.swift */; };
+		730D428E2F3C6491001E5D2F /* ProvicesModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730D428D2F3C6491001E5D2F /* ProvicesModelManager.swift */; };
 		7319D6262F39A64600F24B7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7319D61D2F39A64600F24B7D /* Assets.xcassets */; };
 		7319D6282F39A64600F24B7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7319D6202F39A64600F24B7D /* LaunchScreen.storyboard */; };
 		7319D62A2F39A64600F24B7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319D61C2F39A64600F24B7D /* AppDelegate.swift */; };
@@ -73,6 +74,7 @@
 		730D42862F3C4A4C001E5D2F /* OneViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewCell.swift; sourceTree = "<group>"; };
 		730D42882F3C4A56001E5D2F /* TwoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewCell.swift; sourceTree = "<group>"; };
 		730D428A2F3C4A61001E5D2F /* ThreeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewCell.swift; sourceTree = "<group>"; };
+		730D428D2F3C6491001E5D2F /* ProvicesModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvicesModelManager.swift; sourceTree = "<group>"; };
 		7319D6042F39A64000F24B7D /* PinjamanAman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinjamanAman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7319D61C2F39A64600F24B7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7319D61D2F39A64600F24B7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,6 +141,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		730D428C2F3C648A001E5D2F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				730D428D2F3C6491001E5D2F /* ProvicesModelManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		7319D5FB2F39A64000F24B7D = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +263,7 @@
 		7319D6342F39A6DD00F24B7D /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				730D428C2F3C648A001E5D2F /* Manager */,
 				7363AAF92F3ADD6100E8002F /* View */,
 				7363AAF82F3ADD5A00E8002F /* Conterller */,
 			);
@@ -394,9 +405,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -477,6 +492,7 @@
 				7363AB0B2F3B25ED00E8002F /* ToYouViewController.swift in Sources */,
 				736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */,
 				7319D6592F39BFAF00F24B7D /* LoginView.swift in Sources */,
+				730D428E2F3C6491001E5D2F /* ProvicesModelManager.swift in Sources */,
 				7319D6412F39ABFD00F24B7D /* NetworkMonitor.swift in Sources */,
 				7363AAF72F3ADCFC00E8002F /* PersonalViewController.swift in Sources */,
 				736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */,

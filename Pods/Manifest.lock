@@ -1,5 +1,31 @@
 PODS:
   - Alamofire (5.10.2)
+  - BRPickerView (2.9.9):
+    - BRPickerView/All (= 2.9.9)
+  - BRPickerView/All (2.9.9):
+    - BRPickerView/Default
+    - BRPickerView/Deprecated
+  - BRPickerView/Core (2.9.9)
+  - BRPickerView/DatePicker (2.9.9):
+    - BRPickerView/Core
+  - BRPickerView/Default (2.9.9):
+    - BRPickerView/DatePicker
+    - BRPickerView/TextPicker
+  - BRPickerView/Deprecated (2.9.9):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/AddressPickerView (= 2.9.9)
+    - BRPickerView/Deprecated/Base (= 2.9.9)
+    - BRPickerView/Deprecated/StringPickerView (= 2.9.9)
+  - BRPickerView/Deprecated/AddressPickerView (2.9.9):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/Base
+  - BRPickerView/Deprecated/Base (2.9.9):
+    - BRPickerView/Core
+  - BRPickerView/Deprecated/StringPickerView (2.9.9):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/Base
+  - BRPickerView/TextPicker (2.9.9):
+    - BRPickerView/Core
   - DeviceKit (5.7.0)
   - FBAEMKit (18.0.1):
     - FBSDKCoreKit_Basics (= 18.0.1)
@@ -23,6 +49,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - BRPickerView
   - DeviceKit
   - FBSDKCoreKit
   - FSPagerView
@@ -38,6 +65,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - BRPickerView
     - DeviceKit
     - FBAEMKit
     - FBSDKCoreKit
@@ -55,6 +83,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  BRPickerView: 84b2effb81f3b9ebd27f1d31de867ae0b37024f7
   DeviceKit: d1a956e25b957efb60a87bfe70be4e00ef36846d
   FBAEMKit: b2ed182002dbcb65d5a60059c9693d322186cd00
   FBSDKCoreKit: 7f96852f2539bdb88ba8d47e5ab4ae70a6f8d691
@@ -70,6 +99,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
   TYAlertController: c121090edb0bea7426f987da94cdddd81eef4231
 
-PODFILE CHECKSUM: 2939747a9cd2cbffdf874e2c81a390b52ecd2f2a
+PODFILE CHECKSUM: ede59e8c0f19712778288ba649be321a5b2f9199
 
 COCOAPODS: 1.16.2

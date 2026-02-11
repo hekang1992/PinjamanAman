@@ -72,7 +72,9 @@ class HomeViewController: BaseViewController {
         
         Task {
             await uploadIDFAInfo()
+            await getAdcInfo()
         }
+        
         
     }
     
@@ -174,4 +176,22 @@ extension HomeViewController {
             }
         }
     }
+}
+
+extension HomeViewController {
+    
+    private func getAdcInfo() async {
+        NetworkManager.get(url: "/patkan/meaningful/unadulterated/relax", responseType: BaseModel.self) { result in
+            switch result {
+            case .success(let success):
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    AdcManager.shared.modelArray = success.logic?.see ?? []
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
 }

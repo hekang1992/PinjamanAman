@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import TYAlertController
+import BRPickerView
 
 class PersonalViewController: BaseViewController {
     
@@ -176,7 +177,12 @@ extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
             cell.tapBlock = { [weak self] in
                 guard let self = self else { return }
                 self.view.endEditing(true)
-                self.tapCell(cell: cell, listModel: model)
+                if type == "ability3" {
+                    self.tapCityCell(cell: cell, listModel: model)
+                }else {
+                    self.tapCell(cell: cell, listModel: model)
+                }
+                
             }
             return cell
         }
@@ -217,6 +223,68 @@ extension PersonalViewController {
         }
     }
     
+    private func tapCityCell(cell: TapCell, listModel: evolveModel) {
+        
+        guard
+            let modelArray = AdcManager.shared.modelArray,
+            !modelArray.isEmpty
+        else { return }
+        
+        let addressArray = AdcCitysManager.getAddressModelArray(dataSourceArr: modelArray)
+        
+        let pickerView = buildCityPicker(
+            title: listModel.strain ?? "",
+            dataSource: addressArray
+        )
+        
+        pickerView.multiResultBlock = { [weak cell] models, _ in
+            guard
+                let models = models,
+                let cell = cell
+            else { return }
+            
+            let selectedText = models
+                .compactMap(\.text)
+                .joined(separator: "-")
+            
+            cell.enterFiled.text = selectedText
+            listModel.worlds = selectedText
+            listModel.acceptance = selectedText
+        }
+        
+        pickerView.show()
+    }
+
+    private func buildCityPicker(title: String, dataSource: [Any]) -> BRTextPickerView {
+        let picker = BRTextPickerView()
+        picker.pickerMode = .componentCascade
+        picker.title = title
+        picker.dataSourceArr = dataSource
+        picker.pickerStyle = createPickerStyle()
+        return picker
+    }
+    
+    private func createPickerStyle() -> BRPickerStyle {
+        let style = BRPickerStyle()
+        
+        style.rowHeight = 46
+        style.language = "en"
+        
+        let isIndonesian = languageCode == "1100"
+        style.doneBtnTitle = isIndonesian ? "OKE" : "OK"
+        style.cancelBtnTitle = isIndonesian ? "Batal" : "Cancel"
+        
+        style.doneTextColor = UIColor(hexString: "#203D31")
+        style.selectRowTextColor = UIColor(hexString: "#203D31")
+        
+        let font = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        style.pickerTextFont = font
+        style.selectRowTextFont = font
+        
+        return style
+    }
+
+
 }
 
 extension PersonalViewController {
