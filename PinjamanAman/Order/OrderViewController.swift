@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
 class OrderViewController: BaseViewController {
     
@@ -80,9 +81,13 @@ class OrderViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         setupDefaultSelection()
+        
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            self.orderListInfo()
+        })
     }
     
     private func setupUI() {
@@ -241,8 +246,10 @@ extension OrderViewController {
                     self.modelArray = success.logic?.see ?? []
                     self.tableView.reloadData()
                 }
+                self.tableView.mj_header?.endRefreshing()
             case .failure(_):
                 LoadingView.shared.hide()
+                self.tableView.mj_header?.endRefreshing()
             }
         }
     }

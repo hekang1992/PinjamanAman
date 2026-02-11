@@ -14,6 +14,8 @@ class CenterView: BaseView {
     
     var cellBlock: ((confideModel) -> Void)?
     
+    var tapBlock: ((String) -> Void)?
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "center_bg_image")
@@ -73,6 +75,7 @@ class CenterView: BaseView {
     lazy var odcImageView: UIImageView = {
         let odcImageView = UIImageView()
         odcImageView.image = languageCode == "1100" ? UIImage(named: "id_oc_l_image") : UIImage(named: "en_oc_l_image")
+        odcImageView.isUserInteractionEnabled = true
         return odcImageView
     }()
     
@@ -95,6 +98,30 @@ class CenterView: BaseView {
         return tableView
     }()
     
+    lazy var oneBtn: UIButton = {
+        let oneBtn = UIButton(type: .custom)
+        oneBtn.addTarget(self, action: #selector(oneBtnClick), for: .touchUpInside)
+        return oneBtn
+    }()
+    
+    lazy var twoBtn: UIButton = {
+        let twoBtn = UIButton(type: .custom)
+        twoBtn.addTarget(self, action: #selector(twoBtnClick), for: .touchUpInside)
+        return twoBtn
+    }()
+    
+    lazy var threeBtn: UIButton = {
+        let threeBtn = UIButton(type: .custom)
+        threeBtn.addTarget(self, action: #selector(threeBtnClick), for: .touchUpInside)
+        return threeBtn
+    }()
+    
+    lazy var fourBtn: UIButton = {
+        let fourBtn = UIButton(type: .custom)
+        fourBtn.addTarget(self, action: #selector(fourBtnClick), for: .touchUpInside)
+        return fourBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
@@ -105,6 +132,10 @@ class CenterView: BaseView {
         addSubview(descLabel)
         addSubview(odcImageView)
         addSubview(bgView)
+        odcImageView.addSubview(oneBtn)
+        odcImageView.addSubview(twoBtn)
+        odcImageView.addSubview(threeBtn)
+        odcImageView.addSubview(fourBtn)
         bgView.addSubview(tableView)
         bgImageView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -146,6 +177,24 @@ class CenterView: BaseView {
         }
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        oneBtn.snp.makeConstraints { make in
+            make.top.left.equalToSuperview()
+            make.size.equalTo(CGSize(width: 375.pix() * 0.25, height: 100.pix()))
+        }
+        twoBtn.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalTo(oneBtn.snp.right)
+            make.size.equalTo(CGSize(width: 375.pix() * 0.25, height: 100.pix()))
+        }
+        threeBtn.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalTo(twoBtn.snp.right)
+            make.size.equalTo(CGSize(width: 375.pix() * 0.25, height: 100.pix()))
+        }
+        fourBtn.snp.makeConstraints { make in
+            make.top.right.equalToSuperview()
+            make.size.equalTo(CGSize(width: 375.pix() * 0.25, height: 100.pix()))
         }
     }
     
@@ -189,6 +238,26 @@ extension CenterView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = modelArray[indexPath.row]
         self.cellBlock?(model)
+    }
+    
+}
+
+extension CenterView {
+    
+    @objc func oneBtnClick() {
+        self.tapBlock?("4")
+    }
+    
+    @objc func twoBtnClick() {
+        self.tapBlock?("7")
+    }
+    
+    @objc func threeBtnClick() {
+        self.tapBlock?("6")
+    }
+    
+    @objc func fourBtnClick() {
+        self.tapBlock?("5")
     }
     
 }

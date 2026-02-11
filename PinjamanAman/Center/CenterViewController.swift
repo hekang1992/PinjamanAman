@@ -39,6 +39,14 @@ class CenterViewController: BaseViewController {
                 self.goH5WebVc(pageUrl: pageUrl)
             }
         }
+        
+        centerView.tapBlock = { [weak self] type in
+            guard let self = self else { return }
+            let listVc = OrderListViewController()
+            listVc.type = type
+            self.navigationController?.pushViewController(listVc, animated: true)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
