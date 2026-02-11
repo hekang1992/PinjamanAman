@@ -14,7 +14,14 @@ class HomeViewController: BaseViewController {
     
     lazy var oneView: OneView = {
         let oneView = OneView(frame: .zero)
+        oneView.isHidden = true
         return oneView
+    }()
+    
+    lazy var twoView: TwoView = {
+        let twoView = TwoView(frame: .zero)
+        twoView.isHidden = true
+        return twoView
     }()
     
     override func viewDidLoad() {
@@ -22,6 +29,11 @@ class HomeViewController: BaseViewController {
         
         view.addSubview(oneView)
         oneView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(twoView)
+        twoView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -93,11 +105,13 @@ extension HomeViewController {
                     let modelArray = success.logic?.see ?? []
                     if let cardModel = modelArray.first(where: { $0.acceptance == "appreciate3" }) {
                         self.oneView.isHidden = true
+                        self.twoView.isHidden = false
                         return
                     }
                     
                     if let cardModel = modelArray.first(where: { $0.acceptance == "appreciate2" }), let listModel = cardModel.forgiveness?.first  {
                         self.oneView.isHidden = false
+                        self.twoView.isHidden = true
                         self.oneView.model = listModel
                         return
                     }
