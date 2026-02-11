@@ -11,20 +11,20 @@ import Kingfisher
 
 class TwoView: BaseView {
     
+    var tapCellBlock: ((forgivenessModel) -> Void)?
+    
+    var tapBlock: ((forgivenessModel) -> Void)?
+    
     var modelArray: [seeModel]? {
         didSet {
             guard let modelArray = modelArray else { return }
             if let _ = modelArray.first(where: { $0.acceptance == "appreciate4" }) {
-                footView.snp.makeConstraints { make in
-                    make.top.equalTo(bgImageView.snp.bottom).offset(80.pix())
-                    make.left.right.equalToSuperview()
-                    make.bottom.equalToSuperview()
+                footView.snp.updateConstraints { make in
+                    make.top.equalTo(bgImageView.snp.bottom).offset(60.pix())
                 }
             }else {
-                footView.snp.makeConstraints { make in
+                footView.snp.updateConstraints { make in
                     make.top.equalTo(bgImageView.snp.bottom).offset(-25.pix())
-                    make.left.right.equalToSuperview()
-                    make.bottom.equalToSuperview()
                 }
             }
             
@@ -106,7 +106,11 @@ class TwoView: BaseView {
             make.left.equalTo(logoImageView.snp.right).offset(15)
             make.height.equalTo(30)
         }
-        
+        footView.snp.makeConstraints { make in
+            make.top.equalTo(bgImageView.snp.bottom).offset(-25.pix())
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
         tableView.snp.makeConstraints { make in
             make.top.equalTo(bgView.snp.bottom).offset(-15)
             make.left.right.bottom.equalToSuperview()
@@ -129,7 +133,7 @@ extension TwoView: UITableViewDelegate, UITableViewDataSource {
             return 0
             
         case "appreciate5":
-            return 40.pix()
+            return 35.pix()
             
         default:
             return 0
@@ -152,8 +156,9 @@ extension TwoView: UITableViewDelegate, UITableViewDataSource {
             nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             headView.addSubview(nameLabel)
             nameLabel.snp.makeConstraints { make in
-                make.left.equalToSuperview().offset(20)
-                make.top.left.bottom.equalToSuperview()
+                make.left.equalToSuperview()
+                make.right.equalToSuperview().offset(-20)
+                make.top.equalToSuperview()
             }
             return headView
             
@@ -195,22 +200,35 @@ extension TwoView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         case "appreciate3":
             let cell = tableView.dequeueReusableCell(withIdentifier: "OneViewCell", for: indexPath) as! OneViewCell
-            cell.model = model?.forgiveness?[indexPath.row]
+            let listModel = model?.forgiveness?[indexPath.row]
+            cell.model = listModel
+            cell.tapBlock = { [weak self] in
+                guard let self = self, let listModel = listModel else { return }
+                self.tapCellBlock?(listModel)
+            }
             return cell
             
         case "appreciate4":
             let cell = tableView.dequeueReusableCell(withIdentifier: "TwoViewCell", for: indexPath) as! TwoViewCell
+            cell.modelArray = model?.forgiveness ?? []
+            cell.tapBlock = { [weak self] model in
+                self?.tapBlock?(model)
+            }
             return cell
             
         case "appreciate5":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThreeViewCell", for: indexPath) as! ThreeViewCell
-            cell.model = model?.forgiveness?[indexPath.row]
+            let listModel = model?.forgiveness?[indexPath.row]
+            cell.model = listModel
+            cell.tapBlock = { [weak self] in
+                guard let self = self, let listModel = listModel else { return }
+                self.tapCellBlock?(listModel)
+            }
             return cell
             
         default:
             return UITableViewCell()
         }
     }
-    
     
 }

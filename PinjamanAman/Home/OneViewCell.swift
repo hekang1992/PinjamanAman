@@ -11,6 +11,8 @@ import Kingfisher
 
 class OneViewCell: UITableViewCell {
     
+    var tapBlock: (() -> Void)?
+    
     var model: forgivenessModel? {
         didSet {
             guard let model = model else { return }
@@ -78,9 +80,14 @@ class OneViewCell: UITableViewCell {
         applyBtn.setTitleColor(.white, for: .normal)
         applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(700))
         applyBtn.setBackgroundImage(UIImage(named: "cen_log_image"), for: .normal)
-//        applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
         applyBtn.isUserInteractionEnabled = true
         return applyBtn
+    }()
+    
+    lazy var tapBtn: UIButton = {
+        let tapBtn = UIButton(type: .custom)
+        tapBtn.addTarget(self, action: #selector(tapBtnClick), for: .touchUpInside)
+        return tapBtn
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -102,6 +109,7 @@ class OneViewCell: UITableViewCell {
         bgImageView.addSubview(uptoLabel)
         bgImageView.addSubview(rateLabel)
         bgImageView.addSubview(applyBtn)
+        contentView.addSubview(tapBtn)
         
         productImageView.snp.makeConstraints { make in
             make.width.height.equalTo(26)
@@ -133,10 +141,20 @@ class OneViewCell: UITableViewCell {
             make.size.equalTo(CGSize(width: 280.pix(), height: 46.pix()))
             make.centerX.equalToSuperview()
         }
+        tapBtn.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+extension OneViewCell {
+    
+    @objc func tapBtnClick() {
+        self.tapBlock?()
+    }
 }

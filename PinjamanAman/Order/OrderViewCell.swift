@@ -60,7 +60,7 @@ class OrderViewCell: UITableViewCell {
                 typeLabel.textColor = UIColor.init(hexString: "#267B3F")
                 
             case "pecc":
-                bgImageView.image = UIImage(named: "dd_review_bg")
+                bgImageView.image = UIImage(named: "oc_review_bg")
                 typeImageView.image = UIImage(named: "dd_review_ic")
                 typeLabel.textColor = UIColor.init(hexString: "#3C90FF")
                 

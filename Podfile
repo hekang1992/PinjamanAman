@@ -14,6 +14,7 @@ target 'PinjamanAman' do
   pod 'MJRefresh'
   pod 'Toast-Swift'
   pod 'FBSDKCoreKit'
+  pod 'FSPagerView'
   pod 'IQKeyboardManagerSwift', '~> 6.5.16'
   pod 'TYAlertController'
   pod 'DeviceKit'

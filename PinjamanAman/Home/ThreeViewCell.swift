@@ -11,6 +11,8 @@ import Kingfisher
 
 class ThreeViewCell: UITableViewCell {
     
+    var tapBlock: (() -> Void)?
+    
     var model: forgivenessModel? {
         didSet {
             guard let model = model else { return }
@@ -92,6 +94,12 @@ class ThreeViewCell: UITableViewCell {
         lineView.backgroundColor = UIColor.init(hexString: "#F6F6F4")
         return lineView
     }()
+    
+    lazy var tapBtn: UIButton = {
+        let tapBtn = UIButton(type: .custom)
+        tapBtn.addTarget(self, action: #selector(tapBtnClick), for: .touchUpInside)
+        return tapBtn
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -153,10 +161,22 @@ class ThreeViewCell: UITableViewCell {
             make.height.equalTo(1)
             make.left.equalToSuperview().offset(20)
         }
+        contentView.addSubview(tapBtn)
+        tapBtn.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+extension ThreeViewCell {
+    
+    @objc func tapBtnClick() {
+        self.tapBlock?()
     }
     
 }

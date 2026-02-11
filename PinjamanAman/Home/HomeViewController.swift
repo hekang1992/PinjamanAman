@@ -42,16 +42,33 @@ class HomeViewController: BaseViewController {
             self.homeDataInfo()
         })
         
-        self.twoView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-            guard let self = self else { return }
-            self.homeDataInfo()
-        })
-        
         self.oneView.tapBlock = { [weak self] model in
             guard let self = self else { return }
             let productID = String(model.opening ?? 0)
             self.clickProductInfo(productID: productID)
         }
+        
+        self.twoView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            self.homeDataInfo()
+        })
+        
+        self.twoView.tapCellBlock = { [weak self] model in
+            guard let self = self else { return }
+            let productID = String(model.opening ?? 0)
+            self.clickProductInfo(productID: productID)
+        }
+        
+        self.twoView.tapBlock = { [weak self] model in
+            guard let self = self else { return }
+            let pageUrl = model.vigor ?? ""
+            if pageUrl.contains(scheme_url) {
+                DeepLinkNavigator.navigate(to: pageUrl, from: self)
+            }else if pageUrl.contains("http") {
+                self.goH5WebVc(pageUrl: pageUrl)
+            }
+        }
+        
         
         Task {
             await uploadIDFAInfo()
