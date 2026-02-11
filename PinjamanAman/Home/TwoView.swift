@@ -44,6 +44,7 @@ class TwoView: BaseView {
         addSubview(bgView)
         bgView.addSubview(logoImageView)
         bgView.addSubview(phoneLabel)
+        addSubview(footView)
         
         bgImageView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -64,7 +65,11 @@ class TwoView: BaseView {
             make.left.equalTo(logoImageView.snp.right).offset(15)
             make.height.equalTo(30)
         }
-        
+        footView.snp.makeConstraints { make in
+            make.top.equalTo(bgImageView.snp.bottom).offset(-25.pix())
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     @MainActor required init?(coder: NSCoder) {
