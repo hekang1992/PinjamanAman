@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class BaseTabBarController: UITabBarController {
 
@@ -53,6 +54,16 @@ class BaseTabBarController: UITabBarController {
 
 extension BaseTabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        let status = CLLocationManager().authorizationStatus
+        
+        if AppLanguageCodeManager.getLanguageCode() == "1100" {
+            if status == .denied || status == .restricted {
+                ToastManager.showMessage("请开启定位!!!!!!! 记录一下..等文案")
+                return false
+            }
+        }
+        
         return true
     }
 }
