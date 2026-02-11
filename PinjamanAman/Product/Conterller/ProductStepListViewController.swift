@@ -228,11 +228,11 @@ extension ProductStepListViewController: UITableViewDelegate, UITableViewDataSou
             make.height.equalTo(15)
         }
         
-        let cardModel = self.model?.logic?.smaller ?? smallerModel()
-        productImageView.kf.setImage(with: URL(string: cardModel.conflicts ?? ""))
-        nameLabel.text = cardModel.soften ?? ""
-        moneyLabel.text = cardModel.positivity ?? ""
-        uptoLabel.text = cardModel.mindset ?? ""
+        let cardModel = self.model?.logic?.smaller
+        productImageView.kf.setImage(with: URL(string: cardModel?.conflicts ?? ""))
+        nameLabel.text = cardModel?.soften ?? ""
+        moneyLabel.text = cardModel?.positivity ?? ""
+        uptoLabel.text = cardModel?.mindset ?? ""
         
         return headView
     }
@@ -258,10 +258,12 @@ extension ProductStepListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let modelArray = self.model?.logic?.strike ?? []
         let model = modelArray[indexPath.row]
-        let cardModel = self.model?.logic?.smaller ?? smallerModel()
+        let cardModel = self.model?.logic?.smaller
         let typeIndex = model.laugh ?? 0
         if typeIndex == 1 {
-            self.judgeKeysToPageVc(cardModel: cardModel, stepModel: model)
+            if let cardModel = cardModel {
+                self.judgeKeysToPageVc(cardModel: cardModel, stepModel: model)
+            }
         }else {
             self.nextBtnClick()
         }
@@ -299,8 +301,10 @@ extension ProductStepListViewController {
     
     @objc func nextBtnClick() {
         let stepModel = self.model?.logic?.achievements ?? strikeModel()
-        let cardModel = self.model?.logic?.smaller ?? smallerModel()
-        self.judgeKeysToPageVc(cardModel: cardModel, stepModel: stepModel)
+        let cardModel = self.model?.logic?.smaller
+        if let cardModel = cardModel {
+            self.judgeKeysToPageVc(cardModel: cardModel, stepModel: stepModel)
+        }
     }
     
 }

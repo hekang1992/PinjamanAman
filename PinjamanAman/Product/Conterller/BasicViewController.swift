@@ -350,8 +350,9 @@ extension BasicViewController {
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
                     let stepModel = success.logic?.achievements ?? strikeModel()
-                    let cardModel = success.logic?.smaller ?? smallerModel()
-                    self?.judgeKeysToPageVc(cardModel: cardModel, stepModel: stepModel)
+                    if let cardModel = success.logic?.smaller {
+                        self?.judgeKeysToPageVc(cardModel: cardModel, stepModel: stepModel)
+                    }
                 }
                 
             case .failure(_):
