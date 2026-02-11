@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import FBSDKCoreKit
 
 class HomeViewController: BaseViewController {
     
@@ -35,6 +36,10 @@ class HomeViewController: BaseViewController {
             self.clickProductInfo(productID: productID)
         }
         
+        Task {
+            await uploadIDFAInfo()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +49,36 @@ class HomeViewController: BaseViewController {
 }
 
 extension HomeViewController {
+    
+    private func uploadIDFAInfo() async {
+        let params = ["shade": AppIdentifierManager.getIDFV(),
+                      "respiration": AppIdentifierManager.getIDFA() ?? ""]
+        NetworkManager.post(url: "/patkan/sophistication/especially/dream",
+                            params: params,
+                            responseType: BaseModel.self) { [weak self] result in
+            switch result {
+            case .success(let success):
+                let partner = success.partner ?? ""
+                if ["0", "00"].contains(partner) {
+                    self?.configureFacebookSDK(with: success.logic?.analysisability ?? analysisabilityModel())
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func configureFacebookSDK(with model: analysisabilityModel) {
+        Settings.shared.displayName = model.cur ?? ""
+        Settings.shared.appURLSchemeSuffix = model.walkety ?? ""
+        Settings.shared.appID = model.shortster ?? ""
+        Settings.shared.clientToken = model.middleee ?? ""
+        
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            didFinishLaunchingWithOptions: nil
+        )
+    }
     
     private func homeDataInfo() {
         
