@@ -69,6 +69,7 @@ class OrderViewController: BaseViewController {
         tableView.estimatedRowHeight = 100
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isHidden = true
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
@@ -77,6 +78,12 @@ class OrderViewController: BaseViewController {
             tableView.sectionHeaderTopPadding = 0
         }
         return tableView
+    }()
+    
+    lazy var emptyView: OrderEmptyView = {
+        let emptyView = OrderEmptyView()
+        emptyView.isHidden = true
+        return emptyView
     }()
     
     override func viewDidLoad() {
@@ -150,6 +157,15 @@ class OrderViewController: BaseViewController {
         footView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        footView.addSubview(emptyView)
+        emptyView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        emptyView.applyBtnBlock = {
+            NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
         }
     }
     
@@ -237,19 +253,32 @@ extension OrderViewController {
                       "millions": "55"]
         NetworkManager.post(url: "/patkan/greenery/while/lives",
                             params: params,
-                            responseType: BaseModel.self) { result in
+                            responseType: BaseModel.self) { [weak self] result in
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
-                    self.modelArray = success.logic?.see ?? []
-                    self.tableView.reloadData()
+                    let modelArray = success.logic?.see ?? []
+                    self?.modelArray = modelArray
+                    self?.tableView.reloadData()
+                    if modelArray.isEmpty {
+                        self?.tableView.isHidden = true
+                        self?.emptyView.isHidden = false
+                    }else {
+                        self?.tableView.isHidden = false
+                        self?.emptyView.isHidden = true
+                    }
+                }else {
+                    self?.tableView.isHidden = true
+                    self?.emptyView.isHidden = false
                 }
-                self.tableView.mj_header?.endRefreshing()
+                self?.tableView.mj_header?.endRefreshing()
             case .failure(_):
                 LoadingView.shared.hide()
-                self.tableView.mj_header?.endRefreshing()
+                self?.tableView.mj_header?.endRefreshing()
+                self?.tableView.isHidden = true
+                self?.emptyView.isHidden = false
             }
         }
     }
