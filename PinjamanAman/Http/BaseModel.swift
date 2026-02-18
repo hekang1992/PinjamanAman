@@ -2,7 +2,7 @@
 //  BaseModel.swift
 //  PinjamanAman
 //
-//  Created by hekang on 2026/2/9.
+//  Created by Michael Brown on 2026/2/9.
 //
 
 class BaseModel: Codable {

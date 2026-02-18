@@ -2,7 +2,7 @@
 //  AppWlView.swift
 //  PinjamanAman
 //
-//  Created by hekang on 2026/2/18.
+//  Created by Michael Brown on 2026/2/18.
 //
 
 import UIKit
