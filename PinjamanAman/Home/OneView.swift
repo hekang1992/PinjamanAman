@@ -13,6 +13,8 @@ class OneView: BaseView {
     
     var tapBlock: ((forgivenessModel) -> Void)?
     
+    var tapABlock: (() -> Void)?
+    
     var model: forgivenessModel? {
         didSet {
             guard let model = model else { return }
@@ -78,6 +80,10 @@ class OneView: BaseView {
     lazy var mentImageView: UIImageView = {
         let mentImageView = UIImageView()
         mentImageView.image = UIImage(named: "home_pri_image")
+        mentImageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mentImageViewTapped))
+        mentImageView.addGestureRecognizer(tapGesture)
+        
         return mentImageView
     }()
     
@@ -332,4 +338,9 @@ extension OneView {
             self.tapBlock?(model)
         }
     }
+    
+    @objc private func mentImageViewTapped() {
+        self.tapABlock?()
+    }
+    
 }

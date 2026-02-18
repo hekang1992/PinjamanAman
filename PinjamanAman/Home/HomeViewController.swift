@@ -51,6 +51,12 @@ class HomeViewController: BaseViewController {
             self.clickProductInfo(productID: productID)
         }
         
+        self.oneView.tapABlock = { [weak self] in
+            guard let self = self else { return }
+            let pageUrl = h5_url + "/breezeHolds"
+            self.goH5WebVc(pageUrl: pageUrl)
+        }
+        
         self.twoView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             self.homeDataInfo()

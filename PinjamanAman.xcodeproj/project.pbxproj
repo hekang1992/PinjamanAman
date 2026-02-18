@@ -233,12 +233,12 @@
 			isa = PBXGroup;
 			children = (
 				736F5BB32F3A167500F5BC15 /* OneView.swift */,
-				7319D6442F39AEE100F24B7D /* HomeViewController.swift */,
 				736F5BB52F3A24E200F5BC15 /* CardListView.swift */,
 				730D42842F3C34C1001E5D2F /* TwoView.swift */,
 				730D42862F3C4A4C001E5D2F /* OneViewCell.swift */,
 				730D42882F3C4A56001E5D2F /* TwoViewCell.swift */,
 				730D428A2F3C4A61001E5D2F /* ThreeViewCell.swift */,
+				7319D6442F39AEE100F24B7D /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
