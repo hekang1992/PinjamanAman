@@ -34,7 +34,7 @@ class AppHeadView: BaseView {
         backBtn.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(20)
-            make.size.equalTo(CGSize(width: 18.pix(), height: 16.pix()))
+            make.size.equalTo(CGSize(width: 20.pix(), height: 20.pix()))
         }
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
