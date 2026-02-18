@@ -56,10 +56,12 @@ extension BaseTabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         let status = CLLocationManager().authorizationStatus
-        
-        if AppLanguageCodeManager.getLanguageCode() == "1100" {
+        let languageCode = AppLanguageCodeManager.getLanguageCode()
+        if languageCode == "1100" {
             if status == .denied || status == .restricted {
-                ToastManager.showMessage("请开启定位!!!!!!! 记录一下..等文案")
+                let title = languageCode == "1100" ? "定位" : "定位"
+                let message = languageCode == "1100" ? "定位" : "定位"
+                AppAlertCofigManager.showAuthAlert(title: title, message: message)
                 return false
             }
         }

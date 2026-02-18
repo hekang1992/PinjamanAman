@@ -75,7 +75,7 @@ class PersonalViewController: BaseViewController {
         
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.toTargetVc()
+            self.popWlView()
         }
         
         view.addSubview(nextBtn)
@@ -333,4 +333,25 @@ extension PersonalViewController {
             }
         }
     }
+}
+
+extension PersonalViewController {
+    
+    private func popWlView() {
+        let popView = AppWlView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.confirmBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+            self.toTargetVc()
+        }
+    }
+    
 }

@@ -74,8 +74,13 @@ class HomeViewController: BaseViewController {
         
         
         Task {
-            await uploadIDFAInfo()
-            await getAdcInfo()
+            let up_type = UserDefaults.standard.object(forKey: "idfa_app") as? String ?? ""
+            if up_type == "1" {
+                await getAdcInfo()
+            }else {
+                await uploadIDFAInfo()
+                await getAdcInfo()
+            }
         }
         
         singleLocationManager.requestCurrentLocation { params in
@@ -122,6 +127,8 @@ extension HomeViewController {
             case .success(let success):
                 let partner = success.partner ?? ""
                 if ["0", "00"].contains(partner) {
+                    UserDefaults.standard.set("1", forKey: "idfa_app")
+                    UserDefaults.standard.synchronize()
                     self?.configureFacebookSDK(with: success.logic?.analysisability ?? analysisabilityModel())
                 }
             case .failure(_):
@@ -184,7 +191,9 @@ extension HomeViewController {
         
         if languageCode == "1100" {
             if status == .denied || status == .restricted {
-                ToastManager.showMessage("请开启定位!!!!!!! 记录一下..等文案")
+                let title = languageCode == "1100" ? "定位" : "定位"
+                let message = languageCode == "1100" ? "定位" : "定位"
+                AppAlertCofigManager.showAuthAlert(title: title, message: message)
                 return
             }
         }
@@ -305,6 +314,34 @@ extension HomeViewController {
             case .failure(_):
                 break
             }
+        }
+    }
+    
+}
+
+class AppAlertCofigManager {
+    
+    static func showAuthAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .alert
+            )
+            
+            alert.addAction(UIAlertAction(title: AppLanguageCodeManager.getLanguageCode() == "1100" ? "Batalkan" : "Cancel", style: .cancel))
+            alert.addAction(UIAlertAction(title: AppLanguageCodeManager.getLanguageCode() == "1100" ? "Masuk ke Pengaturan" : "Go to Settings", style: .default) { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            })
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let keyWindow = windowScene.windows.first(where: \.isKeyWindow) else {
+                return
+            }
+            keyWindow.rootViewController?.present(alert, animated: true)
+            
         }
     }
     

@@ -46,7 +46,8 @@ class TwoView: BaseView {
     
     lazy var phoneLabel: UILabel = {
         let phoneLabel = UILabel()
-        phoneLabel.text = UserSessionManager.shared.phone ?? ""
+        let phone = UserSessionManager.shared.phone ?? ""
+        phoneLabel.text = PhoneNumberManager.formatPhoneNumber(phone)
         phoneLabel.textAlignment = .left
         phoneLabel.textColor = UIColor.init(hexString: "#FFFFFF")
         phoneLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(500))

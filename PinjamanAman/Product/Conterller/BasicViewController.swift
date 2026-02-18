@@ -87,7 +87,7 @@ class BasicViewController: BaseViewController {
         
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.toTargetVc()
+            self.popWlView()
         }
         
         view.addSubview(nextBtn)
@@ -135,9 +135,11 @@ class BasicViewController: BaseViewController {
         oneListView.tapBlock = { [weak self] in
             guard let self = self else { return }
             let card = self.model?.logic?.go?.laugh ?? 0
-            if card == 1 {
-                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
-            }else {
+            let face = self.model?.logic?.involves?.laugh ?? 0
+            if card == 1 && face == 0 {
+                self.popFaceView()
+//                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
+            }else if card == 0 {
                 self.popCardView()
             }
             //            let face = self.model?.logic?.involves?.laugh ?? 0
@@ -148,7 +150,7 @@ class BasicViewController: BaseViewController {
             let card = self.model?.logic?.go?.laugh ?? 0
             
             if card == 1 {
-                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
+//                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
             }else {
                 self.popCardView()
                 return
@@ -156,7 +158,7 @@ class BasicViewController: BaseViewController {
             
             let face = self.model?.logic?.involves?.laugh ?? 0
             if face == 1 {
-                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
+//                ToastManager.showMessage(languageCode == "1100" ? "Sertifikasi selesai" : "Certification completed")
             }else {
                 self.popFaceView()
                 return
@@ -238,7 +240,9 @@ extension BasicViewController {
                     position: .front,
                     presentVC: self
                 ) { [weak self] imageData in
-                    self?.uploadImage(type: "10", imageData: imageData)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        self?.uploadImage(type: "10", imageData: imageData)
+                    }
                 }
                 cameraPicker?.presentCamera()
             }
@@ -329,6 +333,22 @@ extension BasicViewController {
             let name = popView.oneFiled.text ?? ""
             let idNum = popView.twoFiled.text ?? ""
             let time = popView.threeFiled.text ?? ""
+            
+            if name.isEmpty || time == "//" {
+                ToastManager.showMessage(AppLanguageCodeManager.getLanguageCode() == "1100" ? "Nama tidak boleh kosong" : "Name cannot be empty")
+                return
+            }
+            
+            if idNum.isEmpty || time == "//" {
+                ToastManager.showMessage(AppLanguageCodeManager.getLanguageCode() == "1100" ? "Nomor KTP tidak boleh kosong" : "ID number cannot be empty")
+                return
+            }
+            
+            if time.isEmpty || time == "//" {
+                ToastManager.showMessage(AppLanguageCodeManager.getLanguageCode() == "1100" ? "Tanggal lahir tidak boleh kosong" : "Birthday cannot be empty")
+                return
+            }
+            
             let orderID = self?.cardModel?.good ?? ""
             let paras = ["blend": name,
                          "thinking": idNum,
@@ -398,3 +418,23 @@ extension BasicViewController {
     
 }
 
+extension BasicViewController {
+    
+    private func popWlView() {
+        let popView = AppWlView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.confirmBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+            self.toTargetVc()
+        }
+    }
+    
+}

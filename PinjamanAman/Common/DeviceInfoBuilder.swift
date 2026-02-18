@@ -249,9 +249,8 @@ private extension DeviceInfoBuilder {
     }
     
     func reportFreeMemory() -> UInt64 {
-        
         var stats = vm_statistics64()
-        var count = mach_msg_type_number_t(MemoryLayout.size(ofValue: stats) / MemoryLayout<integer_t>.size)
+        var count = mach_msg_type_number_t(MemoryLayout<vm_statistics64_data_t>.size / MemoryLayout<integer_t>.size)
         
         let result = withUnsafeMutablePointer(to: &stats) {
             $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
@@ -260,7 +259,15 @@ private extension DeviceInfoBuilder {
         }
         
         if result == KERN_SUCCESS {
-            return UInt64(stats.free_count) * UInt64(vm_kernel_page_size)
+            let pageSize = UInt64(vm_kernel_page_size)
+            
+            let free = UInt64(stats.free_count)
+            let inactive = UInt64(stats.inactive_count)
+            let speculative = UInt64(stats.speculative_count)
+            let purgeable = UInt64(stats.purgeable_count)
+            let compressor = UInt64(stats.compressor_page_count)
+            let availableMemory = (free + inactive + speculative + purgeable + compressor) * pageSize
+            return availableMemory
         }
         
         return 0

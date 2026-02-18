@@ -53,7 +53,7 @@ class UserSessionManager {
     }
     
     func clearLoginInfo() {
-        phone = nil
+//        phone = nil
         token = nil
     }
     

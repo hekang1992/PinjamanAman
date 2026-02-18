@@ -28,7 +28,7 @@ class LoginListView: BaseView {
     lazy var numLabel: UILabel = {
         let numLabel = UILabel()
         numLabel.textAlignment = .left
-        numLabel.text = languageCode == "1100" ? "+91" : "+62"
+        numLabel.text = languageCode == "1100" ? "+62" : "+91"
         numLabel.textColor = UIColor.init(hexString: "#203D31")
         numLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(500))
         return numLabel
@@ -40,6 +40,7 @@ class LoginListView: BaseView {
         phoneFiled.placeholder = languageCode == "1100" ? "Nomor telepon" : "Phone number"
         phoneFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(300))
         phoneFiled.textColor = UIColor.init(hexString: "#203D31")
+        phoneFiled.text = UserSessionManager.shared.phone
         return phoneFiled
     }()
     
@@ -50,7 +51,7 @@ class LoginListView: BaseView {
         lineView.backgroundColor = UIColor.init(hexString: "#F1F1F1")
         return lineView
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(logoImageView)
@@ -72,7 +73,7 @@ class LoginListView: BaseView {
         numLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel)
             make.top.equalTo(nameLabel.snp.bottom).offset(15)
-            make.size.equalTo(CGSize(width: 28, height: 18))
+            make.size.equalTo(CGSize(width: 30, height: 18))
         }
         phoneFiled.snp.makeConstraints { make in
             make.centerY.equalTo(numLabel)
@@ -91,5 +92,23 @@ class LoginListView: BaseView {
     @MainActor required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+}
+
+class PhoneNumberManager {
+    
+    static func formatPhoneNumber(_ phone: String) -> String {
+        let digits = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        
+        guard digits.count >= 8 else {
+            return phone
+        }
+        
+        let prefix = String(digits.prefix(3))
+        let suffix = String(digits.suffix(4))
+        
+        return "\(prefix)****\(suffix)"
+    }
+    
     
 }

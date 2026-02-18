@@ -54,6 +54,7 @@ class CodeListView: BaseView {
     lazy var btnLineView: UIView = {
         let btnLineView = UIView()
         btnLineView.backgroundColor = UIColor.init(hexString: "#267B3F")
+        btnLineView.isHidden = true
         return btnLineView
     }()
 

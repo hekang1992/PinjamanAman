@@ -37,15 +37,27 @@ class LoginViewController: BaseViewController {
         UserDefaults.standard.set(String(Int(Date().timeIntervalSince1970)), forKey: "start_time")
         UserDefaults.standard.synchronize()
         
+        loginView.ablock = { [weak self] in
+            guard let self = self else { return }
+            let pageUrl = h5_url + "/resonatesDeep"
+            self.goH5WebVc(pageUrl: pageUrl)
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.loginView.phoneListView.phoneFiled.becomeFirstResponder()
         
-        Task{
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
-            await self.requestIDFAPermission()
+        let phone = self.loginView.phoneListView.phoneFiled.text ?? ""
+        
+        if phone.isEmpty {
+            
+            Task{
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                await self.requestIDFAPermission()
+            }
+            
         }
         
     }

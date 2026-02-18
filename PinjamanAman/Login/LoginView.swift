@@ -10,6 +10,8 @@ import SnapKit
 
 class LoginView: BaseView {
     
+    var ablock: (() -> Void)?
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "login_head_image")
@@ -65,6 +67,7 @@ class LoginView: BaseView {
     lazy var entBtn: UIButton = {
         let entBtn = UIButton(type: .custom)
         entBtn.setImage(languageCode == "1100" ? UIImage(named: "prc_id_a_imagre") : UIImage(named: "prc_en_a_imagre"), for: .normal)
+        entBtn.addTarget(self, action: #selector(entBtnClick), for: .touchUpInside)
         return entBtn
     }()
     
@@ -149,4 +152,11 @@ class LoginView: BaseView {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+extension LoginView {
+    
+    @objc func entBtnClick() {
+        self.ablock?()
+    }
 }

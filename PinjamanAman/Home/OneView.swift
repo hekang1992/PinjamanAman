@@ -47,7 +47,8 @@ class OneView: BaseView {
     
     lazy var phoneLabel: UILabel = {
         let phoneLabel = UILabel()
-        phoneLabel.text = UserSessionManager.shared.phone ?? ""
+        let phone = UserSessionManager.shared.phone ?? ""
+        phoneLabel.text = PhoneNumberManager.formatPhoneNumber(phone)
         phoneLabel.textAlignment = .left
         phoneLabel.textColor = UIColor.init(hexString: "#FFFFFF")
         phoneLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(500))
@@ -141,7 +142,7 @@ class OneView: BaseView {
         applyBtn.setTitleColor(.white, for: .normal)
         applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(700))
         applyBtn.setBackgroundImage(UIImage(named: "cen_log_image"), for: .normal)
-        applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
+//        applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
         return applyBtn
     }()
     
@@ -161,6 +162,12 @@ class OneView: BaseView {
         lineView.layer.masksToBounds = true
         lineView.backgroundColor = UIColor.init(hexString: "#F6F6F4")
         return lineView
+    }()
+    
+    lazy var applyClickBtn: UIButton = {
+        let applyClickBtn = UIButton(type: .custom)
+        applyClickBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
+        return applyClickBtn
     }()
     
     override init(frame: CGRect) {
@@ -304,6 +311,11 @@ class OneView: BaseView {
                 make.centerX.equalToSuperview()
                 make.size.equalTo(CGSize(width: 335.pix(), height: 441.pix()))
             }
+        }
+        
+        cardImageView.addSubview(applyClickBtn)
+        applyClickBtn.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(5.pix())
         }
     }
     

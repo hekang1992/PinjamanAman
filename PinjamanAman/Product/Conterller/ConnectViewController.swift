@@ -73,7 +73,7 @@ class ConnectViewController: BaseViewController {
         
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.toTargetVc()
+            self.popWlView()
         }
         
         view.addSubview(nextBtn)
@@ -228,7 +228,7 @@ extension ConnectViewController: UITableViewDelegate, UITableViewDataSource {
                         let phone = r.closer
                         let name = r.blend
                         if phone.isEmpty || name.isEmpty || name == " " || phone == " " {
-                            ToastManager.showMessage(languageCode == "1100" ? "Format nama atau nomor telepon tidak benar." : "The name or phone number format is incorrect.")
+                            ToastManager.showMessage(languageCode == "1100" ? "Nomor ponsel salah, silakan pilih lagi." : "The phone number is incorrect, please select again.")
                             return
                         }
                         model.blend = name
@@ -337,4 +337,25 @@ extension ConnectViewController {
             }
         }
     }
+}
+
+extension ConnectViewController {
+    
+    private func popWlView() {
+        let popView = AppWlView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.confirmBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+            self.toTargetVc()
+        }
+    }
+    
 }
