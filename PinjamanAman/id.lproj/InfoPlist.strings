@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  PinjamanAman
+
+  Created by hekang on 2026/2/25.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "Pinjaman Aman meminta izin lokasi untuk mencocokkan layanan sesuai kebutuhan Anda. Dengan informasi lokasi, kami akan merekomendasikan produk pinjaman dan layanan eksklusif yang sesuai.";
+
+"NSCameraUsageDescription" = "Pinjaman Aman meminta izin kamera untuk menyelesaikan verifikasi identitas secara efisien. Verifikasi foto membantu menyederhanakan proses dan memperpendek waktu peninjauan.";
+
+"NSUserTrackingUsageDescription" = "Pinjaman Aman meminta izin IDFA untuk memberikan layanan personal kepada Anda. Kami menggunakan izin ini untuk konten yang tepat dan menjaga privasi serta keamanan data Anda dengan enkripsi.";
+
+"NSContactsUsageDescription" = "Pinjaman Aman meminta izin daftar kontak untuk verifikasi identitas dan pengecekan risiko. Hal ini membantu meningkatkan keamanan akun dan memastikan pengajuan pinjaman diproses dengan lancar.";

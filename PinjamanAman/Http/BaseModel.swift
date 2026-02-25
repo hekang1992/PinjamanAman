@@ -138,6 +138,7 @@ class viewsModel: Codable {
     var provimories: String?
     var rejuvenation: String?
     var tip: String?
+    var fhaeprov: String?
 }
 
 class forgivenessModel: Codable {

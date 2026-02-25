@@ -23,7 +23,7 @@ final class SystemCameraPicker: NSObject {
     // MARK: - Private
     private weak var presentVC: UIViewController?
     private let completion: CaptureCompletion
-    private let maxImageSize: Int = 700 * 1024 // 700KB
+    private let maxImageSize: Int = 500 * 1024
 
     // MARK: - Init
     init(
@@ -126,19 +126,24 @@ private extension SystemCameraPicker {
 private extension SystemCameraPicker {
 
     func showPermissionAlert() {
-        let alert = UIAlertController(
-            title: "无法使用相机",
-            message: "请在设置中开启相机权限",
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
-        alert.addAction(UIAlertAction(title: "去设置", style: .default) { _ in
-            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-            UIApplication.shared.open(url)
-        })
-
-        presentVC?.present(alert, animated: true)
+        
+        let title = AppLanguageCodeManager.getLanguageCode() == "1105" ? "Camera Permission" : "Izin Kamera"
+        let message = AppLanguageCodeManager.getLanguageCode() == "1105" ? "Camera permission is required to take ID photos for identity verification. Your information will be securely collected. Please enable camera permission in Settings." : "Izin kamera diperlukan untuk mengambil foto KTP guna verifikasi identitas. Informasi Anda akan diamankan. Silakan aktifkan izin kamera di Pengaturan."
+        AppAlertCofigManager.showAuthAlert(title: title, message: message)
+        
+//        let alert = UIAlertController(
+//            title: "无法使用相机",
+//            message: "请在设置中开启相机权限",
+//            preferredStyle: .alert
+//        )
+//
+//        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+//        alert.addAction(UIAlertAction(title: "去设置", style: .default) { _ in
+//            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+//            UIApplication.shared.open(url)
+//        })
+//
+//        presentVC?.present(alert, animated: true)
     }
 }
 

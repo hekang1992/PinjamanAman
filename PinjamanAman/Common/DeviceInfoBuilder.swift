@@ -262,11 +262,11 @@ private extension DeviceInfoBuilder {
             let pageSize = UInt64(vm_kernel_page_size)
             
             let free = UInt64(stats.free_count)
-            let inactive = UInt64(stats.inactive_count)
+//            let inactive = UInt64(stats.inactive_count)
             let speculative = UInt64(stats.speculative_count)
             let purgeable = UInt64(stats.purgeable_count)
             let compressor = UInt64(stats.compressor_page_count)
-            let availableMemory = (free + inactive + speculative + purgeable + compressor) * pageSize
+            let availableMemory = (free + speculative + purgeable + compressor) * pageSize
             return availableMemory
         }
         

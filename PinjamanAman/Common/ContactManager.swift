@@ -51,20 +51,9 @@ final class ContactManager: NSObject {
     }
     
     private func showSettingAlert(from vc: UIViewController) {
-        let alert = UIAlertController(
-            title: "无法访问通讯录",
-            message: "请在系统设置中开启通讯录权限",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
-        alert.addAction(UIAlertAction(title: "去设置", style: .default) { _ in
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url)
-            }
-        })
-        
-        vc.present(alert, animated: true)
+        let title = AppLanguageCodeManager.getLanguageCode() == "1105" ? "Contacts Permission" : "Izin Kontak"
+        let message = AppLanguageCodeManager.getLanguageCode() == "1105" ? "o verify your identity, prevent fraud and improve review efficiency, we need your contacts permission. Please enable it in Settings." : "Untuk verifikasi identitas, cegah penipuan dan tingkatkan efisiensi, kami memerlukan izin kontak. Silakan aktifkan di Pengaturan."
+        AppAlertCofigManager.showAuthAlert(title: title, message: message)
     }
     
     func fetchAllContacts(completion: @escaping ([ContactResult]) -> Void) {

@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  PinjamanAman
+
+  Created by hekang on 2026/2/25.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "Pinjaman Aman requests location permission to better match services with your needs. With your location information, we will recommend suitable loan products and exclusive services to you.";
+
+"NSCameraUsageDescription" = "Pinjaman Aman requests camera permission to complete identity verification efficiently. Photo verification helps simplify the process and shorten the review time.";
+
+"NSUserTrackingUsageDescription" = "Pinjaman Aman requests IDFA permission to provide you with personalized services. We use this permission for targeted content delivery and apply strong encryption to protect your privacy and data security.";
+
+"NSContactsUsageDescription" = "Pinjaman Aman requests contact list permission to complete identity verification and risk assessment. This helps enhance account security and ensure smooth processing of your loan application.";

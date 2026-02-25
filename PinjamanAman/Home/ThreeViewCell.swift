@@ -38,7 +38,6 @@ class ThreeViewCell: UITableViewCell {
         let productImageView = UIImageView()
         productImageView.layer.cornerRadius = 8
         productImageView.layer.masksToBounds = true
-        productImageView.backgroundColor = .systemGreen
         return productImageView
     }()
     
@@ -46,7 +45,7 @@ class ThreeViewCell: UITableViewCell {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .left
         nameLabel.textColor = UIColor.init(hexString: "#203D31")
-        nameLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(500))
+        nameLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(500))
         return nameLabel
     }()
     
@@ -123,7 +122,7 @@ class ThreeViewCell: UITableViewCell {
         
         productImageView.snp.makeConstraints { make in
             make.width.height.equalTo(26)
-            make.left.equalToSuperview().offset(15.pix())
+            make.left.equalToSuperview().offset(12.pix())
             make.top.equalToSuperview().offset(15.pix())
         }
         nameLabel.snp.makeConstraints { make in
@@ -143,12 +142,12 @@ class ThreeViewCell: UITableViewCell {
         }
         rateLabel.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
-            make.right.equalToSuperview().offset(-15)
+            make.right.equalToSuperview().offset(-13)
             make.height.equalTo(16)
         }
         applyBtn.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-20)
-            make.right.equalToSuperview().offset(-15.pix())
+            make.right.equalToSuperview().offset(-13)
             if AppLanguageCodeManager.getLanguageCode() == "1100" {
                 make.size.equalTo(CGSize(width: 140.pix(), height: 36.pix()))
             }else {

@@ -234,6 +234,10 @@ extension ConnectViewController: UITableViewDelegate, UITableViewDataSource {
                         model.blend = name
                         model.beliefs = phone
                         cell.nameFiled.text = String(format: "%@-%@", name, phone)
+                    }else {
+                        if let self = self {
+                            ToastManager.showMessage(languageCode == "1100" ? "Nomor ponsel salah, silakan pilih lagi." : "The phone number is incorrect, please select again.")
+                        }
                     }
                 }
             }

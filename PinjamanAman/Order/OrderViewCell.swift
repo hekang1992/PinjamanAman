@@ -21,8 +21,9 @@ class OrderViewCell: UITableViewCell {
             logoImageView.kf.setImage(with: URL(string: model.conflicts ?? ""))
             nameLabel.text = model.soften ?? ""
             
-            let applyStr = model.resolve ?? ""
+            let applyStr = model.views?.fhaeprov ?? ""
             applyBtn.setTitle(applyStr, for: .normal)
+            applyBtn.isHidden = applyStr.isEmpty
             
             oneLabel.text = model.economy ?? ""
             twoLabel.text = model.materials ?? ""

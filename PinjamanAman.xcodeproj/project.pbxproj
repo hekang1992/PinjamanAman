@@ -66,6 +66,7 @@
 		736F5BB42F3A167900F5BC15 /* OneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB32F3A167500F5BC15 /* OneView.swift */; };
 		736F5BB62F3A24E200F5BC15 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BB52F3A24E200F5BC15 /* CardListView.swift */; };
 		736F5BBC2F3A2E7000F5BC15 /* ProductStepViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BBB2F3A2E7000F5BC15 /* ProductStepViewCell.swift */; };
+		7378A15A2F4E86BE000B86B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7378A1582F4E86BE000B86B7 /* InfoPlist.strings */; };
 		73B8F6E92F3B7CD400409D13 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B8F6E82F3B7CD400409D13 /* ContactManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,8 @@
 		736F5BB32F3A167500F5BC15 /* OneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneView.swift; sourceTree = "<group>"; };
 		736F5BB52F3A24E200F5BC15 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		736F5BBB2F3A2E7000F5BC15 /* ProductStepViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStepViewCell.swift; sourceTree = "<group>"; };
+		7378A1592F4E86BE000B86B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7378A15B2F4E86D4000B86B7 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		73B8F6E82F3B7CD400409D13 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinjamanAman.release.xcconfig"; path = "Target Support Files/Pods-PinjamanAman/Pods-PinjamanAman.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +183,7 @@
 			children = (
 				7319D61E2F39A64600F24B7D /* Info.plist */,
 				7319D61D2F39A64600F24B7D /* Assets.xcassets */,
+				7378A1582F4E86BE000B86B7 /* InfoPlist.strings */,
 				7319D61C2F39A64600F24B7D /* AppDelegate.swift */,
 				7319D6202F39A64600F24B7D /* LaunchScreen.storyboard */,
 				7319D62D2F39A67800F24B7D /* PinjamanAman.entitlements */,
@@ -383,6 +387,7 @@
 			knownRegions = (
 				en,
 				Base,
+				id,
 			);
 			mainGroup = 7319D5FB2F39A64000F24B7D;
 			minimizedProjectReferenceProxies = 1;
@@ -402,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7319D6262F39A64600F24B7D /* Assets.xcassets in Resources */,
+				7378A15A2F4E86BE000B86B7 /* InfoPlist.strings in Resources */,
 				7319D6282F39A64600F24B7D /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,6 +536,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		7378A1582F4E86BE000B86B7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7378A1592F4E86BE000B86B7 /* en */,
+				7378A15B2F4E86D4000B86B7 /* id */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -540,19 +555,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8K9YQ3M42C;
+				DEVELOPMENT_TEAM = 57MBH2272N;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PinjamanAman/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pinjaman Aman";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSContactsUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Pinjaman Aman requests camera permission to complete identity verification efficiently. Photo verification helps simplify the process and shorten the review time.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Pinjaman Aman requests contact list permission to complete identity verification and risk assessment. This helps enhance account security and ensure smooth processing of your loan application.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Pinjaman Aman requests location permission to better match services with your needs. With your location information, we will recommend suitable loan products and exclusive services to you.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Pinjaman Aman requests IDFA permission to provide you with personalized services. We use this permission for targeted content delivery and apply strong encryption to protect your privacy and data security.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -564,10 +578,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.ksp1017;
+				PRODUCT_BUNDLE_IDENTIFIER = ll.leap.loan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = www.ksp1017;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -589,19 +602,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8K9YQ3M42C;
+				DEVELOPMENT_TEAM = 57MBH2272N;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PinjamanAman/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pinjaman Aman";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSContactsUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Pinjaman Aman requests camera permission to complete identity verification efficiently. Photo verification helps simplify the process and shorten the review time.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Pinjaman Aman requests contact list permission to complete identity verification and risk assessment. This helps enhance account security and ensure smooth processing of your loan application.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Pinjaman Aman requests location permission to better match services with your needs. With your location information, we will recommend suitable loan products and exclusive services to you.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Pinjaman Aman requests IDFA permission to provide you with personalized services. We use this permission for targeted content delivery and apply strong encryption to protect your privacy and data security.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -613,10 +625,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.ksp1017;
+				PRODUCT_BUNDLE_IDENTIFIER = ll.leap.loan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = www.ksp1017;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -636,6 +647,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -699,6 +711,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

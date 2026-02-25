@@ -70,7 +70,6 @@ class ProductStepViewCell: UITableViewCell {
         let logoImageView = UIImageView()
         logoImageView.layer.cornerRadius = 8
         logoImageView.layer.masksToBounds = true
-        logoImageView.backgroundColor = .systemBlue
         return logoImageView
     }()
     
