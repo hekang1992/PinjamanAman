@@ -76,6 +76,7 @@ class strikeModel: Codable {
     var spirit: String?
     var laugh: Int?
     var word: String?
+    var mind: String?
 }
 
 class confideModel: Codable {

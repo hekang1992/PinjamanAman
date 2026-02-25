@@ -350,12 +350,17 @@ extension BasicViewController {
             }
             
             let orderID = self?.cardModel?.good ?? ""
-            let paras = ["blend": name,
+            var paras = ["blend": name,
                          "thinking": idNum,
                          "old": time,
                          "reevaluate": orderID,
                          "beliefs": UserSessionManager.shared.phone ?? "",
                          "transform": self?.cardModel?.opening ?? ""]
+            
+            if self?.languageCode == "1105" {
+                paras["acceptance"] = "11"
+            }
+            
             self?.saveName(paras: paras)
         }
     }
@@ -366,7 +371,15 @@ extension BasicViewController {
     
     private func saveName(paras: [String: String]) {
         LoadingView.shared.show()
-        NetworkManager.post(url: "/patkan/doing/deeply/force", params: paras, responseType: BaseModel.self) { [weak self] result in
+        
+        var pageUrl = ""
+        if languageCode == "1100" {
+            pageUrl = "/patkan/doing/deeply/force"
+        }else {
+            pageUrl = "/patkan/fleeing/discussing/where"
+        }
+        
+        NetworkManager.post(url: pageUrl, params: paras, responseType: BaseModel.self) { [weak self] result in
             switch result {
             case .success(let success):
                 LoadingView.shared.hide()

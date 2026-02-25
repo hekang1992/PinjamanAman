@@ -16,7 +16,7 @@ class ProductStepViewCell: UITableViewCell {
             guard let model = model else { return }
             logoImageView.kf.setImage(with: URL(string: model.spirit ?? ""))
             nameLabel.text = model.strain ?? ""
-            descLabel.text = model.cultivated ?? ""
+            descLabel.text = model.mind ?? ""
             let laugh = model.laugh ?? 0
             
             stepLabel.textColor = laugh == 1 ? UIColor.init(hexString: "#267B3F") : UIColor.init(hexString: "#B0B4B3")

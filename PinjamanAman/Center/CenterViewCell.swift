@@ -23,7 +23,7 @@ class CenterViewCell: UITableViewCell {
         let bgImageView = UIImageView()
         bgImageView.layer.cornerRadius = 8
         bgImageView.layer.masksToBounds = true
-        bgImageView.backgroundColor = .systemGreen
+//        bgImageView.backgroundColor = .systemGreen
         return bgImageView
     }()
     

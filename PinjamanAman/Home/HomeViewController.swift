@@ -204,17 +204,6 @@ extension HomeViewController {
             }
         }
         
-        let onetime = UserDefaults.standard.object(forKey: "start_time") as? String ?? ""
-        let twotime = UserDefaults.standard.object(forKey: "end_time") as? String ?? ""
-        
-        if !onetime.isEmpty && !twotime.isEmpty {
-            self.lycCocelleInfo(type: "1",
-                                orderID: "",
-                                productID: "",
-                                onetime: onetime,
-                                twotime: twotime)
-        }
-        
         if languageCode == "1100" {
             singleLocationManager.requestCurrentLocation { params in
                 if let params = params {
@@ -245,6 +234,20 @@ extension HomeViewController {
                     case .failure(_):
                         break
                     }
+                }
+            }
+            
+            let onetime = UserDefaults.standard.object(forKey: "start_time") as? String ?? ""
+            let twotime = UserDefaults.standard.object(forKey: "end_time") as? String ?? ""
+            
+            if !onetime.isEmpty && !twotime.isEmpty {
+                Task {
+                    try? await Task.sleep(nanoseconds: 3_000_00_000)
+                    self.lycCocelleInfo(type: "1",
+                                        orderID: "",
+                                        productID: "",
+                                        onetime: onetime,
+                                        twotime: twotime)
                 }
             }
         }

@@ -76,14 +76,10 @@ class PopSaveInfoView: BaseView {
         return descLabel
     }()
     
-    lazy var oneBtn: UIButton = {
-        let oneBtn = UIButton(type: .custom)
-        oneBtn.setTitle(languageCode == "1100" ? "Nama sesuai KTP" : "Real name", for: .normal)
-        oneBtn.setTitleColor(UIColor.init(hexString: "#B0B4B3"), for: .normal)
-        oneBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        oneBtn.setImage(UIImage(named: "cc_one_image"), for: .normal)
-        oneBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
-        oneBtn.titleLabel?.textAlignment = .left
+    lazy var oneBtn: NameListView = {
+        let oneBtn = NameListView()
+        oneBtn.bgImageView.image = UIImage(named: "cc_one_image")
+        oneBtn.nameLabel.text = languageCode == "1100" ? "Nama sesuai KTP" : "Real name"
         return oneBtn
     }()
     
@@ -103,14 +99,10 @@ class PopSaveInfoView: BaseView {
         return lineView
     }()
     
-    lazy var twoBtn: UIButton = {
-        let twoBtn = UIButton(type: .custom)
-        twoBtn.setTitle(languageCode == "1100" ? "Nomor KTP" : "ID number", for: .normal)
-        twoBtn.setTitleColor(UIColor.init(hexString: "#B0B4B3"), for: .normal)
-        twoBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        twoBtn.setImage(UIImage(named: "cc_two_image"), for: .normal)
-        twoBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
-        twoBtn.titleLabel?.textAlignment = .left
+    lazy var twoBtn: NameListView = {
+        let twoBtn = NameListView()
+        twoBtn.bgImageView.image = UIImage(named: "cc_two_image")
+        twoBtn.nameLabel.text = languageCode == "1100" ? "Nomor KTP" : "ID number"
         return twoBtn
     }()
     
@@ -130,14 +122,10 @@ class PopSaveInfoView: BaseView {
         return tlineView
     }()
     
-    lazy var threeBtn: UIButton = {
-        let threeBtn = UIButton(type: .custom)
-        threeBtn.setTitle(languageCode == "1100" ? "Ulang tahun" : "Birthday", for: .normal)
-        threeBtn.setTitleColor(UIColor.init(hexString: "#B0B4B3"), for: .normal)
-        threeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        threeBtn.setImage(UIImage(named: "cc_three_image"), for: .normal)
-        threeBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
-        threeBtn.titleLabel?.textAlignment = .left
+    lazy var threeBtn: NameListView = {
+        let threeBtn = NameListView()
+        threeBtn.bgImageView.image = UIImage(named: "cc_three_image")
+        threeBtn.nameLabel.text = languageCode == "1100" ? "Ulang tahun" : "Birthday"
         return threeBtn
     }()
     

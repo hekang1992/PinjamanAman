@@ -57,6 +57,7 @@
 		7363AB092F3B25CC00E8002F /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB082F3B25CC00E8002F /* ConnectViewController.swift */; };
 		7363AB0B2F3B25ED00E8002F /* ToYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB0A2F3B25ED00E8002F /* ToYouViewController.swift */; };
 		7363AB0D2F3B272900E8002F /* ConnectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7363AB0C2F3B272900E8002F /* ConnectViewCell.swift */; };
+		736D7C562F4EF8D300CD6F14 /* NameListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D7C552F4EF8D300CD6F14 /* NameListView.swift */; };
 		736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */; };
 		736F5BAA2F3A082F00F5BC15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */; };
 		736F5BAC2F3A0A9400F5BC15 /* AppHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */; };
@@ -125,6 +126,7 @@
 		7363AB082F3B25CC00E8002F /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		7363AB0A2F3B25ED00E8002F /* ToYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToYouViewController.swift; sourceTree = "<group>"; };
 		7363AB0C2F3B272900E8002F /* ConnectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewCell.swift; sourceTree = "<group>"; };
+		736D7C552F4EF8D300CD6F14 /* NameListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameListView.swift; sourceTree = "<group>"; };
 		736F5BA72F3A07B200F5BC15 /* DeepLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTarget.swift; sourceTree = "<group>"; };
 		736F5BA92F3A082F00F5BC15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		736F5BAB2F3A0A9400F5BC15 /* AppHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeadView.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				7363AB042F3B106400E8002F /* EnterTextCell.swift */,
 				7363AB062F3B1A9700E8002F /* PopEnmuView.swift */,
 				7363AB0C2F3B272900E8002F /* ConnectViewCell.swift */,
+				736D7C552F4EF8D300CD6F14 /* NameListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				7319D6612F39D33D00F24B7D /* CenterView.swift in Sources */,
 				7319D6532F39B4D500F24B7D /* NetworkManager.swift in Sources */,
 				7363AB0B2F3B25ED00E8002F /* ToYouViewController.swift in Sources */,
+				736D7C562F4EF8D300CD6F14 /* NameListView.swift in Sources */,
 				736F5BA82F3A07B200F5BC15 /* DeepLinkTarget.swift in Sources */,
 				7319D6592F39BFAF00F24B7D /* LoginView.swift in Sources */,
 				730D428E2F3C6491001E5D2F /* ProvicesModelManager.swift in Sources */,
@@ -556,7 +560,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -580,10 +584,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.ksp1017;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = www.ksp1017;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -606,7 +610,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -630,10 +634,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.ksp1017;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = www.ksp1017;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

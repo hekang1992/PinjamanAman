@@ -47,7 +47,15 @@ class BaseTabBarController: UITabBarController {
 
         viewControllers = [homeNav, orderNav, meNav]
 
-        tabBar.isTranslucent = false
+//        tabBar.isTranslucent = false
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithDefaultBackground()
+        self.tabBar.standardAppearance = tabBarAppearance
+        if #available(iOS 15.0, *) {
+            self.tabBar.scrollEdgeAppearance = tabBarAppearance
+        }
+        
     }
 }
 

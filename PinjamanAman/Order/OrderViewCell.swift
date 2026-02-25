@@ -231,7 +231,7 @@ class OrderViewCell: UITableViewCell {
         typeLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15.pix())
             make.left.equalToSuperview().offset(13.pix())
-            make.height.equalTo(12)
+            make.height.equalTo(16)
         }
         
         typeImageView.snp.makeConstraints { make in
