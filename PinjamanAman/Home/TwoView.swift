@@ -152,7 +152,7 @@ extension TwoView: UITableViewDelegate, UITableViewDataSource {
             let headView = UIView()
             let nameLabel = UILabel()
             nameLabel.textAlignment = .left
-            nameLabel.text = "Featured products"
+            nameLabel.text = "Produk unggulan"
             nameLabel.textColor = UIColor.init(hexString: "#22372E")
             nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             headView.addSubview(nameLabel)

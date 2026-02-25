@@ -108,7 +108,7 @@ class PersonalViewController: BaseViewController {
             
         }
         
-        start_time = String(Date().timeIntervalSince1970)
+        start_time = String(Int(Date().timeIntervalSince1970))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,7 +121,7 @@ class PersonalViewController: BaseViewController {
 extension PersonalViewController {
     
     @objc func nextBtnClick() {
-        end_time = String(Date().timeIntervalSince1970)
+        end_time = String(Int(Date().timeIntervalSince1970))
         var params = ["transform": self.cardModel?.opening ?? ""]
         for model in modelArray {
             let key = model.partner ?? ""

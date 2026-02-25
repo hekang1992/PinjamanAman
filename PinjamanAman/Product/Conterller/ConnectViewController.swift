@@ -106,7 +106,7 @@ class ConnectViewController: BaseViewController {
             
         }
         
-        start_time = String(Date().timeIntervalSince1970)
+        start_time = String(Int(Date().timeIntervalSince1970))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +119,7 @@ class ConnectViewController: BaseViewController {
 extension ConnectViewController {
     
     @objc func nextBtnClick() {
-        end_time = String(Date().timeIntervalSince1970)
+        end_time = String(Int(Date().timeIntervalSince1970))
         var params = [String: String]()
         var parasArray: [[String: String]] = []
         for model in modelArray {
