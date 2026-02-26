@@ -242,7 +242,7 @@ extension HomeViewController {
             
             if !onetime.isEmpty && !twotime.isEmpty {
                 Task {
-                    try? await Task.sleep(nanoseconds: 3_000_00_000)
+                    try? await Task.sleep(nanoseconds: 3_000_000_000)
                     self.lycCocelleInfo(type: "1",
                                         orderID: "",
                                         productID: "",
