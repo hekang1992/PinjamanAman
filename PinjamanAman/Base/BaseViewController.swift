@@ -27,7 +27,7 @@ class BaseViewController: UIViewController {
         footView.layer.cornerRadius = 20
         footView.layer.masksToBounds = true
         footView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        footView.backgroundColor = UIColor.white
+        footView.backgroundColor = UIColor.init(hexString: "#F6F6F4")
         return footView
     }()
     
