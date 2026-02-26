@@ -7,6 +7,9 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 class CenterView: BaseView {
     
@@ -15,6 +18,10 @@ class CenterView: BaseView {
     var cellBlock: ((confideModel) -> Void)?
     
     var tapBlock: ((String) -> Void)?
+    
+    var tapPrivacyBlock: ((String) -> Void)?
+    
+    private let disposeBag = DisposeBag()
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
@@ -214,12 +221,24 @@ extension CenterView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView()
         let bgImageView = UIImageView()
-        bgImageView.image = languageCode == "1100" ? UIImage(named: "id_c_de_image") : UIImage(named: "id_c_de_image")
+        bgImageView.image = languageCode == "1100" ? UIImage(named: "id_c_de_image") : UIImage(named: "en_c_de_image")
         headView.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(CGSize(width: 375.pix(), height: 120.pix()))
         }
+        
+        bgImageView
+            .rx
+            .tapGesture()
+            .when(.recognized)
+            .debounce(.microseconds(200), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let pageUrl = h5_url + "/soulEmotions"
+                self.tapPrivacyBlock?(pageUrl)
+        }).disposed(by: disposeBag)
+        
         return headView
     }
     

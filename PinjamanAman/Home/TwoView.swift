@@ -114,7 +114,8 @@ class TwoView: BaseView {
         }
         tableView.snp.makeConstraints { make in
             make.top.equalTo(bgView.snp.bottom).offset(-15)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
     

@@ -8,6 +8,7 @@ target 'PinjamanAman' do
   # Pods for PinjamanAman
   pod 'SnapKit'
   pod 'RxSwift'
+  pod 'RxGesture'
   pod 'RxCocoa'
   pod 'Kingfisher'
   pod 'Alamofire'

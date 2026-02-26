@@ -47,6 +47,10 @@ class CenterViewController: BaseViewController {
             self.navigationController?.pushViewController(listVc, animated: true)
         }
         
+        centerView.tapPrivacyBlock = { [weak self] pageUrl in
+            self?.goH5WebVc(pageUrl: pageUrl)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -156,7 +156,8 @@ class OrderViewController: BaseViewController {
         
         footView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.left.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         footView.addSubview(emptyView)

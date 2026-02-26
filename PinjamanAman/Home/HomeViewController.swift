@@ -197,8 +197,8 @@ extension HomeViewController {
         
         if languageCode == "1100" {
             if status == .denied || status == .restricted {
-                let title = languageCode == "1100" ? "Location Permission" : "Izin Lokasi"
-                let message = languageCode == "1100" ? "To complete identity verification, we need your location permission. It will only be used for this verification to keep your application secure. Please enable location permission in Settings to continue." : "Untuk menyelesaikan verifikasi identitas, kami memerlukan izin lokasi Anda. Izin ini hanya digunakan untuk verifikasi ini. Silakan aktifkan izin lokasi di Pengaturan untuk melanjutkan."
+                let title = languageCode == "1105" ? "Location Permission" : "Izin Lokasi"
+                let message = languageCode == "1105" ? "To complete identity verification, we need your location permission. It will only be used for this verification to keep your application secure. Please enable location permission in Settings to continue." : "Untuk menyelesaikan verifikasi identitas, kami memerlukan izin lokasi Anda. Izin ini hanya digunakan untuk verifikasi ini. Silakan aktifkan izin lokasi di Pengaturan untuk melanjutkan."
                 AppAlertCofigManager.showAuthAlert(title: title, message: message)
                 return
             }
