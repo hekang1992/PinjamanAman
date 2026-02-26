@@ -39,6 +39,8 @@ class H5WebViewController: BaseViewController {
 extension H5WebViewController {
     
     private func setupUI() {
+        
+        view.backgroundColor = .white
         view.addSubview(bgView)
         bgView.snp.makeConstraints { make in
             make.top.leading.right.equalToSuperview()
@@ -111,7 +113,8 @@ extension H5WebViewController {
         
         footView.addSubview(webView)
         webView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.left.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)

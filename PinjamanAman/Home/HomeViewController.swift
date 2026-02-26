@@ -269,6 +269,13 @@ extension HomeViewController {
                     }else if pageUrl.contains("http") {
                         self.goH5WebVc(pageUrl: pageUrl)
                     }
+                }else if partner == "-2" {
+                    ToastManager.showMessage(success.reason ?? "")
+                    UserSessionManager.shared.clearLoginInfo()
+                    Task {
+                        try? await Task.sleep(nanoseconds: 500_000_000)
+                        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
+                    }
                 }
             case .failure(_):
                 LoadingView.shared.hide()

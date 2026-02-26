@@ -135,7 +135,7 @@ extension TwoView: UITableViewDelegate, UITableViewDataSource {
             return 0
             
         case "appreciate5":
-            return 35.pix()
+            return 40.pix()
             
         default:
             return 0
@@ -160,7 +160,7 @@ extension TwoView: UITableViewDelegate, UITableViewDataSource {
             nameLabel.snp.makeConstraints { make in
                 make.left.equalToSuperview()
                 make.right.equalToSuperview().offset(-20)
-                make.top.equalToSuperview()
+                make.top.equalToSuperview().offset(10.pix())
             }
             return headView
             
