@@ -7,8 +7,13 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 class PopAlertFaceView: BaseView {
+    
+    let disposeBag = DisposeBag()
     
     var cancelBlock: (() -> Void)?
     var sureBlock: (() -> Void)?
@@ -28,32 +33,42 @@ class PopAlertFaceView: BaseView {
         return cancelBtn
     }()
     
-    lazy var sureBtn: UIButton = {
-        let sureBtn = UIButton(type: .custom)
-        sureBtn.addTarget(self, action: #selector(sureBtnClick), for: .touchUpInside)
-        return sureBtn
-    }()
-
+//    lazy var sureBtn: UIButton = {
+//        let sureBtn = UIButton(type: .custom)
+//        sureBtn.addTarget(self, action: #selector(sureBtnClick), for: .touchUpInside)
+//        return sureBtn
+//    }()
+//    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
-        bgImageView.addSubview(sureBtn)
+//        bgImageView.addSubview(sureBtn)
         addSubview(cancelBtn)
         
         bgImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(CGSize(width: 337.pix(), height: 458.pix()))
         }
-        sureBtn.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-33)
-            make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 280.pix(), height: 46.pix()))
-        }
+//        sureBtn.snp.makeConstraints { make in
+//            make.bottom.equalToSuperview().offset(-33)
+//            make.centerX.equalToSuperview()
+//            make.size.equalTo(CGSize(width: 280.pix(), height: 46.pix()))
+//        }
         cancelBtn.snp.makeConstraints { make in
             make.bottom.equalTo(bgImageView.snp.top).offset(-15)
             make.right.equalTo(bgImageView)
             make.width.height.equalTo(22)
         }
+        
+        bgImageView
+            .rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.sureBlock?()
+            }).disposed(by: disposeBag)
+        
     }
     
     @MainActor required init?(coder: NSCoder) {
