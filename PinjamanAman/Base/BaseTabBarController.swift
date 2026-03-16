@@ -63,18 +63,32 @@ class BaseTabBarController: UITabBarController {
 extension BaseTabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
-        let status = CLLocationManager().authorizationStatus
-        let languageCode = AppLanguageCodeManager.getLanguageCode()
-        if languageCode == "1100" {
-            if status == .denied || status == .restricted {
-                let title = languageCode == "1105" ? "Location Permission" : "Izin Lokasi"
-                let message = languageCode == "1105" ? "To complete identity verification, we need your location permission. It will only be used for this verification to keep your application secure. Please enable location permission in Settings to continue." : "Untuk menyelesaikan verifikasi identitas, kami memerlukan izin lokasi Anda. Izin ini hanya digunakan untuk verifikasi ini. Silakan aktifkan izin lokasi di Pengaturan untuk melanjutkan."
-                AppAlertCofigManager.showAuthAlert(title: title, message: message)
-                return false
-            }
+//        let status = CLLocationManager().authorizationStatus
+//        let languageCode = AppLanguageCodeManager.getLanguageCode()
+//        if languageCode == "1100" {
+//            if status == .denied || status == .restricted {
+//                let title = languageCode == "1105" ? "Location Permission" : "Izin Lokasi"
+//                let message = languageCode == "1105" ? "To complete identity verification, we need your location permission. It will only be used for this verification to keep your application secure. Please enable location permission in Settings to continue." : "Untuk menyelesaikan verifikasi identitas, kami memerlukan izin lokasi Anda. Izin ini hanya digunakan untuk verifikasi ini. Silakan aktifkan izin lokasi di Pengaturan untuk melanjutkan."
+//                AppAlertCofigManager.showAuthAlert(title: title, message: message)
+//                return false
+//            }
+//        }
+        
+        if !UserSessionManager.shared.isLoggedIn {
+            self.toLoginVc()
+            return false
         }
         
         return true
     }
 }
 
+extension BaseTabBarController {
+    
+    func toLoginVc() {
+        let loginVc = BaseNavigationController(rootViewController: LoginViewController())
+        loginVc.modalPresentationStyle = .overFullScreen
+        self.present(loginVc, animated: true)
+    }
+    
+}

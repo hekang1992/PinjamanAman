@@ -10,6 +10,7 @@ import SnapKit
 import MJRefresh
 import FBSDKCoreKit
 import CoreLocation
+import AppTrackingTransparency
 
 class HomeViewController: BaseViewController {
     
@@ -43,6 +44,10 @@ class HomeViewController: BaseViewController {
         self.oneView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             self.homeDataInfo()
+            if UserSessionManager.shared.isLoggedIn {
+                self.uoloadInfo()
+                self.deviceInfo()
+            }
         })
         
         self.oneView.tapBlock = { [weak self] model in
@@ -60,6 +65,10 @@ class HomeViewController: BaseViewController {
         self.twoView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             self.homeDataInfo()
+            if UserSessionManager.shared.isLoggedIn {
+                self.uoloadInfo()
+                self.deviceInfo()
+            }
         })
         
         self.twoView.tapCellBlock = { [weak self] model in
@@ -79,49 +88,77 @@ class HomeViewController: BaseViewController {
         }
         
         
+//        Task {
+//            let up_type = UserDefaults.standard.object(forKey: "idfa_app") as? String ?? ""
+//            if up_type == "1" {
+//                await getAdcInfo()
+//            }else {
+//                await uploadIDFAInfo()
+//                await getAdcInfo()
+//            }
+//        }
+        
         Task {
-            let up_type = UserDefaults.standard.object(forKey: "idfa_app") as? String ?? ""
-            if up_type == "1" {
-                await getAdcInfo()
-            }else {
-                await uploadIDFAInfo()
-                await getAdcInfo()
+            await getAdcInfo()
+        }
+        
+        if UserSessionManager.shared.isLoggedIn {
+//            singleLocationManager.requestCurrentLocation { params in }
+            
+            let status = CLLocationManager().authorizationStatus
+            
+            if languageCode == "1100" {
+                if status == .denied || status == .restricted {
+                    let title = languageCode == "1105" ? "Location Permission" : "Izin Lokasi"
+                    let message = languageCode == "1105" ? "To complete identity verification, we need your location permission. It will only be used for this verification to keep your application secure. Please enable location permission in Settings to continue." : "Untuk menyelesaikan verifikasi identitas, kami memerlukan izin lokasi Anda. Izin ini hanya digunakan untuk verifikasi ini. Silakan aktifkan izin lokasi di Pengaturan untuk melanjutkan."
+                    AppAlertCofigManager.showLocationAuthAlert(title: title, message: message)
+                    return
+                }
             }
+            
         }
-        
-        singleLocationManager.requestCurrentLocation { params in
-            //            if let params = params {
-            //                NetworkManager.post(url: "/patkan/survival/relationships/companionship",
-            //                                    params: params,
-            //                                    responseType: BaseModel.self) { result in
-            //                    switch result {
-            //                    case .success(_):
-            //                        break
-            //                    case .failure(_):
-            //                        break
-            //                    }
-            //                }
-            //            }
-        }
-        
-        //        DeviceInfoBuilder.shared.build { result in
-        //            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
-        //                return
-        //            }
-        //            let base64String = jsonData.base64EncodedString()
-        //            print("Base64：")
-        //            print(base64String)
-        //        }
-        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.homeDataInfo()
+        if UserSessionManager.shared.isLoggedIn {
+            self.uoloadInfo()
+            self.deviceInfo()
+        }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Task{
+            try? await Task.sleep(nanoseconds: 800_000_000)
+            await self.requestIDFAPermission()
+        }
+    }
+    
 }
 
 extension HomeViewController {
+    
+    private func requestIDFAPermission() async {
+        
+        guard #available(iOS 14, *) else { return }
+        
+        let status = await ATTrackingManager.requestTrackingAuthorization()
+        
+        switch status {
+        case .authorized, .denied, .notDetermined:
+            break
+            
+        case .restricted:
+            break
+            
+        @unknown default:
+            break
+        }
+        
+    }
     
     private func uploadIDFAInfo() async {
         let params = ["shade": AppIdentifierManager.getIDFV(),
@@ -153,6 +190,43 @@ extension HomeViewController {
             UIApplication.shared,
             didFinishLaunchingWithOptions: nil
         )
+    }
+    
+    private func uoloadInfo() {
+        singleLocationManager.requestCurrentLocation { params in
+            if let params = params {
+                NetworkManager.post(url: "/patkan/survival/relationships/companionship",
+                                    params: params,
+                                    responseType: BaseModel.self) { result in
+                    switch result {
+                    case .success(_):
+                        break
+                    case .failure(_):
+                        break
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    private func deviceInfo() {
+        DeviceInfoBuilder.shared.build { result in
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
+                return
+            }
+            let base64String = jsonData.base64EncodedString()
+            NetworkManager.post(url: "/patkan/journey/granite/conclusion",
+                                params: ["logic": base64String],
+                                responseType: BaseModel.self) { result in
+                switch result {
+                case .success(_):
+                    break
+                case .failure(_):
+                    break
+                }
+            }
+        }
     }
     
     private func homeDataInfo() {
@@ -193,63 +267,57 @@ extension HomeViewController {
     
     private func clickProductInfo(productID: String) {
         
-        let status = CLLocationManager().authorizationStatus
-        
-        if languageCode == "1100" {
-            if status == .denied || status == .restricted {
-                let title = languageCode == "1105" ? "Location Permission" : "Izin Lokasi"
-                let message = languageCode == "1105" ? "To complete identity verification, we need your location permission. It will only be used for this verification to keep your application secure. Please enable location permission in Settings to continue." : "Untuk menyelesaikan verifikasi identitas, kami memerlukan izin lokasi Anda. Izin ini hanya digunakan untuk verifikasi ini. Silakan aktifkan izin lokasi di Pengaturan untuk melanjutkan."
-                AppAlertCofigManager.showAuthAlert(title: title, message: message)
-                return
-            }
+        if !UserSessionManager.shared.isLoggedIn {
+            self.toLoginVc()
+            return
         }
         
         if languageCode == "1100" {
-            singleLocationManager.requestCurrentLocation { params in
-                if let params = params {
-                    NetworkManager.post(url: "/patkan/survival/relationships/companionship",
-                                        params: params,
-                                        responseType: BaseModel.self) { result in
-                        switch result {
-                        case .success(_):
-                            break
-                        case .failure(_):
-                            break
-                        }
-                    }
-                }
-            }
+//            singleLocationManager.requestCurrentLocation { params in
+//                if let params = params {
+//                    NetworkManager.post(url: "/patkan/survival/relationships/companionship",
+//                                        params: params,
+//                                        responseType: BaseModel.self) { result in
+//                        switch result {
+//                        case .success(_):
+//                            break
+//                        case .failure(_):
+//                            break
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            DeviceInfoBuilder.shared.build { result in
+//                guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
+//                    return
+//                }
+//                let base64String = jsonData.base64EncodedString()
+//                NetworkManager.post(url: "/patkan/journey/granite/conclusion",
+//                                    params: ["logic": base64String],
+//                                    responseType: BaseModel.self) { result in
+//                    switch result {
+//                    case .success(_):
+//                        break
+//                    case .failure(_):
+//                        break
+//                    }
+//                }
+//            }
             
-            DeviceInfoBuilder.shared.build { result in
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []) else {
-                    return
-                }
-                let base64String = jsonData.base64EncodedString()
-                NetworkManager.post(url: "/patkan/journey/granite/conclusion",
-                                    params: ["logic": base64String],
-                                    responseType: BaseModel.self) { result in
-                    switch result {
-                    case .success(_):
-                        break
-                    case .failure(_):
-                        break
-                    }
-                }
-            }
-            
-            let onetime = UserDefaults.standard.object(forKey: "start_time") as? String ?? ""
-            let twotime = UserDefaults.standard.object(forKey: "end_time") as? String ?? ""
-            
-            if !onetime.isEmpty && !twotime.isEmpty {
-                Task {
-                    try? await Task.sleep(nanoseconds: 3_000_000_000)
-                    self.lycCocelleInfo(type: "1",
-                                        orderID: "",
-                                        productID: "",
-                                        onetime: onetime,
-                                        twotime: twotime)
-                }
-            }
+//            let onetime = UserDefaults.standard.object(forKey: "start_time") as? String ?? ""
+//            let twotime = UserDefaults.standard.object(forKey: "end_time") as? String ?? ""
+//            
+//            if !onetime.isEmpty && !twotime.isEmpty {
+//                Task {
+//                    try? await Task.sleep(nanoseconds: 3_000_000_000)
+//                    self.lycCocelleInfo(type: "1",
+//                                        orderID: "",
+//                                        productID: "",
+//                                        onetime: onetime,
+//                                        twotime: twotime)
+//                }
+//            }
         }
         
         LoadingView.shared.show()
@@ -300,39 +368,6 @@ extension HomeViewController {
         }
     }
     
-    private func lycCocelleInfo(type: String,
-                                orderID: String,
-                                productID: String,
-                                onetime: String,
-                                twotime: String) {
-        let reminder = LocationInfoStorage.storedLongitude
-        let order = LocationInfoStorage.storedLatitude
-        let params = ["food": type,
-                      "good": orderID,
-                      "possessions": productID,
-                      "entire": AppIdentifierManager.getIDFV(),
-                      "foundation": AppIdentifierManager.getIDFA() ?? "",
-                      "plant": onetime,
-                      "sustains": twotime,
-                      "reminder": reminder,
-                      "order": order]
-        NetworkManager.post(url: "/patkan/overwhelming/nostalgia/signs",
-                            params: params,
-                            responseType: BaseModel.self) { result in
-            switch result {
-            case .success(let success):
-                let partner = success.partner ?? ""
-                if ["0","00"].contains(partner) {
-                    UserDefaults.standard.removeObject(forKey: "start_time")
-                    UserDefaults.standard.removeObject(forKey: "end_time")
-                }
-                
-            case .failure(_):
-                break
-            }
-        }
-    }
-    
 }
 
 class AppAlertCofigManager {
@@ -358,6 +393,49 @@ class AppAlertCofigManager {
             }
             keyWindow.rootViewController?.present(alert, animated: true)
             
+        }
+    }
+    
+    static func showLocationAuthAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            let currentDate = Date()
+            let calendar = Calendar.current
+            
+            let lastShownDate = UserDefaults.standard.object(forKey: "lastAuthAlertDate") as? Date
+            
+            if let lastDate = lastShownDate {
+                if calendar.isDate(lastDate, inSameDayAs: currentDate) {
+                    return
+                }
+            }
+            
+            UserDefaults.standard.set(currentDate, forKey: "lastAuthAlertDate")
+            
+            let alert = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .alert
+            )
+            
+            alert.addAction(UIAlertAction(
+                title: AppLanguageCodeManager.getLanguageCode() == "1100" ? "Batalkan" : "Cancel",
+                style: .cancel
+            ))
+            
+            alert.addAction(UIAlertAction(
+                title: AppLanguageCodeManager.getLanguageCode() == "1100" ? "Masuk ke Pengaturan" : "Go to Settings",
+                style: .default
+            ) { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            })
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let keyWindow = windowScene.windows.first(where: \.isKeyWindow) else {
+                return
+            }
+            keyWindow.rootViewController?.present(alert, animated: true)
         }
     }
     

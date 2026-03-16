@@ -18,7 +18,10 @@ class LoginViewController: BaseViewController {
     }()
     
     private var timer: Timer?
+    
     private var countDown = 60
+    
+    private let singleLocationManager = SingleLocationService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,22 +46,31 @@ class LoginViewController: BaseViewController {
             self.goH5WebVc(pageUrl: pageUrl)
         }
         
+        loginView.backblock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.loginView.phoneListView.phoneFiled.becomeFirstResponder()
         
-        let phone = self.loginView.phoneListView.phoneFiled.text ?? ""
-        
-        if phone.isEmpty {
-            
-            Task{
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
-                await self.requestIDFAPermission()
-            }
-            
+        Task{
+            try? await Task.sleep(nanoseconds: 800_000_000)
+            singleLocationManager.requestCurrentLocation { _ in }
         }
+        
+//        let phone = self.loginView.phoneListView.phoneFiled.text ?? ""
+//        
+//        if phone.isEmpty {
+//            
+//            Task{
+//                try? await Task.sleep(nanoseconds: 1_000_000_000)
+//                await self.requestIDFAPermission()
+//            }
+//            
+//        }
         
     }
     
@@ -71,42 +83,42 @@ class LoginViewController: BaseViewController {
 
 extension LoginViewController {
     
-    private func requestIDFAPermission() async {
-        
-        guard #available(iOS 14, *) else { return }
-        
-        let status = await ATTrackingManager.requestTrackingAuthorization()
-        
-        switch status {
-        case .authorized, .denied, .notDetermined:
-            await uploadIDFAInfo()
-            
-        case .restricted:
-            break
-            
-        @unknown default:
-            break
-        }
-        
-    }
-    
-    private func uploadIDFAInfo() async {
-        let params = ["shade": AppIdentifierManager.getIDFV(),
-                      "respiration": AppIdentifierManager.getIDFA() ?? ""]
-        NetworkManager.post(url: "/patkan/sophistication/especially/dream",
-                            params: params,
-                            responseType: BaseModel.self) { [weak self] result in
-            switch result {
-            case .success(let success):
-                let partner = success.partner ?? ""
-                if ["0", "00"].contains(partner) {
-                    self?.configureFacebookSDK(with: success.logic?.analysisability ?? analysisabilityModel())
-                }
-            case .failure(_):
-                break
-            }
-        }
-    }
+//    private func requestIDFAPermission() async {
+//        
+//        guard #available(iOS 14, *) else { return }
+//        
+//        let status = await ATTrackingManager.requestTrackingAuthorization()
+//        
+//        switch status {
+//        case .authorized, .denied, .notDetermined:
+//            await uploadIDFAInfo()
+//            
+//        case .restricted:
+//            break
+//            
+//        @unknown default:
+//            break
+//        }
+//        
+//    }
+//    
+//    private func uploadIDFAInfo() async {
+//        let params = ["shade": AppIdentifierManager.getIDFV(),
+//                      "respiration": AppIdentifierManager.getIDFA() ?? ""]
+//        NetworkManager.post(url: "/patkan/sophistication/especially/dream",
+//                            params: params,
+//                            responseType: BaseModel.self) { [weak self] result in
+//            switch result {
+//            case .success(let success):
+//                let partner = success.partner ?? ""
+//                if ["0", "00"].contains(partner) {
+//                    self?.configureFacebookSDK(with: success.logic?.analysisability ?? analysisabilityModel())
+//                }
+//            case .failure(_):
+//                break
+//            }
+//        }
+//    }
     
     @objc func codeBtnClick() {
         let phone = self.loginView.phoneListView.phoneFiled.text ?? ""
@@ -220,6 +232,19 @@ extension LoginViewController {
                     let token = success.logic?.complements ?? ""
                     UserSessionManager.shared.saveLoginInfo(phone: phone, token: token)
                     
+                    let onetime = UserDefaults.standard.object(forKey: "start_time") as? String ?? ""
+                    let twotime = UserDefaults.standard.object(forKey: "end_time") as? String ?? ""
+                    
+                    if !onetime.isEmpty && !twotime.isEmpty {
+                        Task {
+                            self.lycCocelleInfo(type: "1",
+                                                orderID: "",
+                                                productID: "",
+                                                onetime: onetime,
+                                                twotime: twotime)
+                        }
+                    }
+                    
                     Task {
                         try? await Task.sleep(nanoseconds: 250_000_000)
                         NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
@@ -235,16 +260,49 @@ extension LoginViewController {
 
 extension LoginViewController {
     
-    func configureFacebookSDK(with model: analysisabilityModel) {
-        Settings.shared.displayName = model.cur ?? ""
-        Settings.shared.appURLSchemeSuffix = model.walkety ?? ""
-        Settings.shared.appID = model.shortster ?? ""
-        Settings.shared.clientToken = model.middleee ?? ""
-        
-        ApplicationDelegate.shared.application(
-            UIApplication.shared,
-            didFinishLaunchingWithOptions: nil
-        )
+    private func lycCocelleInfo(type: String,
+                                orderID: String,
+                                productID: String,
+                                onetime: String,
+                                twotime: String) {
+        let reminder = LocationInfoStorage.storedLongitude
+        let order = LocationInfoStorage.storedLatitude
+        let params = ["food": type,
+                      "good": orderID,
+                      "possessions": productID,
+                      "entire": AppIdentifierManager.getIDFV(),
+                      "foundation": AppIdentifierManager.getIDFA() ?? "",
+                      "plant": onetime,
+                      "sustains": twotime,
+                      "reminder": reminder,
+                      "order": order]
+        NetworkManager.post(url: "/patkan/overwhelming/nostalgia/signs",
+                            params: params,
+                            responseType: BaseModel.self) { result in
+            switch result {
+            case .success(let success):
+                let partner = success.partner ?? ""
+                if ["0","00"].contains(partner) {
+                    UserDefaults.standard.removeObject(forKey: "start_time")
+                    UserDefaults.standard.removeObject(forKey: "end_time")
+                }
+                
+            case .failure(_):
+                break
+            }
+        }
     }
+    
+//    func configureFacebookSDK(with model: analysisabilityModel) {
+//        Settings.shared.displayName = model.cur ?? ""
+//        Settings.shared.appURLSchemeSuffix = model.walkety ?? ""
+//        Settings.shared.appID = model.shortster ?? ""
+//        Settings.shared.clientToken = model.middleee ?? ""
+//        
+//        ApplicationDelegate.shared.application(
+//            UIApplication.shared,
+//            didFinishLaunchingWithOptions: nil
+//        )
+//    }
     
 }

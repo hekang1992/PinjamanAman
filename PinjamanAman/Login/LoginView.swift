@@ -12,6 +12,8 @@ class LoginView: BaseView {
     
     var ablock: (() -> Void)?
     
+    var backblock: (() -> Void)?
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "login_head_image")
@@ -79,6 +81,13 @@ class LoginView: BaseView {
         loginBtn.setBackgroundImage(UIImage(named: "login_btn_bg_image"), for: .normal)
         return loginBtn
     }()
+    
+    lazy var backBtn: UIButton = {
+        let backBtn = UIButton(type: .custom)
+        backBtn.setBackgroundImage(UIImage(named: "back_li_image"), for: .normal)
+        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
+        return backBtn
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,6 +95,7 @@ class LoginView: BaseView {
         addSubview(bgImageView)
         addSubview(oneImageView)
         addSubview(twoImageView)
+        addSubview(backBtn)
         addSubview(scrollView)
         scrollView.addSubview(threeImageView)
         threeImageView.addSubview(phoneListView)
@@ -108,6 +118,13 @@ class LoginView: BaseView {
             make.right.equalToSuperview()
             make.size.equalTo(CGSize(width: 134, height: 125))
         }
+        
+        backBtn.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.left.equalToSuperview().offset(20)
+            make.width.height.equalTo(18)
+        }
+        
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(bgImageView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
@@ -159,4 +176,9 @@ extension LoginView {
     @objc func entBtnClick() {
         self.ablock?()
     }
+    
+    @objc func backBtnClick() {
+        self.backblock?()
+    }
+
 }

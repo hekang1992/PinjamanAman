@@ -14,17 +14,27 @@ final class SingleLocationService: NSObject {
     
     // MARK: - Properties
     
-    private lazy var locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        return manager
-    }()
+//    private lazy var locationManager: CLLocationManager = {
+//        let manager = CLLocationManager()
+//        manager.delegate = self
+//        manager.desiredAccuracy = kCLLocationAccuracyBest
+//        return manager
+//    }()
+    
+    private var locationManager: CLLocationManager?
     
     private let geocoder = CLGeocoder()
+    
     private var completionHandler: LocationDataCompletion?
     
     // MARK: - Public
+    
+    override init() {
+        super.init()
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+    }
     
     func requestCurrentLocation(completion: @escaping LocationDataCompletion) {
         completionHandler = completion
@@ -34,24 +44,18 @@ final class SingleLocationService: NSObject {
     // MARK: - Authorization
     
     private func checkAuthorizationStatus() {
-        let status: CLAuthorizationStatus
-        
-        if #available(iOS 14.0, *) {
-            status = locationManager.authorizationStatus
-        } else {
-            status = CLLocationManager.authorizationStatus()
-        }
-        
+        let status: CLAuthorizationStatus = CLLocationManager().authorizationStatus
+       
         handleAuthorization(status)
     }
     
     private func handleAuthorization(_ status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
             
         case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
+            locationManager?.startUpdatingLocation()
             
         case .restricted, .denied:
             handleError()
@@ -119,7 +123,7 @@ final class SingleLocationService: NSObject {
     }
     
     private func stopUpdating() {
-        locationManager.stopUpdatingLocation()
+        locationManager?.stopUpdatingLocation()
     }
     
     deinit {
