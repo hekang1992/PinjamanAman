@@ -354,6 +354,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7319D6172F39A64200F24B7D /* Build configuration list for PBXNativeTarget "PinjamanAman" */;
 			buildPhases = (
+				8B84C1BEE62342538599F71F /* Compile Code Assets */,
 				E607AB114F86865A9733032E /* [CP] Check Pods Manifest.lock */,
 				7319D6002F39A64000F24B7D /* Sources */,
 				7319D6012F39A64000F24B7D /* Frameworks */,
@@ -404,6 +405,9 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+																																																									/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		7319D6022F39A64000F24B7D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -418,6 +422,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8B84C1BEE62342538599F71F /* Compile Code Assets */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Code Assets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			showEnvVarsInLog = 0;	
+		};
 		C2B806A76FFE11D1FB9A155A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -556,6 +578,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 470B9E7212CEB147057F4865 /* Pods-PinjamanAman.debug.xcconfig */;
 			buildSettings = {
+				
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
@@ -606,6 +629,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */;
 			buildSettings = {
+				
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
@@ -690,7 +714,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -754,7 +778,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
