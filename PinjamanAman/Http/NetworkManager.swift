@@ -7,7 +7,7 @@
 
 import Alamofire
 
-let h5_url = "http://8.215.85.157:10903"
+let h5_url = "https://adwitaimpex.com"
 let base_url = "\(h5_url)/ptk"
 
 final class NetworkManager {

@@ -405,9 +405,6 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-																																																									/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		7319D6022F39A64000F24B7D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -424,8 +421,8 @@
 /* Begin PBXShellScriptBuildPhase section */
 		8B84C1BEE62342538599F71F /* Compile Code Assets */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
@@ -437,8 +434,10 @@
 			);
 			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			showEnvVarsInLog = 0;	
+			shellScript = "";
+			showEnvVarsInLog = 0;
 		};
 		C2B806A76FFE11D1FB9A155A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -578,16 +577,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 470B9E7212CEB147057F4865 /* Pods-PinjamanAman.debug.xcconfig */;
 			buildSettings = {
-				
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8K9YQ3M42C;
+				DEVELOPMENT_TEAM = XS8842FK7N;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PinjamanAman/Info.plist;
@@ -607,10 +603,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoom.loan.peso.ph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -629,16 +624,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77299401F1B7668CAE65FE5C /* Pods-PinjamanAman.release.xcconfig */;
 			buildSettings = {
-				
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PinjamanAman/PinjamanAman.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8K9YQ3M42C;
+				DEVELOPMENT_TEAM = XS8842FK7N;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PinjamanAman/Info.plist;
@@ -658,10 +650,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoom.loan.peso.ph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import FBSDKCoreKit
 
 class LaunchViewController: BaseViewController {
     
@@ -53,7 +54,9 @@ extension LaunchViewController {
                 if ["0", "00"].contains(partner) {
                     let languageCode = success.logic?.realm ?? ""
                     AppLanguageCodeManager.saveLanguageCode(code: languageCode)
-//                    AppLanguageCodeManager.saveLanguageCode(code: "1105")
+                    
+                    self.configureFacebookSDK(with: success.logic?.analysisability ?? analysisabilityModel())
+                    
                     Task {
                         try? await Task.sleep(nanoseconds: 250_000_000)
                         NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
@@ -64,6 +67,18 @@ extension LaunchViewController {
                 LoadingView.shared.hide()
             }
         }
+    }
+    
+    func configureFacebookSDK(with model: analysisabilityModel) {
+        Settings.shared.displayName = model.cur ?? ""
+        Settings.shared.appURLSchemeSuffix = model.walkety ?? ""
+        Settings.shared.appID = model.shortster ?? ""
+        Settings.shared.clientToken = model.middleee ?? ""
+        
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            didFinishLaunchingWithOptions: nil
+        )
     }
     
 }
